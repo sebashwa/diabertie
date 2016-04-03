@@ -7,12 +7,15 @@ import User from './models/User';
 const router = Router();
 
 router.post('/signup', (req, res) => {
-  const token = jwt.sign({ sub: req.body.email }, app.get('jwtSignature'), { expiresIn: '7d' });
-  const telegramToken = Buffer(token, 'binary').toString('base64').slice(-65, -1);
+  const { email, password, timezone } = req.body;
+  const jwtoken = jwt.sign({ sub: email }, app.get('jwtSignature'), { expiresIn: '7d' });
+  const telegramToken = Buffer(jwtoken, 'binary').toString('base64').slice(-65, -1);
 
-  User.register(new User({ email: req.body.email, telegramToken }), req.body.password, (err, user) => {
-    if (err) throw err;
-    res.cookie('jwtoken', token);
+  const user = new User({ email, telegramToken, timezone });
+
+  User.register(user, password, (err, user) => {
+    if (err) console.error(err);
+    res.cookie('jwtoken', jwtoken);
     res.json(user);
   });
 });

@@ -4,7 +4,8 @@ import passportLocalMongoose from 'passport-local-mongoose';
 const UserSchema = new mongoose.Schema({
   telegramToken: String,
   telegramId:    { type: Number, default: null },
-  createdAt:     { type: Date, default: Date.now }
+  createdAt:     { type: Date, default: Date.now },
+  timezone:      { type: String, default: 'etc_utc' }
 });
 
 UserSchema.method('toJSON', function() {

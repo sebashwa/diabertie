@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
+import moment from 'moment-timezone';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -22,7 +23,11 @@ class AuthForm extends Component {
     e.preventDefault();
     const { dispatch, formAction } = this.props;
     const { email, password } = this.refs;
-    const formData = { email: email.value, password: password.value };
+    const formData = {
+      email:    email.value,
+      password: password.value,
+      timezone: moment.tz.guess()
+    };
 
     dispatch(formAction(formData));
   }
@@ -31,11 +36,11 @@ class AuthForm extends Component {
     const { authType } = this.props;
 
     return (
-      <form className={ authType.toLowerCase() } method="post">
+      <form className={ authType.toLowerCase() } method="post" onSubmit={ this.handleSubmit }>
         <Link to="/landing">Close</Link>
         <input type="text" name="email" ref="email" placeholder="Email" />
         <input type="password" name="password" ref="password" placeholder="Password" />
-        <button type="submit" onClick={ this.handleSubmit }>{ authType }</button>
+        <button type="submit">{ authType }</button>
       </form>
     );
   }

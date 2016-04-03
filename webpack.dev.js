@@ -33,12 +33,8 @@ export default function(app) {
     ],
     module: {
       loaders: [
-        {
-          test:    /\.jsx?$/,
-          exclude: /node_modules/,
-          loader:  'babel',
-          query:   BABEL_QUERY
-        }
+        { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel', query: BABEL_QUERY },
+        { test: /\.json$/, loader: 'json' }
       ]
     },
     plugins: [
