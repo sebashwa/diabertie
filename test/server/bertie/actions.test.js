@@ -1,5 +1,5 @@
 import expect from 'unexpected';
-import { connectBot } from '../../../server/telegram/actions';
+import { connectBot } from '../../../server/bertie/actions';
 import User from '../../../server/models/User';
 import mongoose from 'mongoose';
 
@@ -36,7 +36,7 @@ describe('telegram actions', () => {
 
     it('informs the user when already connected with the same account', () => {
       const presentId = 99181;
-      
+
       return User.findOneAndUpdate({ telegramToken: presentToken }, { telegramId: presentId }).then(() => {
         const result = connectBot(presentToken, presentId);
 
