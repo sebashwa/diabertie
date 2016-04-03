@@ -5,12 +5,14 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import mongoose from 'mongoose';
-import telegram from './telegram';
+import TelegramBot from 'node-telegram-bot-api';
+import bearDiabertie from './telegram';
 
 import apiRoutes from './apiRoutes';
 import User from './models/User';
 
 const app = express();
+
 
 app.use(cookieParser());
 app.use(cors({ origin: 'http://localhost:3000',  credentials: true }));
@@ -46,5 +48,8 @@ mongoose.connect(process.env.MONGO_DB_URL, (err) => {
 });
 
 app.use('/api', apiRoutes);
+
+const bot = new TelegramBot(process.env.TELEGRAM_API_KEY, { polling: true });
+bearDiabertie(bot);
 
 export default app;
