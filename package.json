@@ -8,7 +8,8 @@
     "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
-    "test": "source test/.env && mocha test/**/*.test.js --compilers js:babel-register --reporter nyan"
+    "test": "source test/.env && mocha test/**/*.test.js --compilers js:babel-register --reporter nyan",
+    "lint": "eslint ."
   },
   "author": "sebashwa",
   "license": "MIT",

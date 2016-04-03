@@ -14,7 +14,7 @@ export default function authReducer(state = Map(), action) {
     case 'GET_USER_FAILURE':
       return state.set('loadingUser', false);
     case 'LOGOUT':
-      browserHistory.push('/landing')
+      browserHistory.push('/landing');
       return state.set('user', null);
     default:
       return state;

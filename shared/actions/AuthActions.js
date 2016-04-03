@@ -18,7 +18,7 @@ export function signup(formData) {
   return {
     type:    'SIGNUP',
     promise: axios.post('api/signup', formData, { withCredentials: true })
-  }
+  };
 }
 
 export function getUser() {

@@ -1,7 +1,7 @@
 import express from 'express';
 import app from './api';
 import React from 'react';
-import { renderToString } from 'react-dom/server'
+import { renderToString } from 'react-dom/server';
 import { RouterContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 import routes from 'routes';
@@ -65,7 +65,7 @@ app.use((req, res) => {
       return HTML;
     }
 
-    res.end(renderView())
+    res.end(renderView());
   });
 });
 

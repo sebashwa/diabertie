@@ -22,7 +22,7 @@ const BABEL_QUERY = {
       }
     ]
   ]
-}
+};
 
 export default function(app) {
   const config = Object.assign(prodCfg, {
