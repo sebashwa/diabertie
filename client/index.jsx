@@ -19,4 +19,3 @@ render(
   </Provider>,
   document.getElementById('react-view')
 );
-

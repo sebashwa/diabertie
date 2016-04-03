@@ -1,24 +1,24 @@
 import React, { Component , PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import { logout, getUser } from 'actions/AuthActions';
 
 class App extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    user: PropTypes.object,
-    loadingUser: PropTypes.bool
+    loadingUser: PropTypes.bool,
+    dispatch:    PropTypes.func.isRequired,
+    user:        PropTypes.object,
   };
 
   componentWillMount = () => {
     const { dispatch, user } = this.props;
-    if (!user) { dispatch(getUser()) }
+    if (!user) { dispatch(getUser()); }
   }
 
   componentWillReceiveProps = (props) => {
-    const { dispatch, user, loadingUser } = props;
-    if (!user && !loadingUser) { browserHistory.push('/landing') }
+    const { user, loadingUser } = props;
+    if (!user && !loadingUser) { browserHistory.push('/landing'); }
   }
 
   handleLogout = () => {

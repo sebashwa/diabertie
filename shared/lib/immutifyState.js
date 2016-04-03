@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-// Abstraction to handle pre-composedstate received from server
+// Abstraction to handle pre-composed state received from server
 // (ie, leave top level keys untouched)
 
 export default function immutifyState(obj) {

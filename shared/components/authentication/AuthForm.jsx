@@ -8,13 +8,14 @@ class AuthForm extends Component {
   }
 
   static propTypes = {
-    authType: PropTypes.string.isRequired,
-    formAction: PropTypes.func.isRequired,
-    user: PropTypes.object
+    user:       PropTypes.object,
+    dispatch:   PropTypes.func.isRequired,
+    authType:   PropTypes.string.isRequired,
+    formAction: PropTypes.func.isRequired
   };
 
   componentWillReceiveProps = (props) => {
-    if (props.user) { browserHistory.push('/') };
+    if (props.user) { browserHistory.push('/'); }
   }
 
   handleSubmit = (e) => {
@@ -30,13 +31,13 @@ class AuthForm extends Component {
     const { authType } = this.props;
 
     return (
-      <form className={ authType.toLowerCase() } method='post'>
+      <form className={ authType.toLowerCase() } method="post">
         <Link to="/landing">Close</Link>
-        <input type='text' name='email' ref='email' placeholder='Email' />
-        <input type='password' name='password' ref='password' placeholder='Password' />
-        <button type='submit' onClick={ this.handleSubmit }>{ authType }</button>
+        <input type="text" name="email" ref="email" placeholder="Email" />
+        <input type="password" name="password" ref="password" placeholder="Password" />
+        <button type="submit" onClick={ this.handleSubmit }>{ authType }</button>
       </form>
-    )
+    );
   }
 };
 
