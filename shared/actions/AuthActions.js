@@ -1,9 +1,11 @@
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 export function login(formData) {
+  const data = { ...formData, timezone: moment.tz.guess() };
   return {
     type:    'LOGIN',
-    promise: axios.post('api/login', formData, { withCredentials: true })
+    promise: axios.post('api/login', data, { withCredentials: true })
   };
 }
 
@@ -15,9 +17,10 @@ export function logout() {
 }
 
 export function signup(formData) {
+  const data = { ...formData, timezone: moment.tz.guess() };
   return {
     type:    'SIGNUP',
-    promise: axios.post('api/signup', formData, { withCredentials: true })
+    promise: axios.post('api/signup', data, { withCredentials: true })
   };
 }
 

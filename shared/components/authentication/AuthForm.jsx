@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import moment from 'moment-timezone';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -23,11 +22,8 @@ class AuthForm extends Component {
     e.preventDefault();
     const { dispatch, formAction } = this.props;
     const { email, password } = this.refs;
-    const formData = {
-      email:    email.value,
-      password: password.value,
-      timezone: moment.tz.guess()
-    };
+
+    const formData = { email: email.value, password: password.value };
 
     dispatch(formAction(formData));
   }
