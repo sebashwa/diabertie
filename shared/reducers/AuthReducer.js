@@ -11,6 +11,11 @@ export default function authReducer(state = Map(), action) {
     case 'LOGIN':
     case 'GET_USER':
       return state.merge({ user: action.res.data, loadingUser: false});
+    case 'SIGNUP_FAILURE':
+      const error = (action.error.data.name == 'UserExistsError') ?
+        { user: ['already exists'] } : null;
+
+      return state.merge({ formErrors: error });
     case 'GET_USER_FAILURE':
       return state.set('loadingUser', false);
     case 'LOGOUT':

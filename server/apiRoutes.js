@@ -14,9 +14,14 @@ router.post('/signup', (req, res) => {
   const user = new User({ email, telegramToken, timezone });
 
   User.register(user, password, (err, user) => {
-    if (err) console.error(err);
-    res.cookie('jwtoken', jwtoken);
-    res.json(user);
+    if (err) {
+      console.error(err);
+      res.status(409);
+      res.json({ name: err.name });
+    } else {
+      res.cookie('jwtoken', jwtoken);
+      res.json(user);
+    }
   });
 });
 

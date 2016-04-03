@@ -11,7 +11,8 @@ class AuthForm extends Component {
     user:       PropTypes.object,
     dispatch:   PropTypes.func.isRequired,
     authType:   PropTypes.string.isRequired,
-    formAction: PropTypes.func.isRequired
+    formAction: PropTypes.func.isRequired,
+    formErrors: PropTypes.object
   };
 
   componentWillReceiveProps = (props) => {
@@ -29,21 +30,37 @@ class AuthForm extends Component {
   }
 
   render() {
-    const { authType } = this.props;
+    const { authType, formErrors } = this.props;
 
     return (
-      <form className={ authType.toLowerCase() } method="post" onSubmit={ this.handleSubmit }>
-        <Link to="/landing">Close</Link>
-        <input type="text" name="email" ref="email" placeholder="Email" />
-        <input type="password" name="password" ref="password" placeholder="Password" />
-        <button type="submit">{ authType }</button>
-      </form>
+      <div className={ `${authType.toLowerCase()}-container` }>
+        <form className={ authType.toLowerCase() } method="post" onSubmit={ this.handleSubmit }>
+          <Link to="/landing">Close</Link>
+          <input type="text" name="email" ref="email" placeholder="Email" />
+          <input type="password" name="password" ref="password" placeholder="Password" />
+          <button type="submit">{ authType }</button>
+        </form>
+        {
+          !!formErrors ?
+            formErrors.map((errors, type) => {
+              return (
+                <p key={ type } className={ `${type}-errors` }>
+                  { `${type.charAt(0).toUpperCase() + type.slice(1)} ${errors.join(',')}` }
+                </p>
+              );
+            }).valueSeq()
+          : null
+        }
+      </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  return { user: state.auth.get('user') };
+  return {
+    user:       state.auth.get('user'),
+    formErrors: state.auth.get('formErrors')
+  };
 };
 
 export default connect(mapStateToProps)(AuthForm);
