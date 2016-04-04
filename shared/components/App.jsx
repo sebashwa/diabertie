@@ -18,7 +18,7 @@ class App extends Component {
 
   componentWillReceiveProps = (props) => {
     const { user, loadingUser } = props;
-    if (!user && !loadingUser) { browserHistory.push('/landing'); }
+    if (!user && !loadingUser) { browserHistory.push('/login'); }
   }
 
   handleLogout = () => {
