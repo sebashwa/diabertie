@@ -18,3 +18,42 @@ export const connectBot = (telegramToken, sender) => {
     }
   }).catch(err => { console.error(err); });
 };
+
+
+export const detectValues = (msg) => {
+  return new Promise(function(resolve) {
+    const words = msg.text.split(/\s/);
+
+    if (words.length == 1) resolve('I do not get you');
+
+    const units = {
+      meals:    ['khe', 'be'],
+      insulins: ['basal', 'base', 'bolus', 'hum', 'humalog', 'lantus', 'lant'],
+      sugar:    ['mmol', 'mg', 'bloodsugar', 'bs']
+    };
+
+    let results = {};
+
+    Object.keys(units).forEach((type) => {
+      units[type].forEach((unit) => {
+        const unitPosition = words.findIndex((w) => w == unit);
+        if (unitPosition == -1) return false;
+
+        const value = parseFloat(words[unitPosition - 1].replace(',','.'));
+        if (!value) return false;
+
+        results[type] = results[type] || [];
+        results[type].push({ value, unit });
+      });
+    });
+
+    const resultStrings = Object.keys(results).map((type) => {
+      const values = results[type];
+      const valueStrings = values.map(v => `${v.value} ${v.unit}`);
+
+      return `_${type}:_ ${valueStrings.join(', ')}`;
+    });
+
+    resolve(`Hey I detected the following\n\n ${resultStrings.join('\n')}`);
+  });
+};
