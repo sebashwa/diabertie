@@ -1,4 +1,6 @@
 import User from '../models/User';
+import knwl from './knwl';
+import unitsBy from './knwl/units';
 
 export const connectBot = (telegramToken, sender) => {
   const telegramId = sender.id;
@@ -19,41 +21,39 @@ export const connectBot = (telegramToken, sender) => {
   }).catch(err => { console.error(err); });
 };
 
+const previewTexts = (events) => events.map(e => `\`${e.value} ${e.type}\``).join(', ');
+
+function validateEvents(events) {
+  const { sugar, therapy, food } = events;
+  const allEvents = [... sugar, ... therapy, ... food];
+  const ambigousMatch = (type) => {
+    return `Sorry, I can only handle one \`${type}\` value but found:\n\n${previewTexts(events[type])}`;
+  };
+
+  if (allEvents.length == 0) {
+    return 'Sorry, I do not get you at all! To track values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`';
+  };
+
+  if (sugar.length > 1) return ambigousMatch('sugar');
+  if (food.length > 1) return ambigousMatch('food');
+
+  return null;
+}
 
 export const detectValues = (msg) => {
-  return new Promise(function(resolve) {
-    const words = msg.text.split(/\s/);
+  return new Promise((resolve) => {
+    const parser = knwl(msg.text);
+    const eventTypes = ['sugar', 'therapy', 'food'];
+    const events = {};
 
-    if (words.length == 1) resolve('I do not get you');
+    eventTypes.forEach((type) => events[type] = parser.get('bertieValues', unitsBy(type)));
 
-    const units = {
-      meals:    ['khe', 'be'],
-      insulins: ['basal', 'base', 'bolus', 'hum', 'humalog', 'lantus', 'lant'],
-      sugar:    ['mmol', 'mg', 'bloodsugar', 'bs']
-    };
+    const error = validateEvents(events);
+    if (error) return resolve(error);
 
-    let results = {};
+    const eventStrings = eventTypes.filter(type => events[type].length > 0)
+      .map((type) => `${previewTexts(events[type])}`).join('\n');
 
-    Object.keys(units).forEach((type) => {
-      units[type].forEach((unit) => {
-        const unitPosition = words.findIndex((w) => w == unit);
-        if (unitPosition == -1) return false;
-
-        const value = parseFloat(words[unitPosition - 1].replace(',','.'));
-        if (!value) return false;
-
-        results[type] = results[type] || [];
-        results[type].push({ value, unit });
-      });
-    });
-
-    const resultStrings = Object.keys(results).map((type) => {
-      const values = results[type];
-      const valueStrings = values.map(v => `${v.value} ${v.unit}`);
-
-      return `_${type}:_ ${valueStrings.join(', ')}`;
-    });
-
-    resolve(`Hey I detected the following\n\n ${resultStrings.join('\n')}`);
+    return resolve(`Hey, I detected the following:\n\n${eventStrings}\n\nDo you want me to save that?`);
   });
 };
