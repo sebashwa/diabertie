@@ -41,7 +41,7 @@ describe('telegram actions', () => {
         const result = connectBot(presentToken, { id: presentId });
 
         return expect(result, 'when fulfilled', 'to contain',
-          'present@user seems to be connected already');
+          '`present@user` is already connected');
       });
     });
 
@@ -56,7 +56,7 @@ describe('telegram actions', () => {
         const result = connectBot(presentToken, { id: alreadyConnectedId });
 
         return expect(result, 'when fulfilled', 'to contain',
-          'already connected with the account already@connected');
+          'already connected with the account `already@connected`');
       });
     });
   });
