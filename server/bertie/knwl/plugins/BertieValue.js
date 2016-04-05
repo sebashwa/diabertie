@@ -11,12 +11,12 @@ export default function BertieValue(knwlInstance) {
       if (!numberRegExp.test(word)) return;
 
       units.forEach((unit) => {
-        const { tokens, category, type } = unit;
-        if (tokens.indexOf(nextWord) === -1) return;
+        const { tokens, ... rest } = unit;
 
+        if (tokens.indexOf(nextWord) === -1) return;
         const value = parseFloat(word.replace(',','.'));
 
-        return results.push({ value, category, type });
+        return results.push({ value, ... rest });
       });
     });
 
