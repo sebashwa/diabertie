@@ -1,8 +1,8 @@
 import expect from 'unexpected';
-import { connectBot } from '../../../server/bertie/actions';
-import User from '../../../server/models/User';
-import mongoose from 'mongoose';
+import { connectBot } from './actions';
+import User from '../models/User';
 
+import mongoose from 'mongoose';
 mongoose.connect('mongodb://localhost:27017/diabertie_test', (err) => { if (err) throw err; } );
 
 describe('telegram actions', () => {
@@ -20,7 +20,7 @@ describe('telegram actions', () => {
     afterEach(() => User.find({}).remove());
 
     it('updates the telegramId on the user', () => {
-      return connectBot(presentToken, 1234).then(() => {
+      return connectBot(presentToken, { id: 1234 }).then(() => {
         const user = User.findOne({ telegramToken: presentToken });
         return expect(user, 'when fulfilled', 'to have property',
           'telegramId', 1234);
@@ -28,7 +28,7 @@ describe('telegram actions', () => {
     });
 
     it('returns a "not found" text if no user is found', () => {
-      const result = connectBot('NOT_PRESENT', 10000);
+      const result = connectBot('NOT_PRESENT', { id: 10000 });
 
       return expect(result, 'when fulfilled', 'to contain',
         'I was not able to find a user');
@@ -38,7 +38,7 @@ describe('telegram actions', () => {
       const presentId = 99181;
 
       return User.findOneAndUpdate({ telegramToken: presentToken }, { telegramId: presentId }).then(() => {
-        const result = connectBot(presentToken, presentId);
+        const result = connectBot(presentToken, { id: presentId });
 
         return expect(result, 'when fulfilled', 'to contain',
           'present@user seems to be connected already');
@@ -53,7 +53,7 @@ describe('telegram actions', () => {
       };
 
       return User.create(alreadyConnectedUserProps).then(() => {
-        const result = connectBot(presentToken, alreadyConnectedId);
+        const result = connectBot(presentToken, { id: alreadyConnectedId });
 
         return expect(result, 'when fulfilled', 'to contain',
           'already connected with the account already@connected');
