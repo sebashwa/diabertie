@@ -6,7 +6,8 @@ import { RouterContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 import routes from 'routes';
 import { Provider } from 'react-redux';
-import * as reducers from 'reducers';
+import reducers from 'reducers';
+import { setBotName } from 'actions/SettingsActions';
 import promiseMiddleware from 'lib/promiseMiddleware';
 import { createStore,
          combineReducers,
@@ -42,6 +43,7 @@ app.use((req, res) => {
 
       const componentHTML = renderToString(InitialView);
 
+      store.dispatch(setBotName(process.env.TELEGRAM_BOT_NAME));
       const initialState = store.getState();
 
       const HTML = `

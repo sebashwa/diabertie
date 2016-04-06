@@ -9,6 +9,7 @@ class App extends Component {
     loadingUser: PropTypes.bool,
     dispatch:    PropTypes.func.isRequired,
     user:        PropTypes.object,
+    botName:     PropTypes.string.isRequired
   };
 
   componentWillMount = () => {
@@ -26,7 +27,7 @@ class App extends Component {
   }
 
   render() {
-    const { user, loadingUser } = this.props;
+    const { user, loadingUser, botName } = this.props;
 
     return (
         <div className="app">
@@ -34,7 +35,7 @@ class App extends Component {
             !!user && !loadingUser ?
               <div>
                 <p>Hey { user.get('email') }! This is your data</p>
-                <a href={ `http://telegram.me/diabertiebot?start=${user.get('telegramToken')}` } target="_blank">Connect</a>
+                <a href={ `http://telegram.me/${botName}?start=${user.get('telegramToken')}` } target="_blank">Connect</a>
                 <a onClick={ this.handleLogout }>Logout</a>
               </div>
             :
@@ -46,7 +47,11 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.auth.get('user'), loadingUser: state.auth.get('loadingUser') };
+  return {
+    user:        state.auth.get('user'),
+    loadingUser: state.auth.get('loadingUser'),
+    botName:     state.settings.get('botName')
+  };
 };
 
 export default connect(mapStateToProps)(App);
