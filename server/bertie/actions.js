@@ -21,39 +21,37 @@ export const connectBot = (telegramToken, sender) => {
   }).catch(err => { console.error(err); });
 };
 
-const previewTexts = (events) => events.map(e => `\`${e.value} ${e.type}\``).join(', ');
+const previewTexts = (events) => events.map(e => `\`${e.value} ${e.subType || e.type}\``).join(', ');
 
-function validateEvents(events) {
-  const { sugar, therapy, food } = events;
-  const allEvents = [... sugar, ... therapy, ... food];
-  const ambigousMatch = (type) => {
-    return `I can only handle one \`${type}\` value but found:\n\n${previewTexts(events[type])}`;
-  };
+function validateDetections({ sugar, therapy, food }) {
+  const all = [... sugar, ... therapy, ... food];
+  const errors = [];
+  const warnings = [];
 
-  if (allEvents.length == 0) {
-    return 'Sorry, I didn\'t get that! To track values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`';
-  };
+  if (all.length == 0) { errors.push('Sorry, I didn\'t get that! To track values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`'); };
+  if (sugar.length > 1) { warnings.push(`Oops, that's strange.. I found more than one \`sugar\` value:\n\n${previewTexts(sugar)}`); }
 
-  if (sugar.length > 1) return ambigousMatch('sugar');
-  if (food.length > 1) return ambigousMatch('food');
-
-  return null;
+  return { errors, warnings };
 }
 
-export const detectValues = (msg) => {
+export const detectValues = (text) => {
   return new Promise((resolve) => {
-    const parser = knwl(msg.text);
-    const eventTypes = ['sugar', 'therapy', 'food'];
-    const events = {};
+    const parser = knwl(text);
+    const types = ['sugar', 'food', 'therapy'];
 
-    eventTypes.forEach((type) => events[type] = parser.get('bertieValues', unitsBy(type)));
+    const detections = types.reduce((prev, type) => {
+      prev[type] = parser.get('bertieValues', unitsBy(type));
+      return prev;
+    }, {});
 
-    const error = validateEvents(events);
-    if (error) return resolve(error);
+    const { errors, warnings } = validateDetections(detections);
+    if (errors.length) return resolve({ errors });
 
-    const eventStrings = eventTypes.filter(type => events[type].length > 0)
-      .map((type) => `${previewTexts(events[type])}`).join('\n');
+    const detectionsMsg = types.filter(type => !!detections[type].length)
+      .map((type) => `${previewTexts(detections[type])}`)
+      .join('\n');
 
-    return resolve(`${eventStrings}\n\nDo you want me to save that?`);
+    const messages = [detectionsMsg, `Do you want me to save that? (y/n)`];
+    return resolve({ data: detections, messages, warnings });
   });
 };
