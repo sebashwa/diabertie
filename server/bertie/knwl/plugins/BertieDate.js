@@ -8,18 +8,18 @@ export default function BertieTime(knwlInstance) {
     words.forEach((word) => {
       const dotFormat = /(\d+)\.(\d+)(\.(\d+))?/;
       const lineFormat = /(\d+)(\-|\/)(\d+)((\-|\/)(\d+))?/;
-      let date;
+      let datum;
 
-      if (dotFormat.test(word)) { date = moment(word, 'DD-MM-YYYY'); }
-      else if (lineFormat.test(word)) { date = moment(word, 'MM-DD-YYYY'); }
+      if (dotFormat.test(word)) { datum = moment(word, 'DD-MM-YYYY'); }
+      else if (lineFormat.test(word)) { datum = moment(word, 'MM-DD-YYYY'); }
 
-      if (!date) return;
+      if (!datum) return;
 
-      const day = date.get('date');
-      const month = date.get('month');
-      const year = date.get('year');
+      const date = datum.get('date');
+      const month = datum.get('month');
+      const year = datum.get('year');
 
-      return results.push({ value: `${day}.${month + 1}.${year}`, day, month, year });
+      return results.push({ value: `${date}.${month + 1}.${year}`, date, month, year });
     });
 
     return results;

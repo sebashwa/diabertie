@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { detectValues, connectBot, saveEvents } from './actions';
+import { bertieDetect, connectBot, saveEvents } from './actions';
 
 const opts = { parse_mode: 'Markdown'};
 
@@ -13,20 +13,25 @@ export default (bot) => {
   });
 
   bot.onText(/^.*\w.*\s.*\w.*$/, async (msg) => {
-    const { errors, messages, warnings, data } = await detectValues(msg.text);
+    const { from, text } = msg;
     const sendMessages = async (msgs) => (
-      await Promise.all(msgs.map(m => bot.sendMessage(msg.from.id, m, { ... opts })))
+      await Promise.all(msgs.map(m => bot.sendMessage(from.id, m, { ... opts })))
     );
+
+    const { errors, messages, warnings, data } = await bertieDetect(text);
 
     if (errors) return sendMessages(errors);
 
     await sendMessages(warnings);
     await sendMessages(messages.slice(0, -1));
 
-    const confirm = await bot.sendMessage(msg.from.id, messages.slice(-1)[0],
-      { ... opts, reply_markup: { force_reply: true } });
+    const { message_id, chat } = await bot.sendMessage(
+      from.id,
+      messages.slice(-1)[0],
+      { ... opts, reply_markup: { force_reply: true } }
+    );
 
-    bot.onReplyToMessage(confirm.chat.id, confirm.message_id, (msg) => {
+    bot.onReplyToMessage(chat.id, message_id, (msg) => {
       const { text, from } = msg;
 
       if (text == 'y') {
