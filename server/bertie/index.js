@@ -33,7 +33,7 @@ export default (bot) => {
         const reply = saveEvents(data, from.id);
         bot.sendMessage(from.id, reply, { ... opts });
       } else if (text == 'n') {
-        bot.sendMessage(from.id, 'Ok, not doing anything!');
+        bot.sendMessage(from.id, `Ok, I'm not doing anything!`);
       };
     });
   });

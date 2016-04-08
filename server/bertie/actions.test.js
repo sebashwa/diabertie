@@ -135,6 +135,9 @@ describe('telegram actions', () => {
       expect(event.user.email, 'to equal', 'user@savesEvents');
     });
 
-    xit('returns a message after saving the data', () => {});
+    it('returns a message after saving the data', async () => {
+      const reply = await saveEvents(detections, userId);
+      expect(reply, 'to contain', 'saved your data');
+    });
   });
 });
