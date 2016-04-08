@@ -4,7 +4,7 @@ import knwl from '..';
 describe('knwl plugin BertieValue', () => {
   const sugarUnits = [{ category: 'sugar', type: 'sugarValue', tokens: ['mg'] }];
 
-  it('accepts a units object and finds corresponding sumgtring', () => {
+  it('accepts a units object and finds corresponding values', () => {
     const parser = knwl('250 mg 1 khe 6.5 humalog');
     const value = parser.get('bertieValues', sugarUnits)[0];
 
