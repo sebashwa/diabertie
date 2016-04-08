@@ -1,16 +1,15 @@
 /* eslint-disable camelcase */
 
-import { detectValues, connectBot } from './actions';
+import { detectValues, connectBot, saveEvents } from './actions';
 
 const opts = { parse_mode: 'Markdown'};
 
 export default (bot) => {
-  bot.onText(/\/start (.+)/, (msg, match) => {
+  bot.onText(/\/start (.+)/, async (msg, match) => {
     const telegramToken = match[1];
+    const text = await connectBot(telegramToken, msg.from);
 
-    connectBot(telegramToken, msg.from).then((text) => {
-      bot.sendMessage(msg.from.id, text, { ... opts });
-    });
+    bot.sendMessage(msg.from.id, text, { ... opts });
   });
 
   bot.onText(/^.*\w.*\s.*\w.*$/, async (msg) => {
@@ -28,14 +27,14 @@ export default (bot) => {
       { ... opts, reply_markup: { force_reply: true } });
 
     bot.onReplyToMessage(confirm.chat.id, confirm.message_id, (msg) => {
-      if (msg.text == 'y') {
-         // storeEvents(data);
-        console.log('data: ', data);
-        bot.sendMessage(msg.from.id, 'Awesome, I saved your data.\nYou can check it out at diabertie.com', { ... opts });
-      } else if (msg.text == 'n') {
-        bot.sendMessage(msg.from.id, 'Ok, try again!');
+      const { text, from } = msg;
+
+      if (text == 'y') {
+        const reply = saveEvents(data, from.id);
+        bot.sendMessage(from.id, reply, { ... opts });
+      } else if (text == 'n') {
+        bot.sendMessage(from.id, 'Ok, not doing anything!');
       };
     });
-
   });
 };

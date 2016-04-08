@@ -1,28 +1,28 @@
 import expect from 'unexpected';
-import { connectBot, detectValues } from './actions';
-import User from '../models/User';
+import { connectBot, detectValues, saveEvents } from './actions';
+import { User, Event } from '../models';
 
 import mongoose from 'mongoose';
 mongoose.connect('mongodb://localhost:27017/diabertie_test', (err) => { if (err) throw err; } );
 
 describe('telegram actions', () => {
   describe('#connectBot', () => {
-    const presentToken = 'PRESENT';
+    const userToken = 'PRESENT';
 
     beforeEach(() => (
       User.create({
         email:         'present@user',
         telegramId:    null,
-        telegramToken: presentToken
+        telegramToken: userToken
       })
     ));
 
     afterEach(() => User.find({}).remove());
 
     it('updates the telegramId on the user', async () => {
-      await connectBot(presentToken, { id: 1234 });
+      await connectBot(userToken, { id: 1234 });
 
-      const user = User.findOne({ telegramToken: presentToken });
+      const user = User.findOne({ telegramToken: userToken });
       return expect(user, 'when fulfilled', 'to have property', 'telegramId', 1234);
     });
 
@@ -34,9 +34,9 @@ describe('telegram actions', () => {
 
     it('informs the user when already connected with the same account', async () => {
       const presentId = 99181;
-      await User.findOneAndUpdate({ telegramToken: presentToken }, { telegramId: presentId });
+      await User.findOneAndUpdate({ telegramToken: userToken }, { telegramId: presentId });
 
-      const result = await connectBot(presentToken, { id: presentId });
+      const result = await connectBot(userToken, { id: presentId });
 
       expect(result, 'to contain', '`present@user` is already connected');
     });
@@ -49,7 +49,7 @@ describe('telegram actions', () => {
       };
 
       await User.create(alreadyConnectedUserProps);
-      const result = await connectBot(presentToken, { id: alreadyConnectedId });
+      const result = await connectBot(userToken, { id: alreadyConnectedId });
 
       expect(result, 'to contain', 'already connected with the account `already@connected`');
     });
@@ -97,10 +97,44 @@ describe('telegram actions', () => {
   });
 
   describe('#storeEvents', () => {
-    context('when parent type is not given', () => {
-      xit('uses the detection type on stored events', () => {
+    const userId = 123456;
 
-      });
+    beforeEach(async () => {
+      await User.create({ email: 'user@savesEvents', telegramId: userId });
     });
+
+    const detections = {
+      sugar:   [{ value: 120, category: 'sugar', type: 'sugarMmol', subType: 'sugarMg', factor: 0.0555 }],
+      therapy: [{ value: 4, category: 'therapy', type: 'bolusInsulin', subType: 'humalog', factor: null }],
+      food:    [{ value: 2, category: 'food', type: 'carbs', subType: 'be', factor: 12 }]
+    };
+
+    afterEach(async () => {
+      await Event.find({}).remove();
+      await User.find({}).remove();
+    });
+
+    it('saves events to the database', async () => {
+      await saveEvents(detections, userId);
+
+      const eventModels = await Event.find({}, null, { sort: 'category' });
+      const events = eventModels.map(m => m.toObject());
+
+      expect(events, 'to satisfy', [
+        { category: 'food', originalUnit: 'be', unit: 'carbs', originalValue: 2, value: 24 },
+        { category: 'sugar', originalUnit: 'sugarMg', unit: 'sugarMmol', originalValue: 120, value: 6.659999847412109 },
+        { category: 'therapy', originalUnit: 'humalog', unit: 'bolusInsulin', originalValue: 4 , value: 4 }
+      ]);
+    });
+
+    it('assigns the User to the events', async () => {
+      await saveEvents(detections, userId);
+
+      const event = await Event.findOne({ value: 24 }).populate('user');
+
+      expect(event.user.email, 'to equal', 'user@savesEvents');
+    });
+
+    xit('returns a message after saving the data', () => {});
   });
 });

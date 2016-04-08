@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   telegramToken: String,
   telegramId:    { type: Number, default: null },
   createdAt:     { type: Date, default: Date.now },
