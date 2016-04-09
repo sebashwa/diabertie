@@ -21,6 +21,8 @@ export default function AuthReducer(state = Map(), action) {
     case 'LOGOUT':
       browserHistory.push('/landing');
       return state.set('user', null);
+    case 'CLEAR_AUTH_FORM_ERRORS':
+      return state.set('formErrors', null);
     default:
       return state;
   }

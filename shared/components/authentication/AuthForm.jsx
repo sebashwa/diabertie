@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { clearFormErrors } from 'actions/AuthActions';
 import { Link, browserHistory } from 'react-router';
 
 class AuthForm extends Component {
@@ -17,6 +18,10 @@ class AuthForm extends Component {
 
   componentWillReceiveProps = (props) => {
     if (props.user) { browserHistory.push('/'); }
+  }
+
+  componentWillUnmount = () => {
+    this.props.dispatch(clearFormErrors());
   }
 
   handleSubmit = (e) => {

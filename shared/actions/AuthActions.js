@@ -1,6 +1,10 @@
 import axios from 'axios';
 import moment from 'moment-timezone';
 
+export function clearFormErrors() {
+  return { type: 'CLEAR_AUTH_FORM_ERRORS' };
+}
+
 export function login(formData) {
   const data = { ...formData, timezone: moment.tz.guess() };
   return {
