@@ -12,7 +12,7 @@ export default (bot) => {
     bot.sendMessage(msg.from.id, text, { ... opts });
   });
 
-  bot.onText(/^.*\w.*\s.*\w.*$/, async (msg) => {
+  bot.onText(/^(?!\/).*\w.*\s.*\w.*$/, async (msg) => {
     const { from, text } = msg;
     const sendMessages = async (msgs) => (
       await Promise.all(msgs.map(m => bot.sendMessage(from.id, m, { ... opts })))
