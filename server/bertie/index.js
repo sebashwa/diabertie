@@ -31,11 +31,11 @@ export default (bot) => {
       { ... opts, reply_markup: { force_reply: true } }
     );
 
-    bot.onReplyToMessage(chat.id, message_id, (msg) => {
+    bot.onReplyToMessage(chat.id, message_id, async (msg) => {
       const { text, from } = msg;
 
       if (text == 'y') {
-        const reply = saveEvents(data, from.id);
+        const reply = await saveEvents(data, from.id);
         bot.sendMessage(from.id, reply, { ... opts });
       } else if (text == 'n') {
         bot.sendMessage(from.id, `Ok, I'm not doing anything!`);
