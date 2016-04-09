@@ -101,6 +101,12 @@ describe('telegram actions', () => {
 
       expect(warnings[0], 'to contain', 'I found more than one `sugar` value');
     });
+
+    it('returns a warning when a date value but no time value', async () => {
+      const { warnings } = await bertieDetect('120 mg 20.05.2015');
+
+      expect(warnings[0], 'to contain', 'I found a `date (20.5.2015)` but no `time`');
+    });
   });
 
   describe('#storeEvents', () => {
@@ -109,7 +115,7 @@ describe('telegram actions', () => {
     beforeEach(async () => {
       await User.create({
         email:      'user@savesEvents',
-        timezone:   'Berlin',
+        timezone:   'Europe/Berlin',
         telegramId: userId
       });
     });
@@ -151,7 +157,7 @@ describe('telegram actions', () => {
       expect(createdAt.getMonth(), 'to equal', 2);
       expect(createdAt.getFullYear(), 'to equal', 2014);
       expect(createdAt.getDate(), 'to equal', 21);
-      expect(createdAt.getHours(), 'to equal', 17);
+      expect(createdAt.getUTCHours(), 'to equal', 15);
       expect(createdAt.getMinutes(), 'to equal', 20);
     });
 

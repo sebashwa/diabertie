@@ -28,13 +28,15 @@ export const connectBot = async (telegramToken, sender) => {
 
 const previewTexts = (events) => events.map(e => `\`${e.value} ${e.subType || e.type}\``).join(', ');
 
-function validateDetections({ sugar, therapy, food }) {
-  const all = [... sugar, ... therapy, ... food];
+function validateDetections({ time, date, values }) {
+  const { sugar, therapy, food } = values;
+  const allValues = [... sugar, ... therapy, ... food];
   const errors = [];
   const warnings = [];
 
-  if (all.length == 0) { errors.push('Sorry, I didn\'t get that! To track values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`'); };
+  if (allValues.length == 0) { errors.push('Sorry, I didn\'t get that! To track values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`'); };
   if (sugar.length > 1) { warnings.push(`Oops, that's strange.. I found more than one \`sugar\` value:\n\n${previewTexts(sugar)}`); }
+  if (!time && date) { warnings.push(`Oops, that's strange.. I found a \`date (${date.value})\` but no \`time\`. That means I would use the current time when saving`); }
 
   return { errors, warnings };
 }
@@ -48,10 +50,14 @@ export const bertieDetect = (text) => {
       prev[type] = parser.get('bertieValues', unitsBy(type));
       return prev;
     }, {});
-    const detectedDate = parser.get('bertieDates')[0];
-    const detectedTime = parser.get('bertieTimes')[0];
 
-    const { errors, warnings } = validateDetections(detectedValues);
+    const detections = {
+      values: detectedValues,
+      time:   parser.get('bertieTimes')[0],
+      date:   parser.get('bertieDates')[0]
+    };
+
+    const { errors, warnings } = validateDetections(detections);
     if (errors.length) return resolve({ errors });
 
     const detectionsMsg = types.filter(type => !!detectedValues[type].length)
@@ -59,9 +65,8 @@ export const bertieDetect = (text) => {
       .join('\n');
 
     const messages = [detectionsMsg, `Do you want me to save that? (y/n)`];
-    const data = { values: detectedValues, time: detectedTime, date: detectedDate };
 
-    return resolve({ data, messages, warnings });
+    return resolve({ data: detections, messages, warnings });
   });
 };
 
