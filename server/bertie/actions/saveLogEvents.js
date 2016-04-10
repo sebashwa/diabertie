@@ -1,4 +1,4 @@
-import { User, Event } from '../../models';
+import { User, LogEvent } from '../../models';
 import moment from 'moment-timezone';
 
 export default async (detections, telegramId) => {
@@ -30,7 +30,7 @@ export default async (detections, telegramId) => {
       };
     });
 
-    await Event.insertMany(events);
+    await LogEvent.insertMany(events);
     return 'Cool, I saved your data';
   } catch (e) {
     console.log(e);

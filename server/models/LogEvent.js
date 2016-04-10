@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const EventSchema = new Schema({
+const LogEventSchema = new Schema({
   category:      String,
   unit:          String,
   value:         Number,
@@ -10,4 +10,4 @@ const EventSchema = new Schema({
   createdAt:     { type: Date, default: Date.now },
 });
 
-export default mongoose.model('Event', EventSchema);
+export default mongoose.model('LogEvent', LogEventSchema);

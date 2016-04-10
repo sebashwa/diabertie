@@ -1,13 +1,13 @@
 import expect from 'unexpected';
-import saveEvents from './saveEvents';
-import { User, Event } from '../../models';
+import saveLogEvents from './saveLogEvents';
+import { User, LogEvent } from '../../models';
 
-describe('bertie action #storeEvents', () => {
+describe('bertie action #storeLogEvents', () => {
   const userId = 123456;
 
   beforeEach(async () => {
     await User.create({
-      email:      'user@savesEvents',
+      email:      'user@savesLogEvents',
       timezone:   'Europe/Berlin',
       telegramId: userId
     });
@@ -24,14 +24,14 @@ describe('bertie action #storeEvents', () => {
   };
 
   afterEach(async () => {
-    await Event.find({}).remove();
+    await LogEvent.find({}).remove();
     await User.find({}).remove();
   });
 
   it('saves events to the database', async () => {
-    await saveEvents(detections, userId);
+    await saveLogEvents(detections, userId);
 
-    const eventModels = await Event.find({}, null, { sort: 'category' });
+    const eventModels = await LogEvent.find({}, null, { sort: 'category' });
     const events = eventModels.map(m => m.toObject());
 
     expect(events, 'to satisfy', [
@@ -43,8 +43,8 @@ describe('bertie action #storeEvents', () => {
   });
 
   it(`takes the user's timezone into account for created at`, async () => {
-    await saveEvents(detections, userId);
-    const eventModel = await Event.findOne();
+    await saveLogEvents(detections, userId);
+    const eventModel = await LogEvent.findOne();
     const createdAt = eventModel.toObject().createdAt;
 
     expect(createdAt.getMonth(), 'to equal', 2);
@@ -55,15 +55,15 @@ describe('bertie action #storeEvents', () => {
   });
 
   it('assigns the User to the events', async () => {
-    await saveEvents(detections, userId);
+    await saveLogEvents(detections, userId);
 
-    const event = await Event.findOne({ value: 24 }).populate('user');
+    const event = await LogEvent.findOne({ value: 24 }).populate('user');
 
-    expect(event.user.email, 'to equal', 'user@savesEvents');
+    expect(event.user.email, 'to equal', 'user@savesLogEvents');
   });
 
   it('returns a message after saving the data', async () => {
-    const reply = await saveEvents(detections, userId);
+    const reply = await saveLogEvents(detections, userId);
     expect(reply, 'to contain', 'saved your data');
   });
 });
