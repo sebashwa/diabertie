@@ -2,7 +2,8 @@ import app from './api';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import { Router } from 'express';
-import User from './models/User';
+import { Event, User } from './models';
+import moment from 'moment-timezone';
 
 const router = Router();
 
@@ -39,6 +40,21 @@ router.post('/login', passport.authenticate('local', { session: false }), (req, 
 
 router.get('/users/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json(req.user);
+});
+
+router.get('/events/:datum', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const { params, user } = req;
+  const datum = moment(params.datum, 'MM-DD-YYYY').tz(user.timezone);
+
+  const events = await Event.find({
+    $and: [
+      { createdAt: { $gte: datum.startOf('day').toISOString() } },
+      { createdAt: { $lte: datum.endOf('day').toISOString() } },
+    ],
+    user: user.id
+  });
+
+  res.json(events);
 });
 
 export default router;
