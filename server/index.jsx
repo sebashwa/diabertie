@@ -6,7 +6,7 @@ import { RouterContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 import routes from 'routes';
 import { Provider } from 'react-redux';
-import reducers from 'reducers';
+import * as reducers from 'reducers';
 import { setBotName } from 'actions/SettingsActions';
 import promiseMiddleware from 'lib/promiseMiddleware';
 import { createStore,

@@ -1,4 +1,2 @@
-import auth from './AuthReducer';
-import settings from './SettingsReducer';
-
-export default { auth, settings };
+export { default as auth } from './AuthReducer';
+export { default as settings } from './SettingsReducer';

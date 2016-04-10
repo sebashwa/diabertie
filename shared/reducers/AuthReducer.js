@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 import { browserHistory } from 'react-router';
 
-export default function AuthReducer(state = Map(), action) {
+export default (state = Map(), action) => {
   switch(action.type) {
     case 'SIGNUP_REQUEST':
     case 'LOGIN_REQUEST':
@@ -26,4 +26,4 @@ export default function AuthReducer(state = Map(), action) {
     default:
       return state;
   }
-}
+};
