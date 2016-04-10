@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { clearFormErrors } from 'actions/AuthActions';
 import { Link, browserHistory } from 'react-router';
+import { containerStyle, formStyle } from './AuthForm.style';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -38,12 +39,15 @@ class AuthForm extends Component {
     const { authType, formErrors } = this.props;
 
     return (
-      <div className={ `${authType.toLowerCase()}-container` }>
-        <form className={ authType.toLowerCase() } method="post" onSubmit={ this.handleSubmit }>
-          <Link to="/landing">Close</Link>
+      <div className={ `${authType}-container` } style={ containerStyle() }>
+        <h1>{ authType }</h1>
+        <form className={ authType } method="post" style={ formStyle() } onSubmit={ this.handleSubmit }>
           <input type="text" name="email" ref="email" placeholder="Email" />
           <input type="password" name="password" ref="password" placeholder="Password" />
-          <button type="submit">{ authType }</button>
+          <div>
+            <Link to="/landing">Close</Link>
+            <button type="submit">{ authType }</button>
+          </div>
         </form>
         {
           !!formErrors ?

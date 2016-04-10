@@ -8,8 +8,6 @@ export default class Main extends React.Component {
   render() {
     return (
       <div id="main">
-        <h1>Diabertie</h1>
-
         {this.props.children}
       </div>
     );
