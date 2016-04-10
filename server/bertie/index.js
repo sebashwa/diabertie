@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 
-import { bertieDetect, connectBot, saveEvents } from './actions';
+import { bertieDetect, bertieConnect, saveEvents } from './actions';
 
 const opts = { parse_mode: 'Markdown'};
 
 export default (bot) => {
   bot.onText(/\/start (.+)/, async (msg, match) => {
     const telegramToken = match[1];
-    const text = await connectBot(telegramToken, msg.from);
+    const text = await bertieConnect(telegramToken, msg.from);
 
     bot.sendMessage(msg.from.id, text, { ... opts });
   });

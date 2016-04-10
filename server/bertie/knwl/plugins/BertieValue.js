@@ -1,4 +1,4 @@
-export default function BertieValue(knwlInstance) {
+export default function (knwlInstance) {
   this.calls = function() {
     const units = arguments[0][1];
     const words = knwlInstance.words.get('linkWords');

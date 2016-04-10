@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-export default function BertieTime(knwlInstance) {
-  this.calls = function() {
+export default function (knwlInstance) {
+  this.calls = () => {
     const words = knwlInstance.words.get('linkWords');
     let results = [];
 
@@ -24,4 +24,4 @@ export default function BertieTime(knwlInstance) {
 
     return results;
   };
-}
+};
