@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import AuthForm from './Landing/AuthForm';
+import AuthForm from './AuthForm';
 import { signup, login } from 'actions/AuthActions';
-import { authFormStyle } from './Landing.style';
+import { authFormStyle } from './index.style';
 
 
 export default class Landing extends Component {
