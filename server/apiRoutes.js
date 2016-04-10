@@ -26,7 +26,7 @@ router.post('/signup', (req, res) => {
   });
 });
 
-router.post('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/logout', (req, res) => {
   res.cookie('jwtoken', null);
   res.sendStatus(200);
 });
