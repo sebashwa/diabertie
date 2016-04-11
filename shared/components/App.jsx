@@ -22,7 +22,7 @@ class App extends Component {
 
   componentWillReceiveProps = (nextProps) => {
     const { user, loadingUser } = nextProps;
-    if (!user && !loadingUser) { browserHistory.push('/login'); }
+    if (!user && !loadingUser) { browserHistory.push('/landing'); }
   }
 
   handleLogout = () => {
