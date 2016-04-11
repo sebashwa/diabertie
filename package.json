@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
-    "test": "mocha '+(server|shared)/**/*.test.js' --compilers js:babel-register,js:babel-polyfill --reporter nyan",
+    "test": "mocha '+(server|shared)/**/*.test.js' --compilers js:babel-register,js:babel-polyfill",
     "lint": "eslint ."
   },
   "author": "sebashwa",
