@@ -20,7 +20,7 @@ describe('bertie action #storeLogEvents', () => {
       food:    [{ value: 2, category: 'food', type: 'carbs', subType: 'be', factor: 12 }]
     },
     date: { year: 2014, month: 2, date: 21 },
-    time: { hour: 16, minute: 20 }
+    time: { hours: 16, minutes: 20 }
   };
 
   afterEach(async () => {

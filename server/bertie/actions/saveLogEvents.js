@@ -13,7 +13,7 @@ export default async (detections, telegramId) => {
     };
 
     if(date) { setTimestampValues(['year', 'month', 'date'], date); }
-    if(time) { setTimestampValues(['hour', 'minute'], time); }
+    if(time) { setTimestampValues(['hours', 'minutes'], time); }
 
     const events = allValues.map((detection) => {
       const { category, type, subType, value, factor } = detection;
