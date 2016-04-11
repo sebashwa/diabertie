@@ -1,10 +1,12 @@
 import axios from 'axios';
-import moment from 'moment-timezone';
 
-export function fetchLogEvents() {
-  const datum = moment().format('MM-DD-YYYY');
+export function fetchLogEvents(datum) {
   return {
     type:    'FETCH_LOG_EVENTS',
     promise: axios.get(`api/logEvents/${datum}`)
   };
+}
+
+export function changeDate(datum, timezone, alteration) {
+  return { type: 'CHANGE_DATUM', datum, alteration, timezone };
 }
