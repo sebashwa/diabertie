@@ -1,3 +1,5 @@
+![Travis](https://travis-ci.org/sebashwa/diabertie.svg)
+
 # diabertie
 
 This is diabertie, your personal diabetes chatbot.
