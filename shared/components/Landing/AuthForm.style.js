@@ -13,7 +13,8 @@ export const containerStyle = () => {
     display:        'flex',
     flexDirection:  'column',
     alignItems:     'center',
-    justifyContent: 'center',
-    minHeight:      '250px'
+    justifyContent: 'flex-start',
+    minHeight:      '250px',
+    minWidth:       '320px'
   };
 };
