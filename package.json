@@ -9,7 +9,8 @@
     "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
     "test": "mocha '+(server|shared)/**/*.test.js' --compilers js:babel-register,js:babel-polyfill",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "heroku-postbuild": "npm run build"
   },
   "author": "sebashwa",
   "license": "MIT",
