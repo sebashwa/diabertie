@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingBertie from 'components/global/LoadingBertie';
+import LogbookData from 'components/LogbookData';
+import LogbookNavigation from 'components/LogbookNavigation';
 
 import { fetchLogEvents } from 'actions/LogbookActions';
 
@@ -19,27 +21,13 @@ class Logbook extends Component {
   render() {
     const { logEvents, loadingLogEvents } = this.props;
 
-    if (!!logEvents && !loadingLogEvents) {
-      return (
-        <div className="logbook">
-          { logEvents.size > 0 ?
-            logEvents.map((logEvent, i) => {
-            const { createdAt, originalValue, originalUnit, category } = logEvent.toObject();
-
-            return (
-              <div key={i} className="event">
-                <span>{ createdAt } </span>
-                <span>{ category } </span>
-                <span>{ originalValue } </span>
-                <span>{ originalUnit } </span>
-              </div>
-            );
-          }) : 'NO DATA TO SEE HERE' }
-        </div>
-      );
-    } else {
-      return <LoadingBertie />;
-    }
+    return (
+      <div className="logbook">
+        <LogbookNavigation />
+        { loadingLogEvents ? <LoadingBertie /> : null }
+        { !!logEvents && !loadingLogEvents ? <LogbookData logEvents={ logEvents } /> : null }
+      </div>
+    );
   }
 };
 
