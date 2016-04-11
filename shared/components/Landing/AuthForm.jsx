@@ -49,17 +49,16 @@ class AuthForm extends Component {
             <button type="submit">{ authType }</button>
           </div>
         </form>
-        {
-          !!formErrors ?
-            formErrors.map((errors, type) => {
-              return (
-                <p key={ type } className={ `${type}-errors` }>
-                  { `${type.charAt(0).toUpperCase() + type.slice(1)} ${errors.join(',')}` }
-                </p>
-              );
-            }).valueSeq()
-          : null
-        }
+        
+        { !!formErrors ?
+          formErrors.map((errors, type) => {
+            return (
+              <p key={ type } className={ `${type}-errors` }>
+                { `${type.charAt(0).toUpperCase() + type.slice(1)} ${errors.join(',')}` }
+              </p>
+            );
+          }).valueSeq()
+        : null }
       </div>
     );
   }
