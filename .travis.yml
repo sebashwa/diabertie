@@ -6,6 +6,7 @@ cache:
   - apt
   - directories:
     - node_modules
+    - $NVM_DIR
 
 services:
   - mongodb
