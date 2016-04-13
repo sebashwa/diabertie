@@ -11,10 +11,7 @@ describe('LogEvent', () => {
   });
 
   describe('#groupInInterval', () => {
-    const time = moment('02-05-2015 22:15', 'MM-DD-YYYY HH:mm');
-    const timePlusTwo = time.clone().add(2, 'minutes');
-    const timePlusSix = time.clone().add(6, 'minutes');
-    const timeMinusOneDay = time.clone().add(-1, 'day');
+    let time;
 
     let logEventTimePlusSix,
         logEventTime,
@@ -26,14 +23,15 @@ describe('LogEvent', () => {
 
     beforeEach(async () => {
       user = await User.create({ email: 'true@user' });
+      time = moment('02-05-2015 22:15', 'MM-DD-YYYY HH:mm').tz(user.timezone);
 
       logEventTime = await LogEvent.create({ createdAt: time, user: user.id});
-      logEventTimePlusTwo = await LogEvent.create({ createdAt: timePlusTwo, user: user.id });
-      logEventTimePlusSix = await LogEvent.create({ createdAt: timePlusSix, user: user.id });
+      logEventTimePlusTwo = await LogEvent.create({ createdAt: time.clone().add(2, 'minutes'), user: user.id });
+      logEventTimePlusSix = await LogEvent.create({ createdAt: time.clone().add(6, 'minutes'), user: user.id });
 
-      logEventDifferentDay = await LogEvent.create({ createdAt: timeMinusOneDay, user: user.id });
+      logEventDifferentDay = await LogEvent.create({ createdAt: time.clone().add(-1, 'day'), user: user.id });
       const anotherUser = await User.create({ email: 'someone@else' });
-      logEventDifferentUser = await LogEvent.create({ createdAt: timePlusTwo, user: anotherUser.id });
+      logEventDifferentUser = await LogEvent.create({ createdAt: time.clone(), user: anotherUser.id });
     });
 
     it('groups logEvents in the given interval', async () => {

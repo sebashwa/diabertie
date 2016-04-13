@@ -11,8 +11,8 @@ const LogEventSchema = new Schema({
 });
 
 LogEventSchema.static('groupInInterval', async function(datum, user, interval=5, callback) {
-  const start = datum.clone().startOf('day');
-  const end = datum.clone().endOf('day');
+  const start = datum.clone().tz(user.timezone).startOf('day');
+  const end = datum.clone().tz(user.timezone).endOf('day');
 
   const match = {
     createdAt: {
