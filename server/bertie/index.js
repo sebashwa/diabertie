@@ -38,7 +38,7 @@ export default (bot) => {
         const reply = await saveLogEvents(data, from.id);
         bot.sendMessage(from.id, reply, { ... opts });
       } else if (text == 'n') {
-        bot.sendMessage(from.id, `Ok, I'm not doing anything!`);
+        bot.sendMessage(from.id, 'Ok, I\'m not doing anything!');
       };
     });
   });

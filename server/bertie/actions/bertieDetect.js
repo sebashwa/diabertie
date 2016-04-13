@@ -39,7 +39,7 @@ export default (text) => {
       .map((type) => `${previewTexts(detectedValues[type])}`)
       .join('\n');
 
-    const messages = [detectionsMsg, `Do you want me to save that? (y/n)`];
+    const messages = [detectionsMsg, 'Do you want me to save that? (y/n)'];
 
     return resolve({ data: detections, messages, warnings });
   });

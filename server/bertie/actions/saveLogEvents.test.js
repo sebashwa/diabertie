@@ -42,7 +42,7 @@ describe('bertie action #storeLogEvents', () => {
 
   });
 
-  it(`takes the user's timezone into account for created at`, async () => {
+  it('takes the user\'s timezone into account for created at', async () => {
     await saveLogEvents(detections, userId);
     const eventModel = await LogEvent.findOne();
     const createdAt = eventModel.toObject().createdAt;
