@@ -4,9 +4,10 @@ import { User } from '../../models';
 
 describe('bertie action #bertieConnect', () => {
   const userToken = 'PRESENT';
+  let user;
 
-  beforeEach(() => (
-    User.create({
+  beforeEach(async () => (
+    user = await User.create({
       email:         'present@user',
       telegramId:    null,
       telegramToken: userToken
@@ -30,7 +31,7 @@ describe('bertie action #bertieConnect', () => {
 
   it('informs the user when already connected with the same account', async () => {
     const presentId = 99181;
-    await User.findOneAndUpdate({ telegramToken: userToken }, { telegramId: presentId });
+    await user.update({ telegramId: presentId });
 
     const result = await bertieConnect(userToken, { id: presentId });
 
