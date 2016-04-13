@@ -3,7 +3,8 @@ node_js:
   - 5.7
 
 cache:
-  directories:
+  - apt
+  - directories:
     - node_modules
 
 services:
