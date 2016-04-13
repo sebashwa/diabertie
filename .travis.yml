@@ -6,3 +6,7 @@ services:
   - mongodb
 node_js:
   - 5.7
+script:
+  - mongod --version
+  - npm run lint
+  - npm test
