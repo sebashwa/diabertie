@@ -44,15 +44,9 @@ router.get('/users/current', passport.authenticate('jwt', { session: false }), (
 
 router.get('/logEvents/:datum', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const { params, user } = req;
-  const datum = moment(params.datum, 'MM-DD-YYYY').tz(user.timezone);
+  const datum = moment(params.datum, 'MM-DD-YYYY');
 
-  const events = await LogEvent.find({
-    $and: [
-      { createdAt: { $gte: datum.startOf('day').toISOString() } },
-      { createdAt: { $lte: datum.endOf('day').toISOString() } },
-    ],
-    user: user.id
-  });
+  const events = await LogEvent.groupInInterval(datum, user);
 
   res.json(events);
 });

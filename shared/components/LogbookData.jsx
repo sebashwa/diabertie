@@ -2,19 +2,31 @@ import React from 'react';
 import moment from 'moment-timezone';
 import { logEventStyle, logbookDataStyle } from './LogbookData.style';
 
-export default ({ logEvents, timezone }) => {
+export default ({ logEvents: logEventBundles, timezone }) => {
   return (
     <div className="logbookData" style={ logbookDataStyle() }>
-      { logEvents.size > 0 ?
-        logEvents.map((logEvent, i) => {
-        const { createdAt, originalValue, originalUnit, category } = logEvent.toObject();
+      { logEventBundles.size > 0 ?
+        logEventBundles.map((logEventBundle, i) => {
+        const { _id: time , logEvents } = logEventBundle.toObject();
+        const { hour, minute } = time.toObject();
 
         return (
-          <div key={i} className="logEvent" style={ logEventStyle() }>
-            <span>{ moment(createdAt).tz(timezone).format('HH:mm') } </span>
-            <span>{ category } </span>
-            <span>{ originalValue } </span>
-            <span>{ originalUnit } </span>
+          <div key={i} className="logEventBundle" style={ logEventStyle() }>
+            <span>{ moment.utc(`${hour}:${minute}`, 'HH:mm').tz(timezone).format('HH:mm') } </span>
+
+
+            { ['sugar', 'food', 'therapy'].map((type) =>
+                logEvents.filter(e => e.get('category') === type).map(logEvent => {
+                  const { originalValue, originalUnit } = logEvent.toObject();
+
+                  return(
+                    <div className="logEvent">
+                      <span>{ originalValue } </span>
+                      <span>{ originalUnit }</span>
+                    </div>
+                );
+              })
+            )}
           </div>
         );
       }) : 'NO DATA TO SEE HERE' }

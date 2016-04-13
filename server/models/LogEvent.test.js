@@ -42,9 +42,9 @@ describe('LogEvent', () => {
       );
 
       expect(aggregation[0].logEvents.map(e => e._id), 'to equal', [
-        Types.ObjectId(logEventTime.id),
+        Types.ObjectId(logEventTimePlusSix.id),
         Types.ObjectId(logEventTimePlusTwo.id),
-        Types.ObjectId(logEventTimePlusSix.id)
+        Types.ObjectId(logEventTime.id)
       ]);
     });
 
@@ -68,17 +68,17 @@ describe('LogEvent', () => {
       const aggregation = await LogEvent.groupInInterval(time, user);
 
       expect(aggregation, 'to satisfy', [
-        { _id: { hour: 22, minute: 20 }, logEvents: Array },
-        { _id: { hour: 22, minute: 15 }, logEvents: Array }
+        { _id: { hour: 22, minute: 15 }, logEvents: Array },
+        { _id: { hour: 22, minute: 20 }, logEvents: Array }
       ]);
 
       expect(aggregation[0].logEvents.map(e => e._id), 'to equal', [
-        Types.ObjectId(logEventTimePlusSix.id)
+        Types.ObjectId(logEventTimePlusTwo.id),
+        Types.ObjectId(logEventTime.id)
       ]);
 
       expect(aggregation[1].logEvents.map(e => e._id), 'to equal', [
-        Types.ObjectId(logEventTime.id),
-        Types.ObjectId(logEventTimePlusTwo.id)
+        Types.ObjectId(logEventTimePlusSix.id)
       ]);
     });
   });

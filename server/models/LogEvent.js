@@ -32,9 +32,12 @@ LogEventSchema.static('groupInInterval', async function(datum, user, interval=5,
     logEvents: { '$push': '$$ROOT' }
   };
 
+  const sort = { createdAt: -1 };
+
   return await this.aggregate([
     { $match: match },
-    { $group: group }
+    { $sort: sort },
+    { $group: group },
   ]).exec(callback);
 });
 
