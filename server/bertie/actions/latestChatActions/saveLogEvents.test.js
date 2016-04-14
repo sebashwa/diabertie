@@ -1,15 +1,14 @@
 import expect from 'unexpected';
 import saveLogEvents from './saveLogEvents';
-import { User, LogEvent } from '../../models';
+import { User, LogEvent } from '../../../models';
 
 describe('bertie action #saveLogEvents', () => {
-  const from = { id: 123456 };
+  let user;
 
   beforeEach(async () => {
-    await User.create({
-      email:      'user@savesLogEvents',
-      timezone:   'Europe/Berlin',
-      telegramId: from.id
+    user = await User.create({
+      email:    'user@savesLogEvents',
+      timezone: 'Europe/Berlin',
     });
   });
 
@@ -24,7 +23,7 @@ describe('bertie action #saveLogEvents', () => {
   };
 
   it('saves events to the database', async () => {
-    await saveLogEvents(detections, from);
+    await saveLogEvents(detections, user);
 
     const eventModels = await LogEvent.find({}, null, { sort: 'category' });
     const events = eventModels.map(m => m.toObject());
@@ -38,7 +37,7 @@ describe('bertie action #saveLogEvents', () => {
   });
 
   it('takes the user\'s timezone into account for created at', async () => {
-    await saveLogEvents(detections, from);
+    await saveLogEvents(detections, user);
     const eventModel = await LogEvent.findOne();
     const createdAt = eventModel.toObject().createdAt;
 
@@ -50,15 +49,14 @@ describe('bertie action #saveLogEvents', () => {
   });
 
   it('assigns the User to the events', async () => {
-    await saveLogEvents(detections, from);
-
+    await saveLogEvents(detections, user);
     const event = await LogEvent.findOne({ value: 24 }).populate('user');
 
     expect(event.user.email, 'to equal', 'user@savesLogEvents');
   });
 
   it('returns a message after saving the data', async () => {
-    const reply = await saveLogEvents(detections, from);
-    expect(reply, 'to contain', 'saved your data');
+    const { message } = await saveLogEvents(detections, user);
+    expect(message, 'to contain', 'saved your data');
   });
 });

@@ -1,16 +1,12 @@
-import { LogEvent } from '../../models';
-import logger from '../../logger';
-import { fetchUser } from '.';
+import { LogEvent } from '../../../models';
+import logger from '../../../logger';
 import moment from 'moment-timezone';
 
-export default async (detections, from) => {
+export default async (detections, user) => {
   const { date, time, values } = detections;
   const allValues = [].concat(... Object.values(values));
 
   try {
-    const { user, error } = await fetchUser(from);
-    if (error) return error;
-
     const createdAt = moment.utc().tz(user.timezone);
     const setTimestampValues = (values, type) => {
       values.forEach((v) => createdAt.set(v, type[v]));
@@ -35,9 +31,10 @@ export default async (detections, from) => {
     });
 
     await LogEvent.insertMany(events);
-    return 'Cool, I saved your data';
+
+    return { message: 'Cool, I saved your data' };
   } catch (e) {
     logger.error(e);
-    return 'Oops, sorry! Something went completely wrong.. Please try again later';
+    return { error: 'Oops, sorry! Something went completely wrong.. Please try again later' };
   }
 };

@@ -7,8 +7,8 @@ const UserSchema = new Schema({
   createdAt:        { type: Date, default: Date.now },
   timezone:         { type: String, default: 'etc_utc' },
   latestChatAction: {
-    action: String,
-    data:   Object
+    action: { type: String, default: null },
+    data:   { type: Object, default: null }
   }
 });
 

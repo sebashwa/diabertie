@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { bertieDetect, bertieConnect, saveLogEvents } from './actions';
+import { bertieDetect, bertieConnect, saveLatestChatAction, executeLatestChatAction } from './actions';
 
 const opts = { parse_mode: 'Markdown'};
 
@@ -12,34 +12,42 @@ export default (bot) => {
     bot.sendMessage(msg.from.id, text, { ... opts });
   });
 
-  bot.onText(/^(?!\/).*\w.*\s.*\w.*$/, async (msg) => {
-    const { from } = msg;
-    const sendMessages = async (msgs) => (
-      await Promise.all(msgs.map(m => bot.sendMessage(from.id, m, { ... opts })))
-    );
+  bot.onText(/^(?!\/)\D*$/, async (msg) => {
+    const { text, from } = msg;
+    const sendMessage = (msg) => bot.sendMessage(from.id, msg, { ... opts });
 
-    const { errors, messages, warnings, data } = await bertieDetect(msg);
+    if (text == 'Yes') {
+      const { error, message } = await executeLatestChatAction(from);
+      if (error) return sendMessage(error);
 
-    if (errors) return sendMessages(errors);
+      sendMessage(message);
+    } else if (text == 'No') {
+      await saveLatestChatAction(null, null, from);
+      sendMessage('Ok, I\'m not doing anything!');
+    } else {
+      sendMessage('Oh sorry, I didn\'t get that..');
+    };
+  });
 
-    await sendMessages(warnings);
-    await sendMessages(messages.slice(0, -1));
+  bot.onText(/^(?!\/).*\d.*\s.*\w.*$/, async (msg) => {
+    const { from, text } = msg;
+    const sendMessage = async (msg) => {
+      await bot.sendMessage(from.id, msg, { ... opts });
+    };
 
-    const { message_id, chat } = await bot.sendMessage(
-      from.id,
-      messages.slice(-1)[0],
-      { ... opts, reply_markup: { force_reply: true } }
-    );
+    const { error: detectionError, message, warnings, data } = await bertieDetect(text);
+    if (detectionError) return sendMessage(detectionError);
 
-    bot.onReplyToMessage(chat.id, message_id, async (msg) => {
-      const { text, from } = msg;
+    const { error: saveLatestChatActionError } = await saveLatestChatAction('saveLogEvents', data, from);
+    if (saveLatestChatActionError) { return sendMessage(saveLatestChatActionError); }
 
-      if (text == 'y') {
-        const reply = await saveLogEvents(data, from);
-        bot.sendMessage(from.id, reply, { ... opts });
-      } else if (text == 'n') {
-        bot.sendMessage(from.id, 'Ok, I\'m not doing anything!');
-      };
+    for(let i = 0; i < warnings.length; i++) {
+      const warning = warnings[i];
+      await sendMessage(warning);
+    }
+
+    bot.sendMessage(from.id, message, {
+      ... opts, reply_markup: { keyboard: [['Yes'], ['No']], one_time_keyboard: true }
     });
   });
 };
