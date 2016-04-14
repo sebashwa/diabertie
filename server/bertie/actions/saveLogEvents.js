@@ -1,12 +1,15 @@
-import { User, LogEvent } from '../../models';
+import { LogEvent } from '../../models';
+import { fetchUser } from '.';
 import moment from 'moment-timezone';
 
-export default async (detections, telegramId) => {
+export default async (detections, from) => {
   const { date, time, values } = detections;
   const allValues = [].concat(... Object.values(values));
 
   try {
-    const user = await User.findOne({ telegramId });
+    const { user, error } = await fetchUser(from);
+    if (error) return error;
+
     const createdAt = moment.utc().tz(user.timezone);
     const setTimestampValues = (values, type) => {
       values.forEach((v) => createdAt.set(v, type[v]));

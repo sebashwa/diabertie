@@ -35,7 +35,7 @@ export default (bot) => {
       const { text, from } = msg;
 
       if (text == 'y') {
-        const reply = await saveLogEvents(data, from.id);
+        const reply = await saveLogEvents(data, from);
         bot.sendMessage(from.id, reply, { ... opts });
       } else if (text == 'n') {
         bot.sendMessage(from.id, 'Ok, I\'m not doing anything!');
