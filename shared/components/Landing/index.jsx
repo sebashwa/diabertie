@@ -14,10 +14,11 @@ export default class Landing extends Component {
     const { route } = this.props;
     return (
       <div className="landing">
-        { route.path == '/landing' ? null :
+        {
+          !(route.path == '/landing') &&
           <div className="auth-form" style={ authFormStyle() } >
-            { route.path == '/signup' ? <AuthForm formAction={ signup } authType="signup" /> : null }
-            { route.path == '/login' ? <AuthForm formAction={ login } authType="login" /> : null }
+            { (route.path == '/signup') && <AuthForm formAction={ signup } authType="signup" /> }
+            { (route.path == '/login') && <AuthForm formAction={ login } authType="login" /> }
           </div>
         }
         Hey, my name is Bertie! I am your personal diabetes chatbot.

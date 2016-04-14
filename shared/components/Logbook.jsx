@@ -35,8 +35,8 @@ class Logbook extends Component {
     return (
       <div className="logbook">
         <LogbookNavigation datum={ datum } timezone={ timezone }/>
-        { loadingLogEvents ? <LoadingBertie /> : null }
-        { !!logEvents && !loadingLogEvents ? <LogbookData logEvents={ logEvents } timezone={ timezone } /> : null }
+        { !!loadingLogEvents && <LoadingBertie /> }
+        { (!!logEvents && !loadingLogEvents) && <LogbookData logEvents={ logEvents } timezone={ timezone } /> }
       </div>
     );
   }

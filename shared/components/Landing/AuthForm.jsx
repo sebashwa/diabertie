@@ -49,8 +49,9 @@ class AuthForm extends Component {
             <button type="submit">{ authType }</button>
           </div>
         </form>
-        
-        { !!formErrors ?
+
+        {
+          !!formErrors &&
           formErrors.map((errors, type) => {
             return (
               <p key={ type } className={ `${type}-errors` }>
@@ -58,17 +59,15 @@ class AuthForm extends Component {
               </p>
             );
           }).valueSeq()
-        : null }
+        }
       </div>
     );
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user:       state.auth.get('user'),
-    formErrors: state.auth.get('formErrors')
-  };
-};
+const mapStateToProps = (state) => ({
+  user:       state.auth.get('user'),
+  formErrors: state.auth.get('formErrors')
+});
 
 export default connect(mapStateToProps)(AuthForm);
