@@ -47,7 +47,11 @@ export default (bot) => {
     }
 
     bot.sendMessage(from.id, message, {
-      ... opts, reply_markup: { keyboard: [['Yes'], ['No']], one_time_keyboard: true }
+      ... opts, reply_markup: {
+        keyboard:          [['Yes'], ['No']], 
+        one_time_keyboard: true,
+        resize_keyoard:    true
+      }
     });
   });
 };
