@@ -48,7 +48,6 @@ describe('knwl plugin BertieDate', () => {
   });
 
   it('works with zero paddings', () => {
-
     const parser = knwl(`06-02 06/02 02.06 06-02-${currentYear} 06/02/${currentYear} 02.06.${currentYear}`);
     const results = parser.get('bertieDates');
 
@@ -59,6 +58,22 @@ describe('knwl plugin BertieDate', () => {
         month: 5,
         year:  currentYear
       });
+    });
+  });
+
+  context('given a dot format date', () => {
+    it('does not recognize it if a word follows', () => {
+      const parser = knwl('8.5 mg');
+      const results = parser.get('bertieDates');
+
+      expect(results, 'to be empty');
+    });
+
+    it('does not recognize it if a word follows directly', () => {
+      const parser = knwl('8.5mg');
+      const results = parser.get('bertieDates');
+
+      expect(results, 'to be empty');
     });
   });
 });

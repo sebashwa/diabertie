@@ -29,7 +29,7 @@ export default (bot) => {
     };
   });
 
-  bot.onText(/^(?!\/).*\d.*\s.*\w.*$/, async (msg) => {
+  bot.onText(/^(?!\/).*\d.*\s.*[A-Za-z].*$/, async (msg) => {
     const { from, text } = msg;
     const sendMessage = async (msg) => {
       await bot.sendMessage(from.id, msg, { ... opts });
@@ -48,7 +48,7 @@ export default (bot) => {
 
     bot.sendMessage(from.id, message, {
       ... opts, reply_markup: {
-        keyboard:          [['Yes'], ['No']], 
+        keyboard:          [['Yes'], ['No']],
         one_time_keyboard: true,
         resize_keyoard:    true
       }
