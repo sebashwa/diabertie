@@ -1,7 +1,7 @@
 import { User } from '../../models';
 
-export default async (telegramToken, sender) => {
-  const telegramId = sender.id;
+export default async (telegramToken, from) => {
+  const telegramId = from.id;
 
   try {
     const users = await User.find({ $or: [{ telegramToken }, { telegramId }] });
@@ -13,7 +13,7 @@ export default async (telegramToken, sender) => {
       return `Sorry, you are already connected with the account \`${connectedUser.email}\``;
     } else if (!users[0].telegramId) {
       await users[0].update({ telegramId });
-      return `Hey ${sender.first_name}, I connected you with your diabertie account \`${users[0].email}\` Glad to have you on board!`;
+      return `Hey ${from.first_name}, I connected you with your diabertie account \`${users[0].email}\` Glad to have you on board!`;
     } else {
       return `Your account \`${users[0].email}\` is already connected. Just go ahead and log some values!`;
     }
