@@ -1,5 +1,7 @@
 import knwl from '../knwl';
 import unitsBy from '../knwl/units';
+import { fetchUser } from '.';
+import logger from '../../logger';
 
 const previewTexts = (events) => events.map(e => `\`${e.value} ${e.subType || e.type}\``).join(', ');
 
@@ -16,8 +18,11 @@ function validateDetections({ time, date, values }) {
   return { errors, warnings };
 }
 
-export default (text) => {
-  const parser = knwl(text);
+export default async (msg) => {
+  const { user, error } = await fetchUser(msg.from);
+  if (error) return error;
+
+  const parser = knwl(msg.text);
   const types = ['sugar', 'food', 'therapy'];
 
   const detectedValues = types.reduce((prev, type) => {
@@ -33,6 +38,13 @@ export default (text) => {
 
   const { errors, warnings } = validateDetections(detections);
   if (errors.length) return { errors };
+
+  try {
+    await user.update({ latestChatAction: { action: 'saveLogEvents', data: detections } });
+  } catch (e) {
+    logger.error(e);
+    return { errors: ['Oops, sorry! Something went completely wrong.. Please try again later'] };
+  }
 
   const detectionsMsg = types.filter(type => !!detectedValues[type].length)
   .map((type) => `${previewTexts(detectedValues[type])}`)

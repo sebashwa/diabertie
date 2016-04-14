@@ -2,10 +2,14 @@ import mongoose, { Schema } from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 
 const UserSchema = new Schema({
-  telegramToken: String,
-  telegramId:    { type: Number, default: null },
-  createdAt:     { type: Date, default: Date.now },
-  timezone:      { type: String, default: 'etc_utc' }
+  telegramToken:    String,
+  telegramId:       { type: Number, default: null },
+  createdAt:        { type: Date, default: Date.now },
+  timezone:         { type: String, default: 'etc_utc' },
+  latestChatAction: {
+    action: String,
+    data:   Object
+  }
 });
 
 UserSchema.method('toJSON', function() {

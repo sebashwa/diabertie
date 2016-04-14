@@ -13,12 +13,12 @@ export default (bot) => {
   });
 
   bot.onText(/^(?!\/).*\w.*\s.*\w.*$/, async (msg) => {
-    const { from, text } = msg;
+    const { from } = msg;
     const sendMessages = async (msgs) => (
       await Promise.all(msgs.map(m => bot.sendMessage(from.id, m, { ... opts })))
     );
 
-    const { errors, messages, warnings, data } = await bertieDetect(text);
+    const { errors, messages, warnings, data } = await bertieDetect(msg);
 
     if (errors) return sendMessages(errors);
 
