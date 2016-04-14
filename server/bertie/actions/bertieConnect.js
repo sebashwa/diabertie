@@ -14,7 +14,7 @@ export default async (telegramToken, from) => {
       return `Sorry, you are already connected with the account \`${connectedUser.email}\``;
     } else if (!users[0].telegramId) {
       await users[0].update({ telegramId });
-      return `Hey ${from.first_name}, I connected you with your diabertie account \`${users[0].email}\` Glad to have you on board!`;
+      return `Hey ${from.first_name}, I connected you with your diabertie account \`${users[0].email}\` Glad to have you on board! To start logging values, just write something like:\n\n\`190 mg 2 bolus 27 basal 12:30\``; 
     } else {
       return `Your account \`${users[0].email}\` is already connected. Just go ahead and log some values!`;
     }
