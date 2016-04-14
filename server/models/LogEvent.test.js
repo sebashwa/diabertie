@@ -5,11 +5,6 @@ import { Types } from 'mongoose';
 
 
 describe('LogEvent', () => {
-  afterEach(async () => {
-    await LogEvent.find().remove();
-    await User.find().remove();
-  });
-
   describe('#groupInInterval', () => {
     let time;
 

@@ -23,11 +23,6 @@ describe('bertie action #saveLogEvents', () => {
     time: { hours: 16, minutes: 20 }
   };
 
-  afterEach(async () => {
-    await LogEvent.find({}).remove();
-    await User.find({}).remove();
-  });
-
   it('saves events to the database', async () => {
     await saveLogEvents(detections, from);
 

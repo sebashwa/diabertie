@@ -7,3 +7,9 @@ before(async () => {
     Object.keys(models).map(m => models[m].find({}).remove())
   );
 });
+
+afterEach(async () =>
+  Promise.all(
+    Object.keys(models).map(m => models[m].find({}).remove())
+  )
+);

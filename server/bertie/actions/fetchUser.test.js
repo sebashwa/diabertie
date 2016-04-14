@@ -6,7 +6,6 @@ describe('bertie action #fetchUser', () => {
   const from = { id: 1234919 };
   let userInDb;
   beforeEach(async () => { userInDb = await User.create({ telegramId: from.id }); });
-  afterEach(async () => await User.find().remove());
 
   it('returns the user if it is found', async () => {
     const { user } = await fetchUser(from);

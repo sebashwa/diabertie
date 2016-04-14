@@ -14,8 +14,6 @@ describe('bertie action #bertieConnect', () => {
     })
   ));
 
-  afterEach(() => User.find({}).remove());
-
   it('updates the telegramId on the user', async () => {
     await bertieConnect(userToken, { id: 1234 });
 
