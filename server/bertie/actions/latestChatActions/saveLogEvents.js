@@ -12,8 +12,8 @@ export default async (detections, user) => {
       values.forEach((v) => createdAt.set(v, type[v]));
     };
 
-    if(date) { setTimestampValues(['year', 'month', 'date'], date); }
-    if(time) { setTimestampValues(['hours', 'minutes'], time); }
+    if (date) { setTimestampValues(['year', 'month', 'date'], date); }
+    if (time) { setTimestampValues(['hours', 'minutes'], time); }
 
     const events = allValues.map((detection) => {
       const { category, type, subType, value, factor } = detection;

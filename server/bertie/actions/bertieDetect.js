@@ -3,6 +3,22 @@ import unitsBy from '../knwl/units';
 
 const previewTexts = (events) => events.map(e => `\`${e.value} ${e.subType || e.type}\``).join(', ');
 
+const buildResponseMessage = (types, {values, time, date}) => {
+  const icons = { sugar: '📈', therapy: '💉', food: '🍝' };
+
+  const dateValue = date ? [date.value] : ['today'];
+  const timeValue = time ? [time.value] : ['now'];
+
+  const dateTimeString = `*${dateValue.concat(timeValue).join(', ')}:*\n`;
+  const valueStrings = types.filter(t => !!values[t].length)
+                            .map((t) => `${icons[t]} ${previewTexts(values[t])}`);
+
+  return [dateTimeString].concat(valueStrings)
+                         .concat('\nDo you want me to save that?')
+                         .join('\n');
+
+};
+
 function validateDetections({ time, date, values }) {
   const { sugar, therapy, food } = values;
   const allValues = [... sugar, ... therapy, ... food];
@@ -25,20 +41,16 @@ export default (text) => {
     return prev;
   }, {});
 
-  const detections = {
+  const data = {
     values: detectedValues,
     time:   parser.get('bertieTimes')[0],
     date:   parser.get('bertieDates')[0]
   };
 
-  const { error, warnings } = validateDetections(detections);
+  const { error, warnings } = validateDetections(data);
   if (error) return { error };
 
-  const detectionsMsg = types.filter(type => !!detectedValues[type].length)
-  .map((type) => `${previewTexts(detectedValues[type])}`)
-  .join('\n');
+  const message = buildResponseMessage(types, data);
 
-  const message = detectionsMsg + '\n\nDo you want me to save that? (y/n)';
-
-  return { data: detections, message, warnings };
+  return { data, message, warnings };
 };
