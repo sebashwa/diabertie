@@ -1,4 +1,5 @@
 import { LogEvent } from '../../models';
+import logger from '../../logger';
 import { fetchUser } from '.';
 import moment from 'moment-timezone';
 
@@ -36,7 +37,7 @@ export default async (detections, from) => {
     await LogEvent.insertMany(events);
     return 'Cool, I saved your data';
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return 'Oops, sorry! Something went completely wrong.. Please try again later';
   }
 };

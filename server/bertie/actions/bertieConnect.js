@@ -1,4 +1,5 @@
 import { User } from '../../models';
+import logger from '../../logger';
 
 export default async (telegramToken, from) => {
   const telegramId = from.id;
@@ -18,7 +19,7 @@ export default async (telegramToken, from) => {
       return `Your account \`${users[0].email}\` is already connected. Just go ahead and log some values!`;
     }
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return 'Oops, sorry! Something went completely wrong.. Please try again later';
   }
 };
