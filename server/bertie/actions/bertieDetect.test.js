@@ -42,13 +42,13 @@ describe('bertie action #bertieDetect', () => {
     expect(errors[0], 'to contain', 'Sorry, I didn\'t get that');
   });
 
-  it('returns a warning when delivering two sugar values', async () => {
+  it('returns a warning when two sugar values given', async () => {
     const { warnings } = await bertieDetect('120 mg 7 mmol');
 
     expect(warnings[0], 'to contain', 'I found more than one `sugar` value');
   });
 
-  it('returns a warning when a date value but no time value', async () => {
+  it('returns a warning when a date value but no time value given', async () => {
     const { warnings } = await bertieDetect('120 mg 20.05.2015');
 
     expect(warnings[0], 'to contain', 'I found a `date (20.5.2015)` but no `time`');

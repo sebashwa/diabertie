@@ -17,30 +17,28 @@ function validateDetections({ time, date, values }) {
 }
 
 export default (text) => {
-  return new Promise((resolve) => {
-    const parser = knwl(text);
-    const types = ['sugar', 'food', 'therapy'];
+  const parser = knwl(text);
+  const types = ['sugar', 'food', 'therapy'];
 
-    const detectedValues = types.reduce((prev, type) => {
-      prev[type] = parser.get('bertieValues', unitsBy(type));
-      return prev;
-    }, {});
+  const detectedValues = types.reduce((prev, type) => {
+    prev[type] = parser.get('bertieValues', unitsBy(type));
+    return prev;
+  }, {});
 
-    const detections = {
-      values: detectedValues,
-      time:   parser.get('bertieTimes')[0],
-      date:   parser.get('bertieDates')[0]
-    };
+  const detections = {
+    values: detectedValues,
+    time:   parser.get('bertieTimes')[0],
+    date:   parser.get('bertieDates')[0]
+  };
 
-    const { errors, warnings } = validateDetections(detections);
-    if (errors.length) return resolve({ errors });
+  const { errors, warnings } = validateDetections(detections);
+  if (errors.length) return { errors };
 
-    const detectionsMsg = types.filter(type => !!detectedValues[type].length)
-      .map((type) => `${previewTexts(detectedValues[type])}`)
-      .join('\n');
+  const detectionsMsg = types.filter(type => !!detectedValues[type].length)
+  .map((type) => `${previewTexts(detectedValues[type])}`)
+  .join('\n');
 
-    const messages = [detectionsMsg, 'Do you want me to save that? (y/n)'];
+  const messages = [detectionsMsg, 'Do you want me to save that? (y/n)'];
 
-    return resolve({ data: detections, messages, warnings });
-  });
+  return { data: detections, messages, warnings };
 };
