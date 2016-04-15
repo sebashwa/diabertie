@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { bertieDetect, bertieConnect, saveLatestChatAction, executeLatestChatAction } from './actions';
+import { bertieDetect, bertieConnect, fetchUser, saveLatestChatAction, executeLatestChatAction } from './actions';
 
 const opts = { parse_mode: 'Markdown'};
 
@@ -16,17 +16,21 @@ export default (bot) => {
     const { text, from } = msg;
     const sendMessage = (msg) => bot.sendMessage(from.id, msg, { ... opts });
 
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(userError); }
+
+
     if (text == 'Yes') {
-      const { error, message } = await executeLatestChatAction(from);
+      const { error, message } = await executeLatestChatAction(user);
       if (error) return sendMessage(error);
 
       sendMessage(message);
     } else if (text == 'No') {
-      await saveLatestChatAction(null, null, from);
+      await saveLatestChatAction(null, null, user);
       sendMessage('Ok, I\'m not doing anything!');
     } else {
       sendMessage('Oh sorry, I didn\'t get that..');
-    };
+    }
   });
 
   bot.onText(/^(?!\/).*\d.*\s.*[A-Za-z].*$/, async (msg) => {
@@ -38,8 +42,11 @@ export default (bot) => {
     const { error: detectionError, message, warnings, data } = await bertieDetect(text);
     if (detectionError) return sendMessage(detectionError);
 
-    const { error: saveLatestChatActionError } = await saveLatestChatAction('saveLogEvents', data, from);
-    if (saveLatestChatActionError) { return sendMessage(saveLatestChatActionError); }
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(userError); }
+
+    const { error } = await saveLatestChatAction('saveLogEvents', data, user);
+    if (error) { return sendMessage(error); }
 
     for(let i = 0; i < warnings.length; i++) {
       const warning = warnings[i];

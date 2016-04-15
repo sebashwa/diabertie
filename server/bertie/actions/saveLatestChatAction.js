@@ -1,10 +1,6 @@
-import { fetchUser } from '.';
 import logger from '../../logger';
 
-export default async (action, data, from) => {
-  const { user, error } = await fetchUser(from);
-  if (error) return { error };
-
+export default async (action, data, user) => {
   try {
     await user.update({ latestChatAction: { action, data } });
     return { user };

@@ -3,11 +3,11 @@ import { User, LogEvent } from '../../models';
 import { executeLatestChatAction } from '.';
 
 describe('bertie action #executeLatestChatAction', () => {
-  const from = { id: 12345 };
+  let user;
 
-  beforeEach(() =>
-    User.create({
-      telegramId:       from.id,
+  beforeEach(async () =>
+    user = await User.create({
+      email:            'user@example.com',
       latestChatAction: {
         action: 'saveLogEvents',
         data:   {
@@ -20,29 +20,23 @@ describe('bertie action #executeLatestChatAction', () => {
   );
 
   it('executes the latest chat action saved on the user', async () => {
-    await executeLatestChatAction(from);
+    await executeLatestChatAction(user);
     const events = await LogEvent.find({});
 
     expect(events[0].value, 'to equal', 120);
   });
 
   it('deletes the latest chat action from the user after executing it', async () => {
-    await executeLatestChatAction(from);
-    const user = await User.findOne({ telegramId: from.id });
+    await executeLatestChatAction(user);
+    const { latestChatAction } = await User.findOne({ _id: user.id });
 
-    expect(user.latestChatAction.action, 'to be', null);
+    expect(latestChatAction.action, 'to be', null);
 
   });
 
   it('returns the message returned by the latest chat action', async () => {
-    const { message } = await executeLatestChatAction(from);
+    const { message } = await executeLatestChatAction(user);
 
     expect(message, 'to contain', 'saved your data');
-  });
-
-  it('returns an error when the user is not found', async () => {
-    const { error } = await executeLatestChatAction({ id: 6666 });
-
-    expect(error, 'to contain', 'was not able to find a user');
   });
 });
