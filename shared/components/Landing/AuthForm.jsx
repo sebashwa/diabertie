@@ -10,6 +10,7 @@ class AuthForm extends Component {
   }
 
   static propTypes = {
+    p:          PropTypes.object,
     user:       PropTypes.object,
     dispatch:   PropTypes.func.isRequired,
     authType:   PropTypes.string.isRequired,
@@ -36,7 +37,7 @@ class AuthForm extends Component {
   }
 
   render() {
-    const { authType, formErrors } = this.props;
+    const { authType, formErrors, p } = this.props;
 
     return (
       <div className={ `${authType}-container` } style={ containerStyle() }>
@@ -45,8 +46,8 @@ class AuthForm extends Component {
           <input type="text" name="email" ref="email" placeholder="Email" />
           <input type="password" name="password" ref="password" placeholder="Password" />
           <div>
-            <Link to="/landing">Close</Link>
-            <button type="submit">{ authType }</button>
+            <Link to="/landing">X</Link>
+            <button type="submit">{ p.t(`Landing.${authType}`) }</button>
           </div>
         </form>
 

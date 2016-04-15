@@ -1,6 +1,8 @@
 import React, { Component , PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import polyglot from 'lib/polyglot';
+
 import LoadingBertie from 'components/global/LoadingBertie';
 import Logbook from './Logbook';
 import Introduction from './Introduction';
@@ -12,7 +14,8 @@ class App extends Component {
     loadingUser: PropTypes.bool,
     user:        PropTypes.object,
     botName:     PropTypes.string.isRequired,
-    dispatch:    PropTypes.func.isRequired
+    dispatch:    PropTypes.func.isRequired,
+    p:           PropTypes.object
   };
 
   componentWillMount = () => {
@@ -33,9 +36,10 @@ class App extends Component {
     const { user, loadingUser, botName } = this.props;
 
     if (user && !loadingUser) {
+      const p = polyglot(user.get('locale'));
       return (
         <div className="app">
-          <a onClick={ this.handleLogout }>Logout</a>
+          <a onClick={ this.handleLogout }>{ p.t('App.logout') }</a>
           { user.get('telegramId') ?
               <Logbook user={ user } /> :
               <Introduction user={ user } botName={ botName } /> }
@@ -46,11 +50,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    user:        state.auth.get('user'),
-    loadingUser: state.auth.get('loadingUser'),
-    botName:     state.settings.get('botName'),
-  };
+  const { user, loadingUser } = state.auth.toObject();
+  const { botName } = state.settings.toObject();
+
+  return { user, loadingUser, botName };
 };
 
 export default connect(mapStateToProps)(App);

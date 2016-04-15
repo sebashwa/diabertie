@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import moment from 'moment-timezone';
 import { logEventStyle, logbookDataStyle } from './LogbookData.style';
 
-function LogBookData({ logEvents: logEventBundles, timezone }) {
+function LogBookData({ logEvents: logEventBundles, user, p }) {
   return (
     <div className="logbookData" style={ logbookDataStyle() }>
       {
@@ -10,6 +10,7 @@ function LogBookData({ logEvents: logEventBundles, timezone }) {
           logEventBundles.map((logEventBundle, i) => {
             const { _id: time , logEvents } = logEventBundle.toObject();
             const { hour, minute } = time.toObject();
+            const { timezone } = user.toObject();
 
             return (
               <div key={i} className="logEventBundle" style={ logEventStyle() }>
@@ -23,8 +24,7 @@ function LogBookData({ logEvents: logEventBundles, timezone }) {
 
                       return(
                         <div className="logEvent">
-                          <span>{ originalValue } </span>
-                          <span>{ originalUnit }</span>
+                          <span>{ p.t(`Logbook.logEvents.${originalUnit}`, originalValue)}</span>
                         </div>
                       );
                     })
@@ -34,7 +34,7 @@ function LogBookData({ logEvents: logEventBundles, timezone }) {
             );
           })
         :
-        'NO DATA TO SEE HERE'
+        p.t('Logbook.noDataAvailable')
       }
     </div>
   );
@@ -42,7 +42,8 @@ function LogBookData({ logEvents: logEventBundles, timezone }) {
 
 LogBookData.propTypes = {
   logEvents: PropTypes.object.isRequired,
-  timezone:  PropTypes.string.isRequired
+  user:      PropTypes.string.isRequired,
+  p:         PropTypes.object.isRequired
 };
 
 export default LogBookData;

@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment-timezone';
+import polyglot from 'lib/polyglot';
 
 import LoadingBertie from 'components/global/LoadingBertie';
 import LogbookData from 'components/LogbookData';
@@ -11,8 +12,7 @@ import { fetchLogEvents } from 'actions/LogbookActions';
 class Logbook extends Component {
   static propTypes = {
     user:             PropTypes.object.isRequired,
-    timezone:         PropTypes.string.isRequired,
-    datum:            PropTypes.string,
+    datum:            PropTypes.object,
     logEvents:        PropTypes.object,
     loadingLogEvents: PropTypes.bool,
     dispatch:         PropTypes.func.isRequired
@@ -26,17 +26,22 @@ class Logbook extends Component {
   componentWillReceiveProps = (nextProps) => {
     const { datum, dispatch } = this.props;
     const nextDatum = nextProps.datum;
-    if (datum != nextDatum) dispatch(fetchLogEvents(nextDatum));
+
+    if (datum.unix() !== nextDatum.unix()) { dispatch(fetchLogEvents(nextDatum)); }
   }
 
   render() {
-    const { logEvents, loadingLogEvents, timezone, datum } = this.props;
+    const { user, logEvents, loadingLogEvents, datum } = this.props;
+    const p = polyglot(user.get('locale'));
 
     return (
       <div className="logbook">
-        <LogbookNavigation datum={ datum } timezone={ timezone }/>
+        <LogbookNavigation datum={ datum } p={ p } />
         { !!loadingLogEvents && <LoadingBertie /> }
-        { (!!logEvents && !loadingLogEvents) && <LogbookData logEvents={ logEvents } timezone={ timezone } /> }
+        { 
+          (!!logEvents && !loadingLogEvents) &&
+          <LogbookData logEvents={ logEvents } user={ user } p={ p } />
+        }
       </div>
     );
   }
@@ -48,8 +53,7 @@ const mapStateToProps = (state, props) => {
   return {
     logEvents:        state.logbook.get('logEvents'),
     loadingLogEvents: state.logbook.get('loadingLogEvents'),
-    datum:            state.logbook.get('datum') || moment().tz(timezone).format('MM-DD-YYYY'),
-    timezone
+    datum:            state.logbook.get('datum') || moment().tz(timezone)
   };
 };
 
