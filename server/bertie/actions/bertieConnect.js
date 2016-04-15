@@ -8,18 +8,18 @@ export default async (telegramToken, from) => {
     const users = await User.find({ $or: [{ telegramToken }, { telegramId }] });
 
     if (!users.length) {
-      return 'Oops! I was not able to find a user. Please sign up at diabertie.com first and connect from there';
+      return ['generalErrors.userNotFound'];
     } else if (users.length > 1) {
-      const connectedUser = users.filter(u => !!u.telegramId)[0];
-      return `Sorry, you are already connected with the account \`${connectedUser.email}\``;
+      const { email } = users.filter(u => !!u.telegramId)[0];
+      return ['bertieConnect.alreadyConnected', { email } ];
     } else if (!users[0].telegramId) {
       await users[0].update({ telegramId });
-      return `Hey ${from.first_name}, I connected you with your diabertie account \`${users[0].email}\` Glad to have you on board! To start logging values, just write something like:\n\n\`190 mg 2 bolus 27 basal 12:30\``; 
+      return ['bertieConnect.success', { name: from.first_name, email: users[0].email } ];
     } else {
-      return `Your account \`${users[0].email}\` is already connected. Just go ahead and log some values!`;
+      return ['bertieConnect.readyToGo', { email: users[0].email }];
     }
   } catch (e) {
     logger.error(e);
-    return 'Oops, sorry! Something went completely wrong.. Please try again later';
+    return ['generalErrors.superWrong'];
   }
 };

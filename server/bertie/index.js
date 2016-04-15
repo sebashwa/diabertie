@@ -1,15 +1,18 @@
 /* eslint-disable camelcase */
 
 import { bertieDetect, bertieConnect, fetchUser, saveLatestChatAction, executeLatestChatAction } from './actions';
+import polyglot from './polyglot';
 
 const opts = { parse_mode: 'Markdown'};
 
 export default (bot) => {
-  bot.onText(/\/start (.+)/, async (msg, match) => {
+  bot.onText(/\/start (.+)/, async ({ from }, match) => {
     const telegramToken = match[1];
-    const text = await bertieConnect(telegramToken, msg.from);
+    const p = polyglot();
 
-    bot.sendMessage(msg.from.id, text, { ... opts });
+    const text = await bertieConnect(telegramToken, from);
+
+    bot.sendMessage(from.id, p.t(...text), { ... opts });
   });
 
   bot.onText(/^(?!\/)\D*$/, async (msg) => {
@@ -17,19 +20,23 @@ export default (bot) => {
     const sendMessage = (msg) => bot.sendMessage(from.id, msg, { ... opts });
 
     const { user, error: userError } = await fetchUser(from);
-    if (userError) { return sendMessage(userError); }
+    if (userError) { return sendMessage(polyglot().t(...userError)); }
 
+    const p = polyglot(user.locale);
+    const positiveTokens = p.t('onText.positiveTokens').split(',');
+    const negativeTokens = p.t('onText.negativeTokens').split(',');
+    const lower = text.toLowerCase();
 
-    if (text == 'Yes') {
+    if (positiveTokens.indexOf(lower) != -1) {
       const { error, message } = await executeLatestChatAction(user);
-      if (error) return sendMessage(error);
+      if (error) return sendMessage(p.t(...error));
 
-      sendMessage(message);
-    } else if (text == 'No') {
+      sendMessage(p.t(...message));
+    } else if (negativeTokens.indexOf(lower) != -1) {
       await saveLatestChatAction(null, null, user);
-      sendMessage('Ok, I\'m not doing anything!');
+      sendMessage(p.t('onText.negativeAnswer'));
     } else {
-      sendMessage('Oh sorry, I didn\'t get that..');
+      sendMessage(p.t('onText.notUnderstood'));
     }
   });
 
@@ -39,22 +46,25 @@ export default (bot) => {
       await bot.sendMessage(from.id, msg, { ... opts });
     };
 
-    const { error: detectionError, message, warnings, data } = await bertieDetect(text);
-    if (detectionError) return sendMessage(detectionError);
-
     const { user, error: userError } = await fetchUser(from);
-    if (userError) { return sendMessage(userError); }
+    if (userError) { return sendMessage(polyglot().t(...userError)); }
+
+    const p = polyglot(user.locale);
+
+    const { error: detectionError, message, warnings, data } = await bertieDetect(text);
+    if (detectionError) return sendMessage(p.t(...detectionError));
 
     const { error } = await saveLatestChatAction('saveLogEvents', data, user);
-    if (error) { return sendMessage(error); }
+    if (error) { return sendMessage(p.t(...error)); }
 
     for(let i = 0; i < warnings.length; i++) {
       const warning = warnings[i];
-      await sendMessage(warning);
+      await sendMessage(p.t(...warning));
     }
 
-    bot.sendMessage(from.id, message, {
-      ... opts, reply_markup: {
+    bot.sendMessage(from.id, p.t(...message), {
+      ... opts,
+      reply_markup: {
         keyboard:          [['Yes'], ['No']],
         one_time_keyboard: true,
         resize_keyoard:    true

@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   telegramId:       { type: Number, default: null },
   createdAt:        { type: Date, default: Date.now },
   timezone:         { type: String, default: 'etc_utc' },
+  locale:           { type: String, default: 'en' },
   latestChatAction: {
     action: { type: String, default: null },
     data:   { type: Object, default: null }

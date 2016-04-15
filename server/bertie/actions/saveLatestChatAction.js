@@ -6,6 +6,6 @@ export default async (action, data, user) => {
     return { user };
   } catch (e) {
     logger.error(e);
-    return { error: 'Oops, sorry! Something went completely wrong.. Please try again later' };
+    return { error: ['generalErrors.superWrong'] };
   }
 };

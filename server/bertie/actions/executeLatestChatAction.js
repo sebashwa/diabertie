@@ -4,7 +4,7 @@ import { saveLatestChatAction } from '.';
 export default async (user) => {
   const { latestChatAction: { action, data } } = user;
 
-  if (!action || !data) return { message: 'Nothing to do here for me' };
+  if (!action) return { message: ['executeLatestChatAction.nothingToDo'] };
 
   const { message, error: latestActionError } = await latestChatActions[action](data, user);
   if (latestActionError) return { error: latestActionError };

@@ -32,9 +32,9 @@ export default async (detections, user) => {
 
     await LogEvent.insertMany(events);
 
-    return { message: 'Cool, I saved your data' };
+    return { message: ['latestChatActions.saveLogEvents.success'] };
   } catch (e) {
     logger.error(e);
-    return { error: 'Oops, sorry! Something went completely wrong.. Please try again later' };
+    return { error: ['generalErrors.superWrong'] };
   }
 };

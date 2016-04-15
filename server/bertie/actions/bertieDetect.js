@@ -13,10 +13,9 @@ const buildResponseMessage = (types, {values, time, date}) => {
   const valueStrings = types.filter(t => !!values[t].length)
                             .map((t) => `${icons[t]} ${previewTexts(values[t])}`);
 
-  return [dateTimeString].concat(valueStrings)
-                         .concat('\nDo you want me to save that?')
-                         .join('\n');
+  const data = [dateTimeString].concat(valueStrings).join('\n');
 
+  return ['bertieDetect.saveConfirmation', { data }];
 };
 
 function validateDetections({ time, date, values }) {
@@ -25,9 +24,9 @@ function validateDetections({ time, date, values }) {
   const warnings = [];
   let error;
 
-  if (allValues.length == 0) { error = 'Sorry, I didn\'t get that! To log values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`'; };
-  if (sugar.length > 1) { warnings.push(`Oops, that's strange.. I found more than one \`sugar\` value:\n\n${previewTexts(sugar)}`); }
-  if (!time && date) { warnings.push(`Oops, that's strange.. I found a \`date (${date.value})\` but no \`time\`. That means I would use the current time when saving`); }
+  if (allValues.length == 0) { error = ['bertieDetect.errors.notFound']; };
+  if (sugar.length > 1) { warnings.push(['bertieDetect.warnings.ambiguousSugar', { valueTexts: previewTexts(sugar) }]); }
+  if (!time && date) { warnings.push(['bertieDetect.warnings.dateWithoutTime', { date: date.value }]); }
 
   return { error, warnings };
 }
