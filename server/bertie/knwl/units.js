@@ -11,7 +11,7 @@ const units = [
     type:     'carbs',
     subType:  'carbUnit',
     factor:   10,
-    tokens:   ['khe', 'cu', 'carbunit', 'carbunits']
+    tokens:   ['khe', 'ke', 'cu', 'carbunit', 'carbunits']
     },
   {
     category: 'food',
@@ -60,7 +60,14 @@ const units = [
     type:     'tablets',
     subType:  null,
     factor:   null,
-    tokens:   ['tablet', 'tablets', 'tab', 'pill', 'pills']
+    tokens:   ['tablet', 'tablets', 'tab']
+  },
+  {
+    category: 'therapy',
+    type:     'tablets',
+    subType:  'pills',
+    factor:   null,
+    tokens:   ['pill', 'pills']
   },
   {
     category: 'sugar',

@@ -51,7 +51,7 @@ export default (bot) => {
 
     const p = polyglot(user.locale);
 
-    const { error: detectionError, message, warnings, data } = await bertieDetect(text);
+    const { error: detectionError, message, warnings, data } = await bertieDetect(text, p);
     if (detectionError) return sendMessage(p.t(...detectionError));
 
     const { error } = await saveLatestChatAction('saveLogEvents', data, user);
