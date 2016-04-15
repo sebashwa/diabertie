@@ -14,11 +14,11 @@ describe('bertie action #fetchUser', () => {
 
   it('returns an error if no user is found', async () => {
     const { error } = await fetchUser({ id: 666666 });
-    expect(error, 'to contain', 'was not able to find a user');
+    expect(error, 'to equal', ['generalErrors.userNotFound']);
   });
 
   it('returns an error if something goes wrong with the user lookup', async () => {
     const { error } = await fetchUser({ id: 'strings are no ids' });
-    expect(error, 'to contain', 'Something went completely wrong');
+    expect(error, 'to equal', ['generalErrors.superWrong']);
   });
 });

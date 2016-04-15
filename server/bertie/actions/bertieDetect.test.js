@@ -27,26 +27,29 @@ describe('bertie action #bertieDetect', () => {
   it('generates a message from the detections', async () => {
     const { message } = await bertieDetect('120 mg 2 be 4 hum 27 lantus');
 
-    expect(message, 'to contain', '📈 `120 sugarMg`\n🍏 `2 be`\n💉 `4 humalog`, `27 lantus`');
-    expect(message, 'to contain', 'want me to save that?');
+    expect(message, 'to equal', ['bertieDetect.saveConfirmation', {
+      data: '*today, now:*\n\n📈 `120 sugarMg`\n🍏 `2 be`\n💉 `4 humalog`, `27 lantus`'
+    }]);
   });
 
   it('returns an error when delivering a message with no detectable values', async () => {
     const { error } = await bertieDetect('119 bertie does not understand');
 
-    expect(error, 'to contain', 'Sorry, I didn\'t get that');
+    expect(error, 'to equal', ['bertieDetect.errors.notFound']);
   });
 
   it('returns a warning when two sugar values given', async () => {
     const { warnings } = await bertieDetect('120 mg 7 mmol');
 
-    expect(warnings[0], 'to contain', 'I found more than one `sugar` value');
+    expect(warnings[0], 'to equal', ['bertieDetect.warnings.ambiguousSugar', {
+      valueTexts: '`120 sugarMg`, `7 sugarMmol`'
+    }]);
   });
 
   it('returns a warning when a date value but no time value given', async () => {
     const { warnings } = await bertieDetect('120 mg 20.05.2015');
 
-    expect(warnings[0], 'to contain', 'I found a `date (20.5.2015)` but no `time`');
+    expect(warnings[0], 'to equal', ['bertieDetect.warnings.dateWithoutTime', { date: '20.5.2015' }]);
   });
 
 });

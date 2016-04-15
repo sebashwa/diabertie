@@ -57,6 +57,6 @@ describe('bertie action #saveLogEvents', () => {
 
   it('returns a message after saving the data', async () => {
     const { message } = await saveLogEvents(detections, user);
-    expect(message, 'to contain', 'saved your data');
+    expect(message, 'to equal', ['latestChatActions.saveLogEvents.success']);
   });
 });

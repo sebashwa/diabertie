@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 import expect from 'unexpected';
 import bertieConnect from './bertieConnect';
 import { User } from '../../models';
@@ -16,15 +18,21 @@ describe('bertie action #bertieConnect', () => {
 
   it('updates the telegramId on the user', async () => {
     await bertieConnect(userToken, { id: 1234 });
+    const user = await User.findOne({ telegramToken: userToken });
 
-    const user = User.findOne({ telegramToken: userToken });
-    return expect(user, 'when fulfilled', 'to have property', 'telegramId', 1234);
+    expect(user, 'to have property', 'telegramId', 1234);
+  });
+
+  it('returns a success message', async () => {
+    const result = await bertieConnect(userToken, { id: 1234, first_name: 'Present' });
+
+    expect(result, 'to equal', ['bertieConnect.success', { name: 'Present', email: 'present@user' }]);
   });
 
   it('returns a "not found" text if no user is found', async () => {
     const result = await bertieConnect('NOT_PRESENT', { id: 10000 });
 
-    expect(result, 'to contain', 'I was not able to find a user');
+    expect(result, 'to equal', ['generalErrors.userNotFound']);
   });
 
   it('informs the user when already connected with the same account', async () => {
@@ -33,7 +41,7 @@ describe('bertie action #bertieConnect', () => {
 
     const result = await bertieConnect(userToken, { id: presentId });
 
-    expect(result, 'to contain', '`present@user` is already connected');
+    expect(result, 'to equal', ['bertieConnect.readyToGo', { email: 'present@user' }]);
   });
 
   it('informs the user when already connected with another account', async () => {
@@ -46,6 +54,6 @@ describe('bertie action #bertieConnect', () => {
     await User.create(alreadyConnectedUserProps);
     const result = await bertieConnect(userToken, { id: alreadyConnectedId });
 
-    expect(result, 'to contain', 'already connected with the account `already@connected`');
+    expect(result, 'to equal', ['bertieConnect.alreadyConnected', { email: 'already@connected' }]);
   });
 });

@@ -37,6 +37,6 @@ describe('bertie action #executeLatestChatAction', () => {
   it('returns the message returned by the latest chat action', async () => {
     const { message } = await executeLatestChatAction(user);
 
-    expect(message, 'to contain', 'saved your data');
+    expect(message, 'to equal', ['latestChatActions.saveLogEvents.success']);
   });
 });
