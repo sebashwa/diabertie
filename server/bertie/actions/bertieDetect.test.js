@@ -27,7 +27,7 @@ describe('bertie action #bertieDetect', () => {
   it('generates a message from the detections', async () => {
     const { message } = await bertieDetect('120 mg 2 be 4 hum 27 lantus');
 
-    expect(message, 'to contain', '📈 `120 sugarMg`\n🍝 `2 be`\n💉 `4 humalog`, `27 lantus`');
+    expect(message, 'to contain', '📈 `120 sugarMg`\n🍏 `2 be`\n💉 `4 humalog`, `27 lantus`');
     expect(message, 'to contain', 'want me to save that?');
   });
 

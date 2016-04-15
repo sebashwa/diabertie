@@ -4,7 +4,7 @@ import unitsBy from '../knwl/units';
 const previewTexts = (events) => events.map(e => `\`${e.value} ${e.subType || e.type}\``).join(', ');
 
 const buildResponseMessage = (types, {values, time, date}) => {
-  const icons = { sugar: '📈', therapy: '💉', food: '🍝' };
+  const icons = { sugar: '📈', therapy: '💉', food: '🍏' };
 
   const dateValue = date ? [date.value] : ['today'];
   const timeValue = time ? [time.value] : ['now'];
