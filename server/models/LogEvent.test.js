@@ -37,9 +37,9 @@ describe('LogEvent', () => {
       );
 
       expect(aggregation[0].logEvents.map(e => e._id), 'to equal', [
-        Types.ObjectId(logEventTimePlusSix.id),
+        Types.ObjectId(logEventTime.id),
         Types.ObjectId(logEventTimePlusTwo.id),
-        Types.ObjectId(logEventTime.id)
+        Types.ObjectId(logEventTimePlusSix.id),
       ]);
     });
 
@@ -68,8 +68,8 @@ describe('LogEvent', () => {
       ]);
 
       expect(aggregation[0].logEvents.map(e => e._id), 'to equal', [
-        Types.ObjectId(logEventTimePlusTwo.id),
-        Types.ObjectId(logEventTime.id)
+        Types.ObjectId(logEventTime.id),
+        Types.ObjectId(logEventTimePlusTwo.id)
       ]);
 
       expect(aggregation[1].logEvents.map(e => e._id), 'to equal', [

@@ -31,18 +31,19 @@ LogEventSchema.static('groupInInterval', async function(datum, user, interval=5,
 
   const $group = {
     _id: {
+      day:    '$day',
+      hour:   '$hour',
       minute: {
         $subtract: [ '$minute', { $mod: ['$minute', interval]} ]
       },
-      hour: '$hour'
     },
     logEvents: { '$push': '$entry' }
   };
 
-  const $sort = { day: -1, hour: -1, minute: -1 };
+  const $sort = { _id: 1 };
 
   return await this.aggregate([
-    { $match }, { $project }, { $sort }, { $group }
+    { $match }, { $project }, { $group }, { $sort }
   ]).exec(callback);
 });
 
