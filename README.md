@@ -10,7 +10,7 @@ To use it, you can (soon) head over to diabertie.com, create an account and conn
 
 ## Contribute
 
-You are very encouraged and welcome to contribute to this project as (long as you stick to the [code of conduct](CODE_OF_CONDUCT.md))
+You are very encouraged and welcome to contribute to this project as long as you stick to the [code of conduct](CODE_OF_CONDUCT.md).
 
 ### Run development server
 
