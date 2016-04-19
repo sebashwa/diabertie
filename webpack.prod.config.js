@@ -7,7 +7,7 @@ module.exports = {
   ],
   resolve: {
     modulesDirectories: ['node_modules', 'shared'],
-    extensions:         ['', '.js', '.jsx']
+    extensions:         ['', '.js', '.jsx', '.svg']
   },
   output: {
     path:       path.join(__dirname, 'server/dist'),
@@ -16,9 +16,13 @@ module.exports = {
   },
   module: {
     loaders: [
+      { test: /\.svg$/, exclude: /node_modules/, loader: 'babel!svg-react' },
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
       { test: /\.json$/, loader: 'json' }
     ]
+  },
+  externals: {
+    'react': 'React'
   },
   plugins: [
     new webpack.DefinePlugin({
