@@ -14,7 +14,7 @@ LogEventSchema.static('groupInInterval', async function(datum, user, interval=5,
   const start = datum.clone().tz(user.timezone).startOf('day');
   const end = datum.clone().tz(user.timezone).endOf('day');
 
-  const match = {
+  const $match = {
     createdAt: {
       $gt: start.toDate(),
       $lt: end.toDate()
@@ -22,22 +22,27 @@ LogEventSchema.static('groupInInterval', async function(datum, user, interval=5,
     user: mongoose.Types.ObjectId(user.id)
   };
 
-  const group = {
-    _id: {
-      minute: {
-        $subtract: [{ $minute: '$createdAt' }, { $mod: [{ $minute: '$createdAt' }, interval]} ]
-      },
-      hour: { $hour: '$createdAt'}
-    },
-    logEvents: { '$push': '$$ROOT' }
+  const $project = {
+    day:    { $dayOfYear: '$createdAt' },
+    hour:   { $hour: '$createdAt' },
+    minute: { $minute: '$createdAt' },
+    entry:  '$$ROOT'
   };
 
-  const sort = { createdAt: -1 };
+  const $group = {
+    _id: {
+      minute: {
+        $subtract: [ '$minute', { $mod: ['$minute', interval]} ]
+      },
+      hour: '$hour'
+    },
+    logEvents: { '$push': '$entry' }
+  };
+
+  const $sort = { day: -1, hour: -1, minute: -1 };
 
   return await this.aggregate([
-    { $match: match },
-    { $sort: sort },
-    { $group: group },
+    { $match }, { $project }, { $sort }, { $group }
   ]).exec(callback);
 });
 
