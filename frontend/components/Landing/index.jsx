@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import polyglot from 'lib/polyglot';
 
-import Bertie from '../../images/mail.svg';
+import Bertie from 'images/Bertie';
 import AuthForm from './AuthForm';
 import { signup, login } from 'actions/AuthActions';
 import { authFormStyle } from './index.style';
