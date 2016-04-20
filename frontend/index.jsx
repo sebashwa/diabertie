@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
+import WithStylesContext from 'lib/WithStylesContext';
 import * as reducers from 'reducers';
 import routes from 'routes';
 import promiseMiddleware from 'lib/promiseMiddleware';
@@ -15,7 +16,9 @@ export const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, in
 
 render(
   <Provider store={ store }>
-    <Router children={ routes } history={ browserHistory } />
+    <WithStylesContext onInsertCss={styles => styles._insertCss()}>
+      <Router children={ routes } history={ browserHistory } />
+    </WithStylesContext>
   </Provider>,
   document.getElementById('react-view')
 );

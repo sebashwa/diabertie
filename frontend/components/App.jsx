@@ -3,9 +3,9 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import polyglot from 'lib/polyglot';
 
-import LoadingBertie from 'components/global/LoadingBertie';
 import Logbook from './Logbook';
 import Introduction from './Introduction';
+import Modal from 'components/global/Modal';
 
 import { logout, getUser } from 'actions/AuthActions';
 
@@ -45,7 +45,7 @@ class App extends Component {
               <Introduction user={ user } botName={ botName } /> }
         </div>
       );
-    } else { return <LoadingBertie />; }
+    } else { return <Modal><div>{"LOADING..."}</div></Modal>; }
   }
 }
 

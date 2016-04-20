@@ -1,0 +1,8 @@
+.logbookData {
+  display: flex;
+}
+
+.logEvent {
+  display: flex;
+  flex-direction: column;
+}

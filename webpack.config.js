@@ -10,11 +10,17 @@ fs.readdirSync('node_modules')
         nodeModules[mod] = 'commonjs ' + mod;
     });
 
+const cssLoaderParams = [
+  'modules',
+  'importLoaders=1',
+  'localIdentName=[path][name]_[local]',
+];
 
 const loaders = [
   { test: /\.svg$/, exclude: /node_modules/, loader: 'babel!svg-react' },
   { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-  { test: /\.json$/, loader: 'json' }
+  { test: /\.json$/, loader: 'json' },
+  { test: /\.css$/, loader: `isomorphic-style!css?${cssLoaderParams.join('&')}!postcss` }
 ];
 
 module.exports = [
@@ -31,7 +37,12 @@ module.exports = [
     ],
     externals: nodeModules,
     module:    { loaders: loaders },
-    output:    {
+    postcss() {
+      return [
+        require('autoprefixer'),
+      ];
+    },
+    output: {
         path:     __dirname + '/dist',
         filename: 'backend.js',
     },
@@ -48,6 +59,11 @@ module.exports = [
       new webpack.optimize.OccurenceOrderPlugin(),
     ],
     module: { loaders: loaders },
+    postcss() {
+      return [
+        require('autoprefixer'),
+      ];
+    },
     output: {
         path:     __dirname + '/dist',
         filename: 'frontend.js',

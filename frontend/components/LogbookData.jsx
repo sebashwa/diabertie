@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment-timezone';
-import { logEventStyle, logbookDataStyle } from './LogbookData.style';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import styles from './LogbookData.css';
 
-function LogBookData({ logEvents: logEventBundles, user, p }) {
+function LogbookData({ logEvents: logEventBundles, user, p }) {
   return (
-    <div className="logbookData" style={ logbookDataStyle() }>
+    <div className={ styles.logbookData } >
       {
         logEventBundles.size > 0 ?
           logEventBundles.map((logEventBundle, i) => {
@@ -13,7 +14,7 @@ function LogBookData({ logEvents: logEventBundles, user, p }) {
             const { timezone } = user.toObject();
 
             return (
-              <div key={i} className="logEventBundle" style={ logEventStyle() }>
+              <div key={i} className={ styles.logEventBundle } >
                 <span>{ moment.utc(`${hour}:${minute}`, 'HH:mm').tz(timezone).format('HH:mm') } </span>
 
 
@@ -23,7 +24,7 @@ function LogBookData({ logEvents: logEventBundles, user, p }) {
                       const { originalValue, originalUnit } = logEvent.toObject();
 
                       return(
-                        <div className="logEvent">
+                        <div className={ styles.logEvent }>
                           <span>{ p.t(`Logbook.logEvents.${originalUnit}`, originalValue)}</span>
                         </div>
                       );
@@ -40,10 +41,10 @@ function LogBookData({ logEvents: logEventBundles, user, p }) {
   );
 };
 
-LogBookData.propTypes = {
+LogbookData.propTypes = {
   logEvents: PropTypes.object.isRequired,
   user:      PropTypes.object.isRequired,
   p:         PropTypes.object.isRequired
 };
 
-export default LogBookData;
+export default withStyles(styles)(LogbookData);

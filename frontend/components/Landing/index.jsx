@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import polyglot from 'lib/polyglot';
+import Modal from 'components/global/Modal';
 
 import Bertie from 'images/Bertie';
 import AuthForm from './AuthForm';
 import { signup, login } from 'actions/AuthActions';
-import { authFormStyle } from './index.style';
 
 
 export default class Landing extends Component {
@@ -19,13 +19,10 @@ export default class Landing extends Component {
 
     return (
       <div className="landing">
-        {
-          !(route.path == '/landing') &&
-          <div className="auth-form" style={ authFormStyle() } >
-            { (route.path == '/signup') && <AuthForm formAction={ signup } authType="signup" p={ p } /> }
-            { (route.path == '/login') && <AuthForm formAction={ login } authType="login" p={ p } /> }
-          </div>
-        }
+        { !(route.path == '/landing') &&
+          ((route.path == '/signup') && <Modal><AuthForm formAction={ signup } authType="signup" p={ p } /></Modal> ||
+          (route.path == '/login') && <Modal><AuthForm formAction={ login } authType="login" p={ p } /></Modal>) }
+
         <Bertie width={200} height={150} />
         { p.t('Landing.bertieWelcome') }
         <Link to="signup">{ p.t('Landing.signup') }</Link>

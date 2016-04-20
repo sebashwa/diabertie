@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment-timezone';
 import polyglot from 'lib/polyglot';
 
-import LoadingBertie from 'components/global/LoadingBertie';
+import Modal from 'components/global/Modal';
 import LogbookData from 'components/LogbookData';
 import LogbookNavigation from 'components/LogbookNavigation';
 
@@ -37,8 +37,8 @@ class Logbook extends Component {
     return (
       <div className="logbook">
         <LogbookNavigation datum={ datum } p={ p } />
-        { !!loadingLogEvents && <LoadingBertie /> }
-        { 
+        { !!loadingLogEvents && <Modal><div>{"LOADING ..."}</div></Modal> }
+        {
           (!!logEvents && !loadingLogEvents) &&
           <LogbookData logEvents={ logEvents } user={ user } p={ p } />
         }

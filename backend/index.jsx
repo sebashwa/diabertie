@@ -13,6 +13,7 @@ import path from 'path';
 import { setBotName } from '../frontend/actions/SettingsActions';
 import promiseMiddleware from '../frontend/lib/promiseMiddleware';
 import * as reducers from '../frontend/reducers';
+import WithStylesContext from '../frontend/lib/WithStylesContext';
 import routes from '../frontend/routes';
 
 app.use(express.static(path.dirname(process.mainModule.filename)));
@@ -28,17 +29,19 @@ app.use((req, res) => {
       return res.status(500).end('Internal server error');
     }
 
+
     if(!renderProps)
       return res.status(404).end('Not found');
 
     function renderView() {
-      const InitialView = (
+      const css = [];
+      const body = renderToString(
         <Provider store={store}>
-          <RouterContext {...renderProps} />
+          <WithStylesContext onInsertCss={styles => css.push(styles._getCss())}>
+            <RouterContext {...renderProps} />
+          </WithStylesContext>
         </Provider>
       );
-
-      const componentHTML = renderToString(InitialView);
 
       store.dispatch(setBotName(process.env.TELEGRAM_BOT_NAME));
       const initialState = store.getState();
@@ -49,13 +52,13 @@ app.use((req, res) => {
         <head>
           <meta charset="utf-8">
           <title>diabertie</title>
-
+          <style>${css.join('')}</style>
           <script>
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
         </head>
         <body>
-          <div id="react-view">${componentHTML}</div>
+          <div id="react-view">${body}</div>
           <script type="application/javascript" src="/frontend.js"></script>
         </body>
       </html>
