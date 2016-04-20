@@ -1,39 +1,18 @@
-var path = require('path');
-var webpack = require('webpack');
+const sharedConfig = require('./webpack.config');
+const webpack = require('webpack');
 
-module.exports = {
-  entry: [
-    './client'
-  ],
-  resolve: {
-    modulesDirectories: ['node_modules', 'shared'],
-    extensions:         ['', '.js', '.jsx', '.svg']
-  },
-  output: {
-    path:       path.join(__dirname, 'server/dist'),
-    filename:   'bundle.js',
-    publicPath: '/'
-  },
-  module: {
-    loaders: [
-      { test: /\.svg$/, exclude: /node_modules/, loader: 'babel!svg-react' },
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.json$/, loader: 'json' }
-    ]
-  },
-  externals: {
-    'react': 'React'
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
-};
+const backendCfg = sharedConfig[0];
+const frontendCfg = sharedConfig[1];
+
+const plugins = [
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  })
+];
+
+backendCfg.plugins = plugins;
+frontendCfg.plugins = plugins;
+
+module.exports = [backendCfg, frontendCfg];

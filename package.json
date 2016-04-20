@@ -5,10 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
+    "start": "NODE_ENV=production node dist/backend --harmony",
     "dev": "webpack --watch & node dist/backend --harmony",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
-    "test": "NODE_ENV=test mocha '+(server|shared)/**/*.test.js' --compilers js:babel-register,js:babel-polyfill",
+    "test": "NODE_ENV=test mocha '+(backend|frontend)/**/*.test.js' --compilers js:babel-register,js:babel-polyfill",
     "lint": "eslint .",
     "heroku-postbuild": "npm run build"
   },
