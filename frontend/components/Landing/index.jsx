@@ -26,8 +26,8 @@ export default class Landing extends Component {
             { (route.path == '/login') && <AuthForm formAction={ login } authType="login" p={ p } /> }
           </div>
         }
+        <Bertie width={200} height={150} />
         { p.t('Landing.bertieWelcome') }
-        <Bertie />
         <Link to="signup">{ p.t('Landing.signup') }</Link>
         <Link to="login">{ p.t('Landing.login') }</Link>
       </div>
