@@ -4,21 +4,18 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { RouterContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
-import routes from 'routes';
 import { Provider } from 'react-redux';
-import * as reducers from 'reducers';
-import { setBotName } from 'actions/SettingsActions';
-import promiseMiddleware from 'lib/promiseMiddleware';
 import { createStore,
          combineReducers,
          applyMiddleware } from 'redux';
 import path from 'path';
 
-if (process.env.NODE_ENV !== 'production') {
-  require('../webpack.dev').default(app);
-}
+import { setBotName } from '../frontend/actions/SettingsActions';
+import promiseMiddleware from '../frontend/lib/promiseMiddleware';
+import * as reducers from '../frontend/reducers';
+import routes from '../frontend/routes';
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.dirname(process.mainModule.filename)));
 
 app.use((req, res) => {
   const location = createLocation(req.url);
@@ -59,7 +56,7 @@ app.use((req, res) => {
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
-          <script type="application/javascript" src="/bundle.js"></script>
+          <script type="application/javascript" src="/frontend.js"></script>
         </body>
       </html>
       `;
@@ -71,4 +68,8 @@ app.use((req, res) => {
   });
 });
 
-export default app;
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function () {
+  console.log('--> Serving app from: ' + PORT);
+});
