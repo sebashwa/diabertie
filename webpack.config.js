@@ -1,4 +1,5 @@
 const fs = require('fs');
+const webpack = require('webpack');
 
 const nodeModules = {};
 fs.readdirSync('node_modules')
@@ -24,7 +25,10 @@ module.exports = [
       modulesDirectories: ['node_modules', 'backend', 'frontend'],
       extensions:         ['', '.js', '.jsx', '.svg']
     },
-    target:    'node',
+    target:  'node',
+    plugins: [
+      new webpack.optimize.OccurenceOrderPlugin(),
+    ],
     externals: nodeModules,
     module:    { loaders: loaders },
     output:    {
@@ -39,7 +43,10 @@ module.exports = [
       modulesDirectories: ['node_modules', 'frontend'],
       extensions:         ['', '.js', '.jsx', '.svg']
     },
-    target: 'web',
+    target:  'web',
+    plugins: [
+      new webpack.optimize.OccurenceOrderPlugin(),
+    ],
     module: { loaders: loaders },
     output: {
         path:     __dirname + '/dist',

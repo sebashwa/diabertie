@@ -12,7 +12,7 @@ const plugins = [
   })
 ];
 
-backendCfg.plugins = plugins;
-frontendCfg.plugins = plugins;
+backendCfg.plugins.concat(plugins);
+frontendCfg.plugins.concat(plugins);
 
 module.exports = [backendCfg, frontendCfg];
