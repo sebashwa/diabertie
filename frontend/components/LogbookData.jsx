@@ -42,7 +42,7 @@ function LogBookData({ logEvents: logEventBundles, user, p }) {
 
 LogBookData.propTypes = {
   logEvents: PropTypes.object.isRequired,
-  user:      PropTypes.string.isRequired,
+  user:      PropTypes.object.isRequired,
   p:         PropTypes.object.isRequired
 };
 
