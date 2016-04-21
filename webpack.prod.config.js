@@ -5,6 +5,9 @@ const backendCfg = sharedConfig[0];
 const frontendCfg = sharedConfig[1];
 
 const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': '"production"'
+  }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false
@@ -12,7 +15,7 @@ const plugins = [
   })
 ];
 
-backendCfg.plugins.concat(plugins);
-frontendCfg.plugins.concat(plugins);
+backendCfg.plugins = plugins;
+frontendCfg.plugins = plugins;
 
 module.exports = [backendCfg, frontendCfg];
