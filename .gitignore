@@ -1,5 +1,5 @@
 node_modules
 npm-debug.log
-dist
-build
+dist/frontend.js
+dist/backend.js
 .env
