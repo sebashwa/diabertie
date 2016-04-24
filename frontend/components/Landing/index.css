@@ -1,59 +1,33 @@
 .root {
-  display: flex;
-  flex-direction: column;
-  max-width: 1024px;
-  margin: 5%;
+  max-width: 90%;
+  height: 100%;
+}
+
+@media all and (min-width: 780px) {
+  .root {
+    max-width: 50%;
+  }
 }
 
 .main {
-  display: flex;
   padding: 5%;
   padding-bottom: 0;
-  flex-flow: column;
   background-color: #6E8187;
 }
-
 
 .bertie {
   width: 60%;
   height: 51%;
   margin: 50px 0;
-  align-self: center;
 }
 
 .bubble {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  align-self: flex-end;
   padding: 5%;
   background-color: white;
-  margin: 5%;
-  margin-top: 0;
   font-size: 30px;
 }
 
 .footer {
-  background-color: #FEFEFE;
+  background-color: #EEE;
   height: 80px;
-}
-
-@media all and (min-width: 568px) and (min-device-width: 568px),
-@media all and (min-device-width: 480px) and (orientation: landscape) {
-  .main {
-    flex-flow: row-reverse nowrap;
-  }
-  .bertie {
-    align-self: flex-end;
-    width: 50%;
-    height: 43%;
-    margin-bottom: 20px
-  }
-
-  .bubble {
-    align-self: flex-start;
-    height: 100%;
-    width: 50%;
-  }
 }
