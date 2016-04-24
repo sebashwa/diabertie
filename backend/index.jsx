@@ -49,7 +49,8 @@ app.use((req, res) => {
       const HTML = `
       <!DOCTYPE html>
       <html>
-        <head>
+        <head style="height: 100%">
+          <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
           <meta charset="utf-8">
           <title>diabertie</title>
           <style>${css.join('')}</style>
@@ -57,7 +58,7 @@ app.use((req, res) => {
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
         </head>
-        <body>
+        <body style="min-height: 100%; margin: 0">
           <div id="react-view">${body}</div>
           <script type="application/javascript" src="/frontend.js"></script>
         </body>

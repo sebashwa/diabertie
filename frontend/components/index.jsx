@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import styles from './index.css';
 
-export default class Main extends React.Component {
+class Main extends React.Component {
   static propTypes = {
     children: PropTypes.object
   };
 
   render() {
     return (
-      <div id="main">
-        {this.props.children}
+      <div className={ styles.root }>
+        { this.props.children }
       </div>
     );
   }
 }
+
+export default withStyles(styles)(Main);

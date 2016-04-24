@@ -5,7 +5,7 @@ import polyglot from 'lib/polyglot';
 
 import Logbook from './Logbook';
 import Introduction from './Introduction';
-import Modal from 'components/global/Modal';
+import Modal from 'react-modal';
 
 import { logout, getUser } from 'actions/AuthActions';
 

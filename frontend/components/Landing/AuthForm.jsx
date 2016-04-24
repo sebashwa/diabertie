@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { clearFormErrors } from 'actions/AuthActions';
 import { Link, browserHistory } from 'react-router';
+import { clearFormErrors } from 'actions/AuthActions';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './AuthForm.css';
 
