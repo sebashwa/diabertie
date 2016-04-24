@@ -5,7 +5,6 @@ import polyglot from 'lib/polyglot';
 
 import Logbook from './Logbook';
 import Introduction from './Introduction';
-import Modal from 'react-modal';
 
 import { logout, getUser } from 'actions/AuthActions';
 
@@ -45,7 +44,7 @@ class App extends Component {
               <Introduction user={ user } botName={ botName } /> }
         </div>
       );
-    } else { return <Modal><div>{"LOADING..."}</div></Modal>; }
+    } else { return <div>{"LOADING..."}</div>; }
   }
 }
 
