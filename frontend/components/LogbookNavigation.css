@@ -6,5 +6,6 @@
 }
 
 .root > a {
+  cursor: pointer;
   font-size: 5em;
 }

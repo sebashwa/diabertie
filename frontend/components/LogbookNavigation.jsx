@@ -14,8 +14,12 @@ class LogbookNavigation extends Component {
   };
 
   handleDateChange = (alteration) => {
-    const { datum, changeDate } = this.props;
-    changeDate(datum, alteration);
+    return (e) => {
+      e.preventDefault();
+
+      const { datum, changeDate } = this.props;
+      changeDate(datum, alteration);
+    };
   }
 
   render() {
@@ -32,9 +36,9 @@ class LogbookNavigation extends Component {
 
     return(
       <div className={styles.root}>
-        <a onClick={ () => this.handleDateChange(-1) } >{ '<' }</a>
+        <a onClick={ this.handleDateChange(-1) } >{ '<' }</a>
         <h1>{ formattedDatum }</h1>
-        <a onClick={ () => this.handleDateChange(1) }>{ '>' }</a>
+        <a onClick={ this.handleDateChange(1) }>{ '>' }</a>
       </div>
     );
   }

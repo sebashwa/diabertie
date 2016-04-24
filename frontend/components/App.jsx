@@ -6,6 +6,9 @@ import polyglot from 'lib/polyglot';
 import Logbook from './Logbook';
 import Introduction from './Introduction';
 
+import styles from './App.css';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+
 import { logout, getUser } from 'actions/AuthActions';
 
 class App extends Component {
@@ -37,7 +40,7 @@ class App extends Component {
     if (user && !loadingUser) {
       const p = polyglot(user.get('locale'));
       return (
-        <div className="app">
+        <div className={styles.root}>
           <a onClick={ this.handleLogout }>{ p.t('App.logout') }</a>
           { user.get('telegramId') ?
               <Logbook user={ user } /> :
@@ -55,4 +58,4 @@ const mapStateToProps = (state) => {
   return { user, loadingUser, botName };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withStyles(styles)(App));
