@@ -1,8 +1,7 @@
-.logbookData {
+.row {
   display: flex;
+  margin: 20px;
 }
-
-.logEvent {
-  display: flex;
-  flex-direction: column;
+.row > div {
+  width: 100px;
 }

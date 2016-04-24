@@ -3,39 +3,46 @@ import moment from 'moment-timezone';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './LogbookData.css';
 
-function LogbookData({ logEvents: logEventBundles, user, p }) {
+function LogbookData({ logEvents: logEventBundles, user }) {
   return (
-    <div className={ styles.logbookData } >
-      {
-        logEventBundles.size > 0 ?
+    <div className={styles.root} >
+      <div className={ styles.row }>
+        <div>{"time"}</div>
+        {
           logEventBundles.map((logEventBundle, i) => {
-            const { _id: time , logEvents } = logEventBundle.toObject();
+            const { _id: time } = logEventBundle.toObject();
             const { hour, minute } = time.toObject();
-            const { timezone } = user.toObject();
 
             return (
-              <div key={i} className={ styles.logEventBundle } >
-                <span>{ moment.utc(`${hour}:${minute}`, 'HH:mm').tz(timezone).format('HH:mm') } </span>
-
-
-                {
-                  ['sugar', 'food', 'therapy'].map((type) =>
-                    logEvents.filter(e => e.get('category') === type).map(logEvent => {
-                      const { originalValue, originalUnit } = logEvent.toObject();
-
-                      return(
-                        <div className={ styles.logEvent }>
-                          <span>{ p.t(`Logbook.logEvents.${originalUnit}`, originalValue)}</span>
-                        </div>
-                      );
-                    })
-                  )
-                }
+              <div key={i}>
+                { moment.utc(`${hour}:${minute}`, 'HH:mm').tz(user.get('timezone')).format('HH:mm') }
               </div>
             );
           })
-        :
-        p.t('Logbook.noDataAvailable')
+        }
+      </div>
+      {
+        ['sugar', 'food', 'therapy'].map(type => {
+          return (
+            <div className={ styles.row }>
+              <div>{type}</div>
+              {
+                logEventBundles.map((logEventBundle, i) => {
+                  const { logEvents } = logEventBundle.toObject();
+                  return (
+                    <div key={i} className={ styles.logEventBundle } >
+                      {
+                        logEvents.filter(e => e.get('category') === type).map(logEvent =>
+                          <div>{ logEvent.get('originalValue') }</div>
+                        )
+                      }
+                    </div>
+                  );
+                })
+              }
+            </div>
+          );
+        })
       }
     </div>
   );
