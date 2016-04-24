@@ -1,17 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { changeDate } from 'actions/LogbookActions';
+
+import * as logbookActions from 'actions/LogbookActions';
+
+import styles from './LogbookNavigation.css';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class LogbookNavigation extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    datum:    PropTypes.object.isRequired,
-    p:        PropTypes.object.isRequired
+    changeDate: PropTypes.func.isRequired,
+    datum:      PropTypes.object.isRequired,
+    p:          PropTypes.object.isRequired
   };
 
   handleDateChange = (alteration) => {
-    const { datum, dispatch } = this.props;
-    dispatch(changeDate(datum, alteration));
+    const { datum, changeDate } = this.props;
+    changeDate(datum, alteration);
   }
 
   render() {
@@ -27,13 +31,13 @@ class LogbookNavigation extends Component {
     });
 
     return(
-      <div className="logbook-navigation">
-      <a onClick={ () => this.handleDateChange(-1) } >{ '<' }</a>
-      <h1>{ formattedDatum }</h1>
-      <a onClick={ () => this.handleDateChange(1) }>{ '>' }</a>
+      <div className={styles.root}>
+        <a onClick={ () => this.handleDateChange(-1) } >{ '<' }</a>
+        <h1>{ formattedDatum }</h1>
+        <a onClick={ () => this.handleDateChange(1) }>{ '>' }</a>
       </div>
     );
   }
 }
 
-export default connect()(LogbookNavigation);
+export default connect(null, { ...logbookActions })(withStyles(styles)(LogbookNavigation));

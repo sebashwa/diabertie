@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.root > a {
+  font-size: 5em;
+}
