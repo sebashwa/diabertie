@@ -1,6 +1,6 @@
 export default {
   Landing: {
-    bertieWelcome: 'Hey, my name is Bertie! I am your personal diabetes chatbot.',
+    bertieWelcome: 'Hey, my name is Bertie! I\'m your personal diabetes chatbot.',
     signup:        'Signup',
     login:         'Login'
   },

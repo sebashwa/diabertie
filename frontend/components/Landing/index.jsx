@@ -36,8 +36,8 @@ class Landing extends Component {
         </div>
 
         <div className={ styles.footer }>
-          <Link to="signup">{ p.t('Landing.signup') }</Link>
           <Link to="login">{ p.t('Landing.login') }</Link>
+          <Link to="signup">{ p.t('Landing.signup') }</Link>
         </div>
       </div>
     );

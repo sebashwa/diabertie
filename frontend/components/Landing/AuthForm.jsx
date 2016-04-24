@@ -1,9 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import { clearFormErrors } from 'actions/AuthActions';
+import polyglot from 'lib/polyglot';
+import Bertie from 'images/Bertie';
+
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './AuthForm.css';
+
+import * as authActions from 'actions/AuthActions';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -11,12 +15,11 @@ class AuthForm extends Component {
   }
 
   static propTypes = {
-    p:          PropTypes.object,
-    user:       PropTypes.object,
-    dispatch:   PropTypes.func.isRequired,
-    authType:   PropTypes.string.isRequired,
-    formAction: PropTypes.func.isRequired,
-    formErrors: PropTypes.object
+    p:               PropTypes.object,
+    user:            PropTypes.object,
+    route:           PropTypes.object.isRequired,
+    formErrors:      PropTypes.object,
+    clearFormErrors: PropTypes.func.isRequired,
   };
 
   componentWillReceiveProps = (props) => {
@@ -24,26 +27,32 @@ class AuthForm extends Component {
   }
 
   componentWillUnmount = () => {
-    this.props.dispatch(clearFormErrors());
+    this.props.clearFormErrors();
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { dispatch, formAction } = this.props;
-    const { email, password } = this.refs;
+  handleSubmit = (authType) => {
+    return (e) => {
+      e.preventDefault();
+      const { email, password } = this.refs;
 
-    const formData = { email: email.value, password: password.value };
+      const formData = { email: email.value, password: password.value };
 
-    dispatch(formAction(formData));
+      this.props[authType](formData);
+    };
   }
 
   render() {
-    const { authType, formErrors, p } = this.props;
+    const { route } = this.props;
+    const authType = route.path == '/signup' ? 'signup' : 'login';
+    const { formErrors } = this.props;
+    const p = polyglot();
 
     return (
       <div className={ styles.container } >
+        <Bertie width="100px" height="100px"/>
+        
         <h1>{ authType }</h1>
-        <form className={ styles.form } method="post" onSubmit={ this.handleSubmit }>
+        <form className={ styles.form } method="post" onSubmit={ this.handleSubmit(authType) }>
           <input type="text" name="email" ref="email" placeholder="Email" />
           <input type="password" name="password" ref="password" placeholder="Password" />
           <div>
@@ -72,4 +81,4 @@ const mapStateToProps = (state) => ({
   formErrors: state.auth.get('formErrors')
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(AuthForm));
+export default connect(mapStateToProps, { ...authActions })(withStyles(styles)(AuthForm));
