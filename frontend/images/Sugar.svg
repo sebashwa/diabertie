@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1504px" height="1504px" viewBox="0 0 1504 1504" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.7 (28169) - http://www.bohemiancoding.com/sketch -->
+    <title>Sugar</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="1504" height="1504" rx="100"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="1504" height="1504" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sugar">
+            <use id="Rectangle-3" stroke="#979797" mask="url(#mask-2)" stroke-width="22" fill="#F4FBFF" xlink:href="#path-1"></use>
+            <polyline id="Path-46" stroke="#979797" stroke-width="22" points="201.565533 130.660366 204.188257 1310.30951 1276.30569 1314.68946"></polyline>
+            <polyline id="Path-47" stroke="#D0011B" stroke-width="13" points="215.072565 1066.08138 471.496365 637.397017 904.298405 1156.14575 1293.0649 224.737503"></polyline>
+        </g>
+    </g>
+</svg>
