@@ -6,6 +6,9 @@ import polyglot from 'lib/polyglot';
 import LogbookData from 'components/LogbookData';
 import LogbookNavigation from 'components/LogbookNavigation';
 
+import styles from './Logbook.css';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+
 import { fetchLogEvents } from 'actions/LogbookActions';
 
 class Logbook extends Component {
@@ -34,7 +37,7 @@ class Logbook extends Component {
     const p = polyglot(user.get('locale'));
 
     return (
-      <div className="logbook">
+      <div className={styles.root}>
         <LogbookNavigation datum={ datum } p={ p } />
         { !!loadingLogEvents && <div>{"LOADING ..."}</div> }
         {
@@ -56,4 +59,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(Logbook);
+export default connect(mapStateToProps)(withStyles(styles)(Logbook));

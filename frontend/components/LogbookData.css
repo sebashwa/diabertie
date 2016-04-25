@@ -1,7 +1,20 @@
-.row {
+.root {
   display: flex;
-  margin: 20px;
+  flex-direction: column;
 }
+
+.row {
+  min-height: 80px;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+}
+
+.row:nth-child(2n) {
+  background-color: #FAFAFA;
+}
+
 .row > div {
-  width: 100px;
+  width: 80px;
+  padding-left: 15px;
 }

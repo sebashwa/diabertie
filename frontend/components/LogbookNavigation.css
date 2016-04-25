@@ -1,4 +1,5 @@
 .root {
+  align-self: center;
   display: flex;
   width: 400px;
   align-items: center;

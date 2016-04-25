@@ -3,21 +3,28 @@ import moment from 'moment-timezone';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './LogbookData.css';
 
+import Sugar from 'images/Sugar';
+import Food from 'images/Food';
+import Therapy from 'images/Therapy';
+
+const icons = {
+  sugar:   <Sugar width="30px" height="30px" />,
+  food:    <Food width="30px" height="30px" />,
+  therapy: <Therapy width="30px" height="30px" />
+};
+
 function LogbookData({ logEvents: logEventBundles, user }) {
   return (
     <div className={styles.root} >
       <div className={ styles.row }>
-        <div>{"time"}</div>
+        <div></div>
         {
           logEventBundles.map((logEventBundle, i) => {
             const { _id: time } = logEventBundle.toObject();
             const { hour, minute } = time.toObject();
+            const formattedTime = moment.utc(`${hour}:${minute}`, 'HH:mm').tz(user.get('timezone')).format('HH:mm');
 
-            return (
-              <div key={i}>
-                { moment.utc(`${hour}:${minute}`, 'HH:mm').tz(user.get('timezone')).format('HH:mm') }
-              </div>
-            );
+            return (<div><b key={i}>{ formattedTime }</b></div>);
           })
         }
       </div>
@@ -25,7 +32,7 @@ function LogbookData({ logEvents: logEventBundles, user }) {
         ['sugar', 'food', 'therapy'].map(type => {
           return (
             <div className={ styles.row }>
-              <div>{type}</div>
+              <div>{ icons[type] }</div>
               {
                 logEventBundles.map((logEventBundle, i) => {
                   const { logEvents } = logEventBundle.toObject();
