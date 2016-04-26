@@ -6,22 +6,22 @@
 
 .main {
   padding: 5%;
-  padding-bottom: 0;
   background-color: #6E8187;
 }
 
 .bertie {
-  width: 60%;
-  height: 51%;
-  margin: 50px 0;
+  width: 90%;
+  height: 77%;
+  margin-top: 50px;
 }
 
 .bubble {
-  width: 50%;
-  float: right;
+  width: 100%;
   padding: 5%;
+  float: right;
   background-color: white;
-  font-size: 1.5em;
+  box-sizing: border-box;
+  font-size: 3.5em;
 }
 
 .footer {
@@ -30,7 +30,7 @@
   align-items: center;
   padding: 1%;
   padding-top: 3%;
-  font-size: 2.0em;
+  font-size: 4em;
   background-color: white;
 }
 
@@ -44,6 +44,8 @@
     width: 70%;
   }
   .bubble {
+    width: 50%;
+    font-size: 1.5em;
     margin-left: 5%;
   }
   .bertie {
@@ -51,6 +53,7 @@
     height: 35%;
   }
   .footer {
+    font-size: 1.5em;
     flex-direction: row;
     justify-content: space-around;
   }

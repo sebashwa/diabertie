@@ -49,16 +49,18 @@ class AuthForm extends Component {
 
     return (
       <div className={ styles.container } >
-        <Bertie width="100px" height="100px"/>
+        <Bertie className={ styles.bertie } />
 
         <h1>{ p.t(`Landing.${authType}`) }</h1>
         <form className={ styles.form } method="post" onSubmit={ this.handleSubmit(authType) }>
           <input type="text" name="email" ref="email" placeholder="Email" />
           <input type="password" name="password" ref="password" placeholder="Password" />
 
-          <button type="submit">{ "OK" }</button>
+          <div className={ styles.interaction }>
+            <Link to="/landing">back</Link>
+            <button type="submit">{ "OK" }</button>
+          </div>
         </form>
-        <Link to="/landing">back</Link>
 
         {
           !!formErrors &&
