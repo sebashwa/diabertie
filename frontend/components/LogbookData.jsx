@@ -8,9 +8,9 @@ import Food from 'images/Food';
 import Therapy from 'images/Therapy';
 
 const icons = {
-  sugar:   <Sugar width="30px" height="30px" />,
-  food:    <Food width="30px" height="30px" />,
-  therapy: <Therapy width="30px" height="30px" />
+  sugar:   <Sugar className={styles.icon} />,
+  food:    <Food className={styles.icon} />,
+  therapy: <Therapy className={styles.icon} />
 };
 
 function LogbookData({ logEvents: logEventBundles, user }) {

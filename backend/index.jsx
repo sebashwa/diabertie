@@ -58,7 +58,7 @@ app.use((req, res) => {
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
         </head>
-        <body style="margin: 0">
+        <body style="margin: 0; background-color: #f9fcff;">
           <div id="react-view">${body}</div>
           <script type="application/javascript" src="/frontend.js"></script>
         </body>

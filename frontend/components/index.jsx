@@ -4,7 +4,7 @@ import styles from './index.css';
 
 class Main extends React.Component {
   static propTypes = {
-    children: PropTypes.object
+    children: PropTypes.node
   };
 
   render() {
