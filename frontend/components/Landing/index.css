@@ -42,6 +42,7 @@
 @media all and (min-device-width: 1024px) and (min-width: 720px) {
   .root {
     width: 70%;
+    margin-top: 5%;
   }
   .bubble {
     width: 50%;
