@@ -13,11 +13,18 @@ const icons = {
   therapy: <Therapy className={styles.icon} />
 };
 
-function LogbookData({ logEvents: logEventBundles, user }) {
+function LogbookData({ logEvents: logEventBundles, user, p }) {
   return (
+    logEventBundles.length == 0 ?
+    <div className={styles.root}>
+      <span className={styles.noData}>
+        {p.t('Logbook.noDataAvailable')}
+      </span>
+    </div>
+    :
     <div className={styles.root} >
-      <div className={ styles.row }>
-        <div></div>
+      <div className={styles.row}>
+        <div>{"Time"}</div>
         {
           logEventBundles.map((logEventBundle, i) => {
             const { _id: time } = logEventBundle.toObject();

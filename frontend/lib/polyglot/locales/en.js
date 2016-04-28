@@ -31,6 +31,6 @@ export default {
       yesterday:  'Yesterday',
       dateFormat: 'DD/MM/YYYY'
     },
-    noDataAvailable: 'Oh, you didn\'t log any data for this day yet...'
+    noDataAvailable: 'Oh, there is no data for this day yet'
   }
 };
