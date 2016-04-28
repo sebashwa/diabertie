@@ -3,13 +3,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 5%;
   padding: 5% 10%;
 }
 
 .bertie {
   flex-shrink: 0;
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
 }
 
 .form {
@@ -29,7 +30,7 @@ input {
 }
 
 h1 {
-  font-size: 7.5em;
+  font-size: 5em;
 }
 
 button {
