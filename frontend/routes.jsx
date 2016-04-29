@@ -4,7 +4,7 @@ import { IndexRoute, Route } from 'react-router';
 import Main from 'components/index';
 import App from 'components/App';
 import Landing from 'components/Landing';
-import AuthForm from 'components/Landing/AuthForm';
+import AuthForm from 'components/AuthForm';
 
 export default (
   <Route component={ Main } path="/">

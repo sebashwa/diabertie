@@ -5,7 +5,7 @@ import polyglot from 'lib/polyglot';
 import Bertie from 'images/Bertie';
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import styles from './index.css';
+import styles from './Landing.css';
 
 class Landing extends Component {
   render() {
