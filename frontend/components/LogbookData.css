@@ -1,9 +1,7 @@
 .root {
   display: flex;
-  justify-content: center;
-  overflow-x: scroll;
-  min-height: 520px;
-  font-size: 2em;
+  flex-direction: column;
+  border: 1px solid #eee;
 }
 
 .noData {
@@ -11,12 +9,34 @@
   padding: 4%;
 }
 
+.icons {
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+  min-width: 100px;
+  min-height: 100px;
+  padding: 2% 0;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+}
+
+.icon {
+  height: 80px;
+  width: 80px;
+  margin: 0 25px;
+}
+
+.rows {
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+  font-size: 2em;
+}
 
 .row {
-  min-height: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: 500px;
 }
 
 .row > div {
@@ -25,22 +45,36 @@
   justify-content: center;
   flex-wrap: wrap;
   flex-shrink: 0;
+  min-height: 89px;
   width: 80px;
-  height: 100px;
-  padding: 15px 25px;
+  padding: 25px;
 }
 
-.icon {
-  height: 80px;
-  width: 80px;
-}
 
 @media all and (min-device-width: 1024px) and (min-width: 720px) {
   .root {
+    flex-direction: row;
+  }
+
+  .rows, .icons {
     flex-direction: column;
+  }
+
+  .icons {
+    box-shadow: 2px 0px 4px 0px rgba(0,0,0,0.50);
+    padding-left: 2%;
+  }
+
+  .icon {
+    margin: 25px 0;
   }
 
   .row {
     flex-direction: row;
+    margin: 20px 0;
+  }
+
+  .row > div {
+    min-height: inherit;
   }
 }
