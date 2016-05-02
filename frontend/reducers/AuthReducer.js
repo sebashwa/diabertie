@@ -12,10 +12,15 @@ export default (state = Map(), action) => {
     case 'GET_USER':
       return state.merge({ user: action.res.data, loadingUser: false});
     case 'SIGNUP_FAILURE':
-      const error = (action.error.data.name == 'UserExistsError') ?
-        { user: ['already exists'] } : null;
-
-      return state.merge({ formErrors: error });
+    case 'LOGIN_FAILURE':
+      switch (action.error.data.name) {
+        case 'UserExistsError':
+          return state.setIn(['formErrors', 'user'], ['already exists']);
+        case 'LoginUnsuccessful':
+          return state.setIn(['formErrors', 'user'], ['credentials are invalid']);
+        default:
+          return state;
+      }
     case 'GET_USER_FAILURE':
       return state.set('loadingUser', false);
     case 'LOGOUT':
@@ -23,6 +28,9 @@ export default (state = Map(), action) => {
       return state.set('user', null);
     case 'CLEAR_AUTH_FORM_ERRORS':
       return state.set('formErrors', null);
+    case 'ADD_AUTH_FORM_ERRORS':
+      const type = Object.keys(action.errors)[0];
+      return state.setIn(['formErrors', type], action.errors[type]);
     default:
       return state;
   }

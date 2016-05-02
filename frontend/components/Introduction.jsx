@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
+import polyglot from 'lib/polyglot';
 
-function Introduction ({ user, botName, p }) {
+const p = polyglot();
+
+function Introduction ({ user, botName }) {
   return (
     <a href={ `http://telegram.me/${botName}?start=${user.get('telegramToken')}` } target="_blank">
       { p.t('Introduction.connect') }
@@ -10,8 +13,7 @@ function Introduction ({ user, botName, p }) {
 
 Introduction.propTypes = {
   user:    PropTypes.object.isRequired,
-  botName: PropTypes.string.isRequired,
-  p:       PropTypes.object.isRequired
+  botName: PropTypes.string.isRequired
 };
 
 export default Introduction;

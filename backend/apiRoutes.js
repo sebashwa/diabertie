@@ -31,11 +31,19 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
-  const token = jwt.sign({ sub: req.user.email }, app.get('jwtSignature'), { expiresIn: '7d' });
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user) => {
+    if (err) { console.error(err); next(err); }
+    if (!user) {
+      res.status(401);
+      res.json({ name: 'LoginUnsuccessful' });
+    } else {
+      const token = jwt.sign({ sub: user.email }, app.get('jwtSignature'), { expiresIn: '7d' });
 
-  res.cookie('jwtoken', token);
-  res.json(req.user);
+      res.cookie('jwtoken', token);
+      res.json(user);
+    }
+  })(req, res, next);
 });
 
 router.get('/users/current', passport.authenticate('jwt', { session: false }), (req, res) => {

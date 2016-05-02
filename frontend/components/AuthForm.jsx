@@ -9,16 +9,14 @@ import styles from './AuthForm.css';
 
 import * as authActions from 'actions/AuthActions';
 
-class AuthForm extends Component {
-  constructor(props) {
-    super(props);
-  }
+const p = polyglot();
 
+class AuthForm extends Component {
   static propTypes = {
-    p:               PropTypes.object,
     user:            PropTypes.object,
     route:           PropTypes.object.isRequired,
     formErrors:      PropTypes.object,
+    addFormErrors:   PropTypes.func.isRequired,
     clearFormErrors: PropTypes.func.isRequired,
   };
 
@@ -28,6 +26,25 @@ class AuthForm extends Component {
 
   componentWillUnmount = () => {
     this.props.clearFormErrors();
+  }
+
+  validateEmail = () => {
+    const value = this.refs.email.value;
+    const errors = [];
+
+    if (value.length == 0) { errors.push(p.t('AuthForm.errors.empty')); }
+    if (!(/.*\@.*/.test(value))) { errors.push(p.t('AuthForm.errors.format')); }
+
+    this.props.addFormErrors({ email: errors });
+  }
+
+  validatePassword = () => {
+    const value = this.refs.password.value;
+    const errors = [];
+
+    if (value.length == 0) { errors.push(p.t('AuthForm.errors.empty')); }
+
+    this.props.addFormErrors({ password: errors });
   }
 
   handleSubmit = (authType) => {
@@ -45,7 +62,6 @@ class AuthForm extends Component {
     const { route } = this.props;
     const authType = route.path == '/signup' ? 'signup' : 'login';
     const { formErrors } = this.props;
-    const p = polyglot();
 
     return (
       <div className={ styles.container } >
@@ -53,8 +69,8 @@ class AuthForm extends Component {
 
         <h1>{ p.t(`Landing.${authType}`) }</h1>
         <form className={ styles.form } method="post" onSubmit={ this.handleSubmit(authType) }>
-          <input type="text" name="email" ref="email" placeholder="Email" />
-          <input type="password" name="password" ref="password" placeholder="Password" />
+          <input type="text" name="email" ref="email" placeholder="Email" onBlur={this.validateEmail} />
+          <input type="password" name="password" ref="password" placeholder="Password" onBlur={this.validatePassword} />
 
           <div className={ styles.interaction }>
             <Link to="/landing">back</Link>
@@ -63,13 +79,14 @@ class AuthForm extends Component {
         </form>
 
         {
-          !!formErrors &&
-          formErrors.map((errors, type) => {
-            return (
-              <p key={ type } className={ styles.errors }>
-                { `${type.charAt(0).toUpperCase() + type.slice(1)} ${errors.join(',')}` }
-              </p>
-            );
+          !!formErrors && formErrors.map((errors, type) => {
+            if (errors.length > 0 ) {
+              return (
+                <p key={ type } className={ styles.errors }>
+                  { `${type.charAt(0).toUpperCase() + type.slice(1)} ${errors.join(', ')}` }
+                </p>
+              );
+            };
           }).valueSeq()
         }
       </div>
@@ -77,9 +94,9 @@ class AuthForm extends Component {
   }
 };
 
-const mapStateToProps = (state) => ({
-  user:       state.auth.get('user'),
-  formErrors: state.auth.get('formErrors')
-});
+const mapStateToProps = (state) => {
+  const { user, formErrors } = state.auth.toObject();
+  return { user, formErrors };
+};
 
 export default connect(mapStateToProps, { ...authActions })(withStyles(styles)(AuthForm));

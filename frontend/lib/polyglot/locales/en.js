@@ -4,6 +4,13 @@ export default {
     signup:        'Signup',
     login:         'Login'
   },
+  AuthForm: {
+    submit: 'OK',
+    errors: {
+      empty:  'is empty',
+      format: 'does not have the right format'
+    }
+  },
   App: {
     logout: 'Logout'
   },

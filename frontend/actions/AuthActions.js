@@ -5,6 +5,10 @@ export function clearFormErrors() {
   return { type: 'CLEAR_AUTH_FORM_ERRORS' };
 }
 
+export function addFormErrors(errors) {
+  return { type: 'ADD_AUTH_FORM_ERRORS', errors };
+}
+
 export function login(formData) {
   const data = { ...formData, timezone: moment.tz.guess() };
   return {
