@@ -1,1 +1,3 @@
-server/dist/bundle.js
+dist/backend.js
+dist/frontend.js
+node_modules/**/*
