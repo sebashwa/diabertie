@@ -42,7 +42,7 @@
     "passport-jwt": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
-    "postcss-loader": "^0.8.2",
+    "postcss-loader": "^0.11.0",
     "react": "^15.0.1",
     "react-addons-update": "^15.0.1",
     "react-dom": "^15.0.1",
