@@ -37,7 +37,7 @@
     "moment-timezone": "^0.5.3",
     "mongoose": "^4.4.8",
     "node-polyglot": "^2.0.0",
-    "node-telegram-bot-api": "^0.21.1",
+    "node-telegram-bot-api": "^0.23.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.0.0",
     "passport-local": "^1.0.0",
