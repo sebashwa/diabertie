@@ -25,7 +25,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
-    "css-loader": "^0.23.1",
+    "css-loader": "^0.24.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "history": "^4.2.0",
