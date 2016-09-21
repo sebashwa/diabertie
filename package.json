@@ -59,7 +59,7 @@
     "eslint-plugin-react": "^6.1.0",
     "mocha": "^2.4.5",
     "react-transform-hmr": "^1.0.1",
-    "unexpected": "^10.11.1",
+    "unexpected": "^10.15.0",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.10.0"
   }
