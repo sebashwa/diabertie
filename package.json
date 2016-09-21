@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.3.6",
-    "axios": "^0.9.1",
+    "axios": "^0.13.0",
     "babel-core": "^6.7.2",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.3.14",
