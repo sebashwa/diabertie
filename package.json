@@ -1,7 +1,7 @@
 {
   "name": "diabertie",
   "version": "1.0.0",
-  "repository": "The diabertie app: Your personal diabetes assistant",
+  "repository": "Diabertie: Your personal diabetes chatbot",
   "description": "",
   "main": "index.js",
   "scripts": {
