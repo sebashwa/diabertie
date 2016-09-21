@@ -3,11 +3,9 @@
 # diabertie
 ![Travis](https://travis-ci.org/sebashwa/diabertie.svg)
 
-This is diabertie, your personal diabetes chatbot.
+This is your personal diabetes chatbot.
 It uses the awesome [Telegram chat bot integration](https://core.telegram.org/bots).
-You can send bertie your blood sugar values, insulin doses and whatever is important for your daily diabetes logging.
-
-To use it, you can head over to diabertie.com, create an account and connect it to the bot from there.
+You can send Diabertie your blood sugar values, insulin doses and whatever is important for your daily diabetes logging.
 
 ## Contribute
 
