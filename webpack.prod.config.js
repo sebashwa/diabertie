@@ -1,8 +1,5 @@
-const sharedConfig = require('./webpack.config');
+const devConfig = require('./webpack.config');
 const webpack = require('webpack');
-
-const backendCfg = sharedConfig[0];
-const frontendCfg = sharedConfig[1];
 
 const plugins = [
   new webpack.DefinePlugin({
@@ -15,7 +12,6 @@ const plugins = [
   })
 ];
 
-backendCfg.plugins = plugins;
-frontendCfg.plugins = plugins;
+devConfig.plugins = plugins;
 
-module.exports = [backendCfg, frontendCfg];
+module.exports = devConfig;

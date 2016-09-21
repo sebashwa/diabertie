@@ -1,3 +1,2 @@
-dist/backend.js
-dist/frontend.js
+dist/index.js
 node_modules/**/*
