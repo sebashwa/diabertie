@@ -6,7 +6,7 @@ import polyglot from './polyglot';
 const opts = { parse_mode: 'Markdown'};
 
 export default (bot) => {
-  bot.onText(/\/start (.+)/, async ({ from }) => {
+  bot.onText(/\/start.*$/, async ({ from }) => {
     const p = polyglot();
 
     const text = await bertieStart(from);
