@@ -24,6 +24,7 @@ LogEventSchema.static('groupInInterval', async function(datum, user, interval=5,
   };
 
   const $project = {
+    year:   { $year: '$createdAt' },
     day:    { $dayOfYear: '$createdAt' },
     hour:   { $hour: '$createdAt' },
     minute: { $minute: '$createdAt' },
@@ -32,6 +33,7 @@ LogEventSchema.static('groupInInterval', async function(datum, user, interval=5,
 
   const $group = {
     _id: {
+      year:   '$year',
       day:    '$day',
       hour:   '$hour',
       minute: {

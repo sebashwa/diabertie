@@ -1,13 +1,14 @@
 import expect from 'unexpected';
-// import fetchLogEvents from './fetchLogEvents';
+import moment from 'moment-timezone';
+import fetchLogEvents from './fetchLogEvents';
 import { User, LogEvent } from '../../../models';
 
-describe.skip('bertie action #fetchLogEvents', () => {
+describe('bertie action #fetchLogEvents', () => {
   let user;
   const createLogEventBatch = async (date) => {
     await LogEvent.create({ user: user.id, createdAt: date, category: 'sugar', unit: 'sugarMmol', value: 6.66, originalUnit: 'sugarMg', originalValue: 120 });
-    await LogEvent.create({ user: user.id, createdAt: date, category: 'therapy', unit: 'bolusInsulin', value: 4, originalUnit: 'humalog', originalValue: 4 });
     await LogEvent.create({ user: user.id, createdAt: date, category: 'food', unit: 'carbs', value: 24, originalUnit: 'be', originalValue: 2 });
+    await LogEvent.create({ user: user.id, createdAt: date, category: 'therapy', unit: 'bolusInsulin', value: 4, originalUnit: 'humalog', originalValue: 4 });
   };
 
   beforeEach(async () => {
@@ -16,15 +17,15 @@ describe.skip('bertie action #fetchLogEvents', () => {
       timezone:   'Europe/Berlin',
     });
 
-    const breakfastTime = new Date('2015-04-11T08:30:21.749Z');
+    const breakfastTime = moment.utc('2015-04-11 07:32');
     await createLogEventBatch(breakfastTime);
-    const lunchTime = new Date('2015-04-11T12:43:41.749Z');
+    const lunchTime = moment.utc('2015-04-11 10:43');
     await createLogEventBatch(lunchTime);
   });
 
   it('fetches the log events of a given date', async () => {
-    const { message } = { message: 'foobar' }; // await fetchLogEvents(new Date('2015-04-11'), user);
+    const { message } = await fetchLogEvents(moment('2015-04-11'), user);
 
-    expect(message, 'to equal', ['8:30\n120 mg/dL, 2 BE, 4 Humalog\n\n12:45\n120 mg/dL, 2 BE, 4 Humalog']);
+    expect(message, 'to equal', '09:30\n120 mg/dL, 2 BE, 4 Humalog\n\n12:40\n120 mg/dL, 2 BE, 4 Humalog');
   });
 });
