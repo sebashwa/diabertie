@@ -1,11 +1,11 @@
-import { LogEvent } from '../../../models';
-import logger from '../../../logger';
+import { LogEvent } from '../../models';
+import logger from '../../logger';
 import moment from 'moment-timezone';
-import polyglot from '../../polyglot';
+import polyglot from '../polyglot';
 
-export default async (datum, user) => {
+export default async (user, datum) => {
   try {
-    const logEventGroups = await LogEvent.groupInInterval(datum, user);
+    const logEventGroups = await LogEvent.groupInInterval(datum || moment(), user);
     const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
     const p = polyglot(user.locale);
 
@@ -15,10 +15,10 @@ export default async (datum, user) => {
 
       const time = moment.utc(logEventGroup._id).dayOfYear(dayOfYear).tz(timezone).format('HH:mm');
       const values = logEventGroup.logEvents.
-        map((logEvent) => p.t(`logEvents.${logEvent.originalUnit}`, logEvent.originalValue)).join(', ');
+        map((logEvent) => `${p.t(`icons.${logEvent.category}`)} ${logEvent.originalValue}`).join(' ');
 
-      return `${time}\n${values}`
-    }).join('\n\n');
+      return `*${time}* - ${values}`
+    }).join('\n');
 
     return { message }
   } catch (e) {
