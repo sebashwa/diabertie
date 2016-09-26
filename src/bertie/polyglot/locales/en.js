@@ -23,6 +23,9 @@ export default {
     },
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
   },
+  diary: {
+    noData: 'Oops, I have no data available for this day...'
+  },
   executeLatestChatAction: {
     nothingToDo: 'Sorry, I just don\'t know what to do'
   },

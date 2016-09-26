@@ -2,6 +2,7 @@
 
 import { bertieDetect, bertieStart, fetchUser, fetchLogEvents, saveLatestChatAction, executeLatestChatAction } from './actions';
 import polyglot from './polyglot';
+import moment from 'moment-timezone';
 
 export default (bot) => {
   const defaultOpts = { parse_mode: 'Markdown'};
@@ -18,11 +19,51 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
+    const today = moment.utc().tz(user.timezone);
 
-    const { message, error } = await fetchLogEvents(user);
+    const { message, error } = await fetchLogEvents(user, today);
     if (error) { return sendMessage(from.id, p.t(...error)); };
 
-    sendMessage(from.id, message);
+    sendMessage(from.id, message, {
+      ... defaultOpts,
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: '<<', callback_data: today.clone().subtract(1, 'days').format('YYYY-MM-DD') },
+          ]
+        ]
+      }
+    });
+  });
+
+  bot.on('callback_query', async ({ from, data, message }) => {
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
+    const p = polyglot(user.locale);
+
+    const queriedDate = moment.utc(data).tz(user.timezone);
+    if (!queriedDate.isValid()) { return sendMessage(from.id, p.t('generalErrors.superWrong')); };
+
+    const today = moment.utc().tz(user.timezone).format('YYYY-MM-DD');
+    const nextDay = queriedDate.clone().add(1, 'days').format('YYYY-MM-DD');
+    const prevDay = queriedDate.clone().subtract(1, 'days').format('YYYY-MM-DD');
+
+    const keyboardButtons = [{ text: '<<', callback_data: prevDay }];
+
+    if (today != queriedDate.format('YYYY-MM-DD')) {
+      keyboardButtons.push({ text: '>>', callback_data: nextDay });
+      keyboardButtons.push({ text: p.t('dateTime.today'), callback_data: today });
+    }
+
+    const { message: msg, error } = await fetchLogEvents(user, queriedDate);
+    if (error) { return sendMessage(from.id, p.t(...error)); };
+
+    bot.editMessageText(msg, {
+      ... defaultOpts,
+      reply_markup: { inline_keyboard: [ keyboardButtons ] },
+      chat_id:      message.chat.id,
+      message_id:   message.message_id,
+    });
   });
 
   bot.onText(/^(?!\/)\D*$/, async (msg) => {
