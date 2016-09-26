@@ -22,11 +22,12 @@ export default async (detections, user) => {
       return {
         category,
         createdAt,
-        user:          user._id,
-        unit:          type,
-        value:         normalizedValue,
         originalUnit:  subType || type,
         originalValue: value,
+        unit:          type,
+        value:         normalizedValue,
+        user:          user._id,
+        timezone:      user.timezone,
       };
     });
 

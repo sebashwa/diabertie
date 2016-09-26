@@ -6,6 +6,7 @@ const LogEventSchema = new Schema({
   value:         Number,
   originalUnit:  String,
   originalValue: Number,
+  timezone:      String,
   user:          { type: Schema.Types.ObjectId, ref: 'User' },
   createdAt:     { type: Date, default: Date.now },
 });
