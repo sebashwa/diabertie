@@ -17,10 +17,10 @@ export default async (user, datum) => {
       const values = logEventGroup.logEvents.
         map((logEvent) => `${p.t(`icons.${logEvent.category}`)} ${logEvent.originalValue}`).join(' ');
 
-      return `*${time}* - ${values}`
+      return `*${time}* - ${values}`;
     }).join('\n');
 
-    return { message }
+    return { message };
   } catch (e) {
     logger.error(e);
     return { error: ['generalErrors.superWrong'] };

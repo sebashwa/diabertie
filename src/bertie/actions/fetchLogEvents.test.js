@@ -1,7 +1,7 @@
 import expect from 'unexpected';
 import moment from 'moment-timezone';
 import fetchLogEvents from './fetchLogEvents';
-import { User, LogEvent } from '../../../models';
+import { User, LogEvent } from '../../models';
 
 describe('bertie action #fetchLogEvents', () => {
   let user;
@@ -24,8 +24,8 @@ describe('bertie action #fetchLogEvents', () => {
   });
 
   it('fetches the log events of a given date', async () => {
-    const { message } = await fetchLogEvents(moment('2015-04-11'), user);
+    const { message } = await fetchLogEvents(user, moment('2015-04-11'));
 
-    expect(message, 'to equal', '09:30\n120 mg/dL, 2 BE, 4 Humalog\n\n12:40\n120 mg/dL, 2 BE, 4 Humalog');
+    expect(message, 'to equal', '*09:30* - 📈 120 🍏 2 💉 4\n*12:40* - 📈 120 🍏 2 💉 4');
   });
 });
