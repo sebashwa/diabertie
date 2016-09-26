@@ -6,12 +6,12 @@ import polyglot from '../polyglot';
 export default async (user, datum) => {
   try {
     const p = polyglot(user.locale);
-    const logEventGroups = await LogEvent.groupInInterval(datum || moment(), user);
+    const logEventGroups = await LogEvent.groupInInterval(datum, user);
     if (!logEventGroups[0]) { return { message: p.t(['diary.noData']) }; };
 
     const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
 
-    const message = logEventGroups.map((logEventGroup) => {
+    const valuesString = logEventGroups.map((logEventGroup) => {
       const dayOfYear = logEventGroup._id.day;
       delete logEventGroup._id.day;
 
@@ -19,8 +19,10 @@ export default async (user, datum) => {
       const values = logEventGroup.logEvents.
         map((logEvent) => `${p.t(`icons.${logEvent.category}`)} ${logEvent.originalValue}`).join(' ');
 
-      return `*${time}* - ${values}`;
-    }).join('\n');
+      return `*${time}* \n ${values}`;
+    }).join('\n\n');
+
+    const message = `${datum.format('ddd, DD.MM.YYYY')}\n\n${valuesString}`;
 
     return { message };
   } catch (e) {
