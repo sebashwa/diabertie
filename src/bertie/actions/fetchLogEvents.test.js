@@ -28,4 +28,9 @@ describe('bertie action #fetchLogEvents', () => {
 
     expect(message, 'to equal', '*09:30* - 📈 120 🍏 2 💉 4\n*12:40* - 📈 120 🍏 2 💉 4');
   });
+
+  it('states that not data is available if no data is available', async () => {
+    const { message } = await fetchLogEvents(user, moment('2015-04-12'));
+    expect(message, 'to equal', 'Oops, I have no data available for this day...');
+  });
 });

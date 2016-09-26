@@ -5,9 +5,11 @@ import polyglot from '../polyglot';
 
 export default async (user, datum) => {
   try {
-    const logEventGroups = await LogEvent.groupInInterval(datum || moment(), user);
-    const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
     const p = polyglot(user.locale);
+    const logEventGroups = await LogEvent.groupInInterval(datum || moment(), user);
+    if (!logEventGroups[0]) { return { message: p.t(['diary.noData']) }; };
+
+    const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
 
     const message = logEventGroups.map((logEventGroup) => {
       const dayOfYear = logEventGroup._id.day;
