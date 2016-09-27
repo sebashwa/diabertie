@@ -31,7 +31,7 @@ describe('bertie action #bertieDetect', () => {
     const { message } = await bertieDetect('120 mg 2 be 4 hum 27 lantus', p);
 
     expect(message, 'to equal', ['bertieDetect.saveConfirmation', {
-      data: '*today, now:*\n\n📈 `120 mg/dL`\n🍏 `2 BE`\n💉 `4 Humalog`, `27 Lantus`'
+      data: 'today, now:\n\n📈 120 mg/dL\n🍏 2 BE\n💉 4 Humalog, 27 Lantus'
     }]);
   });
 
@@ -46,7 +46,7 @@ describe('bertie action #bertieDetect', () => {
 
     expect(warnings[0], 'to equal', ['bertieDetect.warnings.ambiguousSugar', {
       icon:       '📈',
-      valueTexts: '`120 mg/dL`, `7 mmol/L`'
+      valueTexts: '120 mg/dL, 7 mmol/L'
     }]);
   });
 
