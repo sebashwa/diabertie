@@ -36,6 +36,6 @@
     "mocha": "^3.0.2",
     "unexpected": "^10.18.0",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-hot-middleware": "^2.12.1"
   }
 }
