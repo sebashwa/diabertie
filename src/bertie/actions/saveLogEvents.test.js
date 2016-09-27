@@ -1,6 +1,6 @@
 import expect from 'unexpected';
 import saveLogEvents from './saveLogEvents';
-import { User, LogEvent } from '../../../models';
+import { User, LogEvent } from '../../models';
 
 describe('bertie action #saveLogEvents', () => {
   let user;
@@ -57,6 +57,6 @@ describe('bertie action #saveLogEvents', () => {
 
   it('returns a message after saving the data', async () => {
     const { message } = await saveLogEvents(detections, user);
-    expect(message, 'to equal', ['latestChatActions.saveLogEvents.success']);
+    expect(message, 'to equal', ['saveLogEvents.success']);
   });
 });

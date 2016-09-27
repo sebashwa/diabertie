@@ -1,5 +1,5 @@
-import { LogEvent } from '../../../models';
-import logger from '../../../logger';
+import { LogEvent } from '../../models';
+import logger from '../../logger';
 import moment from 'moment-timezone';
 
 export default async (detections, user) => {
@@ -33,7 +33,7 @@ export default async (detections, user) => {
 
     await LogEvent.insertMany(events);
 
-    return { message: ['latestChatActions.saveLogEvents.success'] };
+    return { message: ['saveLogEvents.success'] };
   } catch (e) {
     logger.error(e);
     return { error: ['generalErrors.superWrong'] };

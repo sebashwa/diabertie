@@ -1,9 +1,6 @@
 export default {
   onText: {
-    positiveTokens: 'yes,y,yep,yay,yo,please',
-    negativeTokens: 'no,n,nein,nope,don\'t',
-    negativeAnswer: 'Ok, I\'m not doing anything!',
-    notUnderstood:  'Oh sorry, I didn\'t get that..'
+    notUnderstood: 'Oh sorry, I didn\'t get that..'
   },
   generalErrors: {
     userNotFound: 'Oops! I was not able to find a user. Please sign up at diabertie.com first and connect from there',
@@ -26,13 +23,10 @@ export default {
   diary: {
     noData: 'Oops, I have no data available for this day...'
   },
-  executeLatestChatAction: {
-    nothingToDo: 'Sorry, I just don\'t know what to do'
-  },
-  latestChatActions: {
-    saveLogEvents: {
-      success: 'Cool, I saved your data'
-    }
+  saveLogEvents: {
+    success: '✅ Saved',
+    abort:   '❌ Not saved',
+    oldData: '❌ Not saved, this is an old request'
   },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',
