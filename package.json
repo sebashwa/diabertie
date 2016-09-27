@@ -30,7 +30,7 @@
     "webpack": "^1.12.14"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
+    "babel-eslint": "^7.0.0",
     "babel-register": "^6.7.2",
     "eslint": "^3.6.0",
     "mocha": "^3.0.2",
