@@ -36,7 +36,7 @@ export default {
       insulin dose. This is all you have to write to Diabertie to save your actions:`,
     command1: '5.5 mmol 24 carbs 4 hum',
     explanation: `Diabertie detects that you measure your sugar value in mmol/l,
-      his food in grams carbonhydrate and uses Humalog as his insulin.
+      your food in grams carbonhydrate and that you use Humalog as your insulin.
       Besides those units, Diabertie understands much more. Here is a list with
       all the abbreviations that you can use, if you want to log values
       in the various units:`,

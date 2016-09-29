@@ -13,7 +13,7 @@ export default {
     zIndex:   3000,
   },
   text: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'rgba(255, 255, 255,0.93)',
     padding:         30,
     paddingTop:      100,
     marginTop:       -70,
