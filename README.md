@@ -1,11 +1,12 @@
 <img src="bertie.png" width="150px" />
 
-# diabertie
+# Diabertie
 ![Travis](https://travis-ci.org/sebashwa/diabertie.svg)
 
 This is your personal diabetes chatbot.
-It uses the awesome [Telegram chat bot integration](https://core.telegram.org/bots).
+It uses the awesome [Telegram](https://telegram.org) [Bot API](https://core.telegram.org/bots).
 You can send Diabertie your blood sugar values, insulin doses and whatever is important for your daily diabetes logging.
+For a detailed documentation on how to use this bot there is a [comprehensive guide](https://sebashwa.github.io/diabertie/) on that.
 
 ## Contribute
 

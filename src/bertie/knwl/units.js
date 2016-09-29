@@ -18,7 +18,7 @@ const units = [
     type:     'carbs',
     subType:  null,
     factor:   null,
-    tokens:   ['carbs', 'carbonhydrate', 'carbonhydrates']
+    tokens:   ['carb', 'carbs', 'carbonhydrate', 'carbonhydrates']
   },
   {
     category: 'therapy',
