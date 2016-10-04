@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node dist/index --harmony",
-    "dev": "webpack --watch & node dist/index --harmony",
+    "dev": "webpack-dev-server --hot & nodemon dist/index --harmony",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
     "test": "NODE_ENV=test mocha 'src/**/*.test.js' --compilers js:babel-register,js:babel-polyfill",
     "lint": "eslint .",
@@ -37,10 +37,10 @@
     "babel-eslint": "^6.0.2",
     "babel-register": "^6.7.2",
     "eslint": "^3.6.0",
-    "eslint-plugin-react": "^6.1.0",		
+    "eslint-plugin-react": "^6.1.0",
     "mocha": "^3.0.2",
+    "nodemon": "^1.10.2",
     "unexpected": "^10.18.0",
-    "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-dev-server": "^1.16.1"
   }
 }
