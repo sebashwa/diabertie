@@ -7,7 +7,7 @@ export default async (user, datum) => {
   try {
     const p = polyglot(user.locale);
     const logEventGroups = await LogEvent.groupInInterval(datum, user);
-    if (!logEventGroups[0]) { return { message: p.t(['diary.noData']) }; };
+    if (!logEventGroups[0]) { return { message: p.t('diary.noData', { datum: datum.format('ddd, DD.MM.YYYY') }) }; };
 
     const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
 
