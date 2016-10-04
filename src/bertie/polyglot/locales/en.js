@@ -3,7 +3,7 @@ export default {
     notUnderstood: 'Oh sorry, I didn\'t get that..'
   },
   generalErrors: {
-    userNotFound: 'Oops! I was not able to find a user. Please sign up at diabertie.com first and connect from there',
+    userNotFound: 'Oh! I was not able to find a user. Please enter /start',
     superWrong:   'Oops, sorry! Something went completely wrong.. Please try again later'
   },
   bertieStart: {
@@ -21,7 +21,7 @@ export default {
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
   },
   diary: {
-    noData: 'Oops, I have no data available for this day...'
+    noData: '%{datum}\n\nNo data available for this day ... 😥\n\n'
   },
   saveLogEvents: {
     success: '✅ Saved',
