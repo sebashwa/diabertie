@@ -24,6 +24,8 @@
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "express": "^4.13.4",
+    "json-loader": "^0.5.4",
     "knwl.js": "^1.0.2",
     "moment-timezone": "^0.5.3",
     "mongoose": "^4.4.8",
