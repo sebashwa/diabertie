@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 import expect from 'unexpected';
 import bertieStart from './bertieStart';
 import { User } from '../../models';

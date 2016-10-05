@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 import { bertieDetect, bertieStart, fetchUser, fetchLogEvents, saveLogEvents, navigateDiary } from './actions';
 import polyglot from './polyglot';
 import moment from 'moment-timezone';
