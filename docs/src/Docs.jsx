@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Animation from './helpers/Animation';
 import unitsBy from '../../src/bertie/knwl/units';
 import styles from './Docs.css';
 import Link from './Link';
@@ -18,46 +19,54 @@ class Docs extends Component {
 
     return (
       <div className={styles.root}>
-        <img className={styles.image} src="img/bertie.svg" />
-        <div className={styles.text}>
-          <p>
-            {p.t('intro.telegramUsage')} <Link href="https://telegram.org" title="Telegram" />&nbsp;
-            <Link href="https://core.telegram.org/bots/api" title="Bot API" />. {p.t('intro.getTelegram')}
-          </p>
+        <Animation className={styles.imageContainer}
+          appear={styles.imageAppear}
+          appearActive={styles.imageAppearActive}
+          length={300}>
+          <img className={styles.image} src="img/bertie.svg" />
+        </Animation>
 
-          <h2 className={styles.highlight}>{p.t('usage.headline')}</h2>
-          <p>{p.t('usage.text')}</p>
+        <Animation appear={styles.textAppear} appearActive={styles.textAppearActive} length={500}>
+          <div className={styles.text}>
+            <p>
+              {p.t('intro.telegramUsage')} <Link href="https://telegram.org" title="Telegram" />&nbsp;
+              <Link href="https://core.telegram.org/bots/api" title="Bot API" />. {p.t('intro.getTelegram')}
+            </p>
 
-          <h3 className={styles.highlight}>{p.t('logValues.headline')}</h3>
-          <p>{p.t('logValues.intro')}</p>
-          <p>{p.t('logValues.example')}</p>
-          <code>{p.t('logValues.command1')}</code>
-          <p>{p.t('logValues.explanation')}</p>
+            <h2 className={styles.highlight}>{p.t('usage.headline')}</h2>
+            <p>{p.t('usage.text')}</p>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                <th>Type</th>
-                <th>Abbreviations</th>
-              </tr>
-              {tableRowsForType('sugar')}
-              {tableRowsForType('food')}
-              {tableRowsForType('therapy')}
-            </tbody>
-          </table>
-          <p>{p.t('logValues.contact')}</p>
-          <p>{p.t('logValues.changeTime')}</p>
-          <code>{p.t('logValues.command2')}</code>
-          <p>{p.t('logValues.changeDate')}</p>
-          <code>{p.t('logValues.command3')}</code>
-          <p>{p.t('logValues.thatsAll')}</p>
+            <h3 className={styles.highlight}>{p.t('logValues.headline')}</h3>
+            <p>{p.t('logValues.intro')}</p>
+            <p>{p.t('logValues.example')}</p>
+            <code>{p.t('logValues.command1')}</code>
+            <p>{p.t('logValues.explanation')}</p>
 
-          <h3 className={styles.highlight}>{p.t('reviewValues.headline')}</h3>
-          <p>{p.t('reviewValues.intro')}</p>
-          <code>{p.t('reviewValues.command')}</code>
-          <p>{p.t('reviewValues.navigate')}</p>
-          <p>{p.t('thatsAll')}</p>
-        </div>
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  <th>Type</th>
+                  <th>Abbreviations</th>
+                </tr>
+                {tableRowsForType('sugar')}
+                {tableRowsForType('food')}
+                {tableRowsForType('therapy')}
+              </tbody>
+            </table>
+            <p>{p.t('logValues.contact')}</p>
+            <p>{p.t('logValues.changeTime')}</p>
+            <code>{p.t('logValues.command2')}</code>
+            <p>{p.t('logValues.changeDate')}</p>
+            <code>{p.t('logValues.command3')}</code>
+            <p>{p.t('logValues.thatsAll')}</p>
+
+            <h3 className={styles.highlight}>{p.t('reviewValues.headline')}</h3>
+            <p>{p.t('reviewValues.intro')}</p>
+            <code>{p.t('reviewValues.command')}</code>
+            <p>{p.t('reviewValues.navigate')}</p>
+            <p>{p.t('thatsAll')}</p>
+          </div>
+        </Animation>
       </div>
     );
   }

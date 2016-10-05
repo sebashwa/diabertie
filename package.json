@@ -30,6 +30,7 @@
     "node-polyglot": "^2.0.0",
     "node-telegram-bot-api": "^0.23.3",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
     "webpack": "^1.12.14"
   },

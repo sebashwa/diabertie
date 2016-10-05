@@ -10,13 +10,16 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 30px;
+}
+
+.Docs__imageContainer___6iocL {
+  z-index: 3000;
 }
 
 .Docs__image___3waOc {
   max-width: 300px;
-  margin: 0 auto;
-  z-index: 3000;
 }
 
 .Docs__text___3zZST {
@@ -33,6 +36,26 @@
 
 .Docs__highlight___9SsCY {
   color: #ACA7D2;
+}
+
+.Docs__imageAppear___8xeiQ {
+  width: 250px;
+  height: 250px;
+  transition: width 300ms, height 300ms ease-in;
+}
+
+.Docs__imageAppearActive___BfKbn {
+  width: 300px;
+  height: 300px;
+}
+
+.Docs__textAppear___3zOoH {
+  opacity: 0.01;
+  transition: opacity 500ms;
+}
+
+.Docs__textAppearActive___Xz7Ej {
+  opacity: 1;
 }
 .Link__root___3aB99 {
   color: #ACA7D2;
