@@ -1,4 +1,4 @@
-import { bertieDetect, bertieStart, fetchUser, fetchLogEvents, saveLogEvents, navigateDiary } from './actions';
+import { bertieDetect, bertieStart, fetchUser, fetchLogEvents, saveLogEvents, getDiaryNavigation } from './actions';
 import polyglot from './polyglot';
 import moment from 'moment-timezone';
 
@@ -34,51 +34,6 @@ export default (bot) => {
         ]
       }
     });
-  });
-
-  bot.on('callback_query', async ({ from, data, message: msg }) => {
-    const { user, error: userError } = await fetchUser(from);
-    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
-    const p = polyglot(user.locale);
-    const callbackProps = JSON.parse(data);
-    let newMsg;
-    let newButtons;
-
-    switch (callbackProps.type) {
-      case 'saveLogEvents': {
-        if (!callbackProps.data) {
-          newMsg = `${msg.text}\n\n${p.t('saveLogEvents.abort')}`;
-        } else if (callbackProps.data != user.latestDetectedData.detectedAt){
-          newMsg = `${msg.text}\n\n${p.t('saveLogEvents.oldData')}`;
-        } else {
-          const { message, error } = await saveLogEvents(user.latestDetectedData.data, user);
-          if (error) return newMsg = error;
-          newMsg = `${msg.text}\n\n${p.t(...message)}`;
-        }
-
-        break;
-      }
-
-      case 'navigateDiary': {
-        const { buttons, message, error } = await navigateDiary(callbackProps.data, user, p);
-        if (error) return newMsg = p.t(...error);
-        newMsg = message;
-        newButtons = buttons;
-        break;
-      }
-    }
-
-    const messageOptions = {
-      ...defaultOpts,
-      chat_id:    msg.chat.id,
-      message_id: msg.message_id,
-    };
-
-    if (newButtons) {
-      messageOptions.reply_markup = { inline_keyboard: [ newButtons ] };
-    }
-
-    bot.editMessageText(newMsg, messageOptions);
   });
 
   bot.onText(/^(?!\/)\D*$/, async (msg) => {
@@ -119,5 +74,54 @@ export default (bot) => {
         ]
       }
     });
+  });
+
+  bot.on('callback_query', async ({ from, data, message: msg }) => {
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
+    const p = polyglot(user.locale);
+    const callbackProps = JSON.parse(data);
+    let newMsg;
+    let newButtons;
+
+    switch (callbackProps.type) {
+      case 'saveLogEvents': {
+        if (!callbackProps.data) {
+          newMsg = `${msg.text}\n\n${p.t('saveLogEvents.abort')}`;
+        } else if (callbackProps.data != user.latestDetectedData.detectedAt){
+          newMsg = `${msg.text}\n\n${p.t('saveLogEvents.oldData')}`;
+        } else {
+          const { message, error } = await saveLogEvents(user.latestDetectedData.data, user);
+          if (error) return newMsg = error;
+          newMsg = `${msg.text}\n\n${p.t(...message)}`;
+        }
+        break;
+      }
+
+      case 'navigateDiary': {
+        const queriedDate = moment.utc(callbackProps.data).tz(user.timezone);
+        if (!queriedDate.isValid()) { return sendMessage(from.id, p.t('generalErrors.superWrong')); };
+
+        const { buttons } = getDiaryNavigation(queriedDate, user, p);
+        const { message, error } = await fetchLogEvents(user, queriedDate);
+        if (error) { return sendMessage(from.id, p.t(...error)); }
+
+        newMsg = message;
+        newButtons = buttons;
+        break;
+      }
+    }
+
+    const messageOptions = {
+      ...defaultOpts,
+      chat_id:    msg.chat.id,
+      message_id: msg.message_id,
+    };
+
+    if (newButtons) {
+      messageOptions.reply_markup = { inline_keyboard: [ newButtons ] };
+    }
+
+    bot.editMessageText(newMsg, messageOptions);
   });
 };
