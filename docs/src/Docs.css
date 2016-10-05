@@ -1,26 +1,53 @@
 .root {
   color: #263238;
-  max-width: 800px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 30px;
 }
 
-.imageContainer {
-  z-index: 3000;
+@media (min-width: 900px) {
+  .root {
+    max-width: 800px;
+  }
+}
+.image {
+  width: 70%;
 }
 
-.image {
-  max-width: 300px;
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageAppear {
+  width: 60%;
+  transition: width 700ms, height 700ms ease-in;
+}
+
+.imageAppearActive {
+  width: 70%;
+}
+
+@media (min-width: 1000px) {
+  .image {
+    width: 300px;
+  }
+
+  .imageAppear {
+    width: 250px;
+  }
+
+  .imageAppearActive {
+    width: 300px;
+  }
 }
 
 .text {
-  background-color: rgba(255, 255, 255, 0.94);
+  background-color: #FFFFFF;
   padding: 30px;
-  padding-top: 100px;
-  margin-top: -70px;
+  margin-top: -20px;
 }
 
 .table {
@@ -30,24 +57,4 @@
 
 .highlight {
   color: #ACA7D2;
-}
-
-.imageAppear {
-  width: 250px;
-  height: 250px;
-  transition: width 300ms, height 300ms ease-in;
-}
-
-.imageAppearActive {
-  width: 300px;
-  height: 300px;
-}
-
-.textAppear {
-  opacity: 0.01;
-  transition: opacity 500ms;
-}
-
-.textAppearActive {
-  opacity: 1;
 }

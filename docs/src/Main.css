@@ -1,6 +1,16 @@
 .root {
   font-family: 'Lato', sans-serif;
+  font-size: 2.5em;
   background-image: url(img/background.svg);
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  .root {
+    font-size: 1.2em;
+  }
 }

@@ -11,11 +11,10 @@ class Animation extends Component {
   };
 
   render() {
-    const { className, appear, appearActive, length, children } = this.props;
+    const { appear, appearActive, className, length, children } = this.props;
 
     return (
-      <ReactCSSTransitionGroup className={className}
-        transitionName={{ appear, appearActive }}
+      <ReactCSSTransitionGroup className={className} transitionName={{ appear, appearActive }}
         transitionAppear={true}
         transitionEnterTimeout={length}
         transitionLeaveTimeout={length}

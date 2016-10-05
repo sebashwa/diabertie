@@ -11757,144 +11757,137 @@
 	        { className: _Docs2.default.root },
 	        _react2.default.createElement(
 	          _Animation2.default,
-	          { className: _Docs2.default.imageContainer,
-	            appear: _Docs2.default.imageAppear,
-	            appearActive: _Docs2.default.imageAppearActive,
-	            length: 300 },
+	          { className: _Docs2.default.imageContainer, appear: _Docs2.default.imageAppear, appearActive: _Docs2.default.imageAppearActive, length: 700 },
 	          _react2.default.createElement('img', { className: _Docs2.default.image, src: 'img/bertie.svg' })
 	        ),
 	        _react2.default.createElement(
-	          _Animation2.default,
-	          { appear: _Docs2.default.textAppear, appearActive: _Docs2.default.textAppearActive, length: 500 },
+	          'div',
+	          { className: _Docs2.default.text },
 	          _react2.default.createElement(
-	            'div',
-	            { className: _Docs2.default.text },
+	            'p',
+	            null,
+	            p.t('intro.telegramUsage'),
+	            ' ',
+	            _react2.default.createElement(_Link2.default, { href: 'https://telegram.org', title: 'Telegram' }),
+	            ' ',
+	            _react2.default.createElement(_Link2.default, { href: 'https://core.telegram.org/bots/api', title: 'Bot API' }),
+	            '. ',
+	            p.t('intro.getTelegram')
+	          ),
+	          _react2.default.createElement(
+	            'h2',
+	            { className: _Docs2.default.highlight },
+	            p.t('usage.headline')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('usage.text')
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            { className: _Docs2.default.highlight },
+	            p.t('logValues.headline')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.intro')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.example')
+	          ),
+	          _react2.default.createElement(
+	            'code',
+	            null,
+	            p.t('logValues.command1')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.explanation')
+	          ),
+	          _react2.default.createElement(
+	            'table',
+	            { className: _Docs2.default.table },
 	            _react2.default.createElement(
-	              'p',
+	              'tbody',
 	              null,
-	              p.t('intro.telegramUsage'),
-	              ' ',
-	              _react2.default.createElement(_Link2.default, { href: 'https://telegram.org', title: 'Telegram' }),
-	              ' ',
-	              _react2.default.createElement(_Link2.default, { href: 'https://core.telegram.org/bots/api', title: 'Bot API' }),
-	              '. ',
-	              p.t('intro.getTelegram')
-	            ),
-	            _react2.default.createElement(
-	              'h2',
-	              { className: _Docs2.default.highlight },
-	              p.t('usage.headline')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('usage.text')
-	            ),
-	            _react2.default.createElement(
-	              'h3',
-	              { className: _Docs2.default.highlight },
-	              p.t('logValues.headline')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.intro')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.example')
-	            ),
-	            _react2.default.createElement(
-	              'code',
-	              null,
-	              p.t('logValues.command1')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.explanation')
-	            ),
-	            _react2.default.createElement(
-	              'table',
-	              { className: _Docs2.default.table },
 	              _react2.default.createElement(
-	                'tbody',
+	                'tr',
 	                null,
 	                _react2.default.createElement(
-	                  'tr',
+	                  'th',
 	                  null,
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Type'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Abbreviations'
-	                  )
+	                  'Type'
 	                ),
-	                tableRowsForType('sugar'),
-	                tableRowsForType('food'),
-	                tableRowsForType('therapy')
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.contact')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.changeTime')
-	            ),
-	            _react2.default.createElement(
-	              'code',
-	              null,
-	              p.t('logValues.command2')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.changeDate')
-	            ),
-	            _react2.default.createElement(
-	              'code',
-	              null,
-	              p.t('logValues.command3')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('logValues.thatsAll')
-	            ),
-	            _react2.default.createElement(
-	              'h3',
-	              { className: _Docs2.default.highlight },
-	              p.t('reviewValues.headline')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('reviewValues.intro')
-	            ),
-	            _react2.default.createElement(
-	              'code',
-	              null,
-	              p.t('reviewValues.command')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('reviewValues.navigate')
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              p.t('thatsAll')
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  'Abbreviations'
+	                )
+	              ),
+	              tableRowsForType('sugar'),
+	              tableRowsForType('food'),
+	              tableRowsForType('therapy')
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.contact')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.changeTime')
+	          ),
+	          _react2.default.createElement(
+	            'code',
+	            null,
+	            p.t('logValues.command2')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.changeDate')
+	          ),
+	          _react2.default.createElement(
+	            'code',
+	            null,
+	            p.t('logValues.command3')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('logValues.thatsAll')
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            { className: _Docs2.default.highlight },
+	            p.t('reviewValues.headline')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('reviewValues.intro')
+	          ),
+	          _react2.default.createElement(
+	            'code',
+	            null,
+	            p.t('reviewValues.command')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('reviewValues.navigate')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('thatsAll')
 	          )
 	        )
 	      );
@@ -12126,17 +12119,16 @@
 	    key: 'render',
 	    value: function render() {
 	      var _props = this.props;
-	      var className = _props.className;
 	      var appear = _props.appear;
 	      var appearActive = _props.appearActive;
+	      var className = _props.className;
 	      var length = _props.length;
 	      var children = _props.children;
 
 
 	      return _react2.default.createElement(
 	        _reactAddonsCssTransitionGroup2.default,
-	        { className: className,
-	          transitionName: { appear: appear, appearActive: appearActive },
+	        { className: className, transitionName: { appear: appear, appearActive: appearActive },
 	          transitionAppear: true,
 	          transitionEnterTimeout: length,
 	          transitionLeaveTimeout: length,
@@ -12359,7 +12351,7 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"root":"Docs__root___39ki4","imageContainer":"Docs__imageContainer___6iocL","image":"Docs__image___3waOc","text":"Docs__text___3zZST","table":"Docs__table___3zSNh","highlight":"Docs__highlight___9SsCY","imageAppear":"Docs__imageAppear___8xeiQ","imageAppearActive":"Docs__imageAppearActive___BfKbn","textAppear":"Docs__textAppear___3zOoH","textAppearActive":"Docs__textAppearActive___Xz7Ej"};
+	module.exports = {"root":"Docs__root___39ki4","image":"Docs__image___3waOc","imageContainer":"Docs__imageContainer___6iocL","imageAppear":"Docs__imageAppear___8xeiQ","imageAppearActive":"Docs__imageAppearActive___BfKbn","text":"Docs__text___3zZST","table":"Docs__table___3zSNh","highlight":"Docs__highlight___9SsCY"};
 
 /***/ },
 /* 107 */
