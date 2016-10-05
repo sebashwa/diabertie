@@ -31,6 +31,6 @@ describe('bertie action #fetchLogEvents', () => {
 
   it('states that not data is available if no data is available', async () => {
     const { message } = await fetchLogEvents(user, moment('2015-04-12'));
-    expect(message, 'to equal', 'Oops, I have no data available for this day...');
+    expect(message, 'to equal', 'Sun, 12.04.2015\n\nNo data available for this day ... 😥\n\n');
   });
 });
