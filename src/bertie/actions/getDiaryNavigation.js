@@ -1,7 +1,6 @@
 import moment from 'moment-timezone';
 
 export default (date, user, p) => {
-  console.log(date);
   const today = moment.utc().tz(user.timezone).format('YYYY-MM-DD');
   const prevDay = date.clone().subtract(1, 'days').format('YYYY-MM-DD');
   const stringifyData = (data) => JSON.stringify({ type: 'navigateDiary', data });
