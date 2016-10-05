@@ -1,0 +1,6 @@
+.root {
+  font-family: 'Lato', sans-serif;
+  background-image: url(img/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}

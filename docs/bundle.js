@@ -54,7 +54,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Main = __webpack_require__(98);
+	var _Main = __webpack_require__(95);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -11249,19 +11249,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _units = __webpack_require__(103);
+	var _units = __webpack_require__(99);
 
 	var _units2 = _interopRequireDefault(_units);
 
-	var _Docs = __webpack_require__(93);
+	var _Docs = __webpack_require__(100);
 
 	var _Docs2 = _interopRequireDefault(_Docs);
 
-	var _Link = __webpack_require__(96);
+	var _Link = __webpack_require__(94);
 
 	var _Link2 = _interopRequireDefault(_Link);
 
-	var _polyglot = __webpack_require__(100);
+	var _polyglot = __webpack_require__(96);
 
 	var _polyglot2 = _interopRequireDefault(_polyglot);
 
@@ -11307,11 +11307,11 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        { style: _Docs2.default.root },
-	        _react2.default.createElement('img', { style: _Docs2.default.image, src: 'bertie.svg' }),
+	        { className: _Docs2.default.root },
+	        _react2.default.createElement('img', { className: _Docs2.default.image, src: 'img/bertie.svg' }),
 	        _react2.default.createElement(
 	          'div',
-	          { style: _Docs2.default.text },
+	          { className: _Docs2.default.text },
 	          _react2.default.createElement(
 	            'p',
 	            null,
@@ -11325,7 +11325,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'h2',
-	            { style: _Docs2.default.highlight },
+	            { className: _Docs2.default.highlight },
 	            p.t('usage.headline')
 	          ),
 	          _react2.default.createElement(
@@ -11335,7 +11335,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'h3',
-	            { style: _Docs2.default.highlight },
+	            { className: _Docs2.default.highlight },
 	            p.t('logValues.headline')
 	          ),
 	          _react2.default.createElement(
@@ -11360,7 +11360,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'table',
-	            { style: _Docs2.default.table },
+	            { className: _Docs2.default.table },
 	            _react2.default.createElement(
 	              'tbody',
 	              null,
@@ -11415,7 +11415,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'h3',
-	            { style: _Docs2.default.highlight },
+	            { className: _Docs2.default.highlight },
 	            p.t('reviewValues.headline')
 	          ),
 	          _react2.default.createElement(
@@ -11450,44 +11450,6 @@
 
 /***/ },
 /* 93 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  root: {
-	    color: '#263238',
-	    maxWidth: 800,
-	    margin: '0 auto',
-	    display: 'flex',
-	    flexDirection: 'column',
-	    paddingTop: 30
-	  },
-	  image: {
-	    maxWidth: 300,
-	    margin: '0 auto',
-	    zIndex: 3000
-	  },
-	  text: {
-	    backgroundColor: 'rgba(255, 255, 255,0.93)',
-	    padding: 30,
-	    paddingTop: 100,
-	    marginTop: -70
-	  },
-	  table: {
-	    width: '100%',
-	    textAlign: 'justify'
-	  },
-	  highlight: {
-	    color: '#ACA7D2'
-	  }
-	};
-
-/***/ },
-/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11502,7 +11464,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Footer = __webpack_require__(95);
+	var _Footer = __webpack_require__(101);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -11528,11 +11490,11 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { style: _Footer2.default.root },
+	        { className: _Footer2.default.root },
 	        'created by ',
 	        _react2.default.createElement(
 	          'a',
-	          { style: _Footer2.default.link, href: 'https://www.github.com/sebashwa' },
+	          { className: _Footer2.default.link, href: 'https://www.github.com/sebashwa' },
 	          'sebashwa'
 	        )
 	      );
@@ -11545,33 +11507,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 95 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  root: {
-	    backgroundColor: '#9BD5FF',
-	    // color:           '#263238',
-	    color: '#FFFFFF',
-	    display: 'flex',
-	    justifyContent: 'center',
-	    padding: 30
-	  },
-	  link: {
-	    fontWeight: 'bold',
-	    textDecoration: 'none',
-	    color: '#FFFFFF'
-	  }
-
-	};
-
-/***/ },
-/* 96 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11586,7 +11522,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Link = __webpack_require__(97);
+	var _Link = __webpack_require__(102);
 
 	var _Link2 = _interopRequireDefault(_Link);
 
@@ -11612,7 +11548,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'a',
-	        { style: _Link2.default.root, href: this.props.href },
+	        { className: _Link2.default.root, href: this.props.href },
 	        this.props.title
 	      );
 	    }
@@ -11630,23 +11566,7 @@
 	exports.default = Link;
 
 /***/ },
-/* 97 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  root: {
-	    color: '#ACA7D2',
-	    textDecoration: 'none'
-	  }
-	};
-
-/***/ },
-/* 98 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11661,7 +11581,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Main = __webpack_require__(99);
+	var _Main = __webpack_require__(103);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -11669,7 +11589,7 @@
 
 	var _Docs2 = _interopRequireDefault(_Docs);
 
-	var _Footer = __webpack_require__(94);
+	var _Footer = __webpack_require__(93);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -11695,7 +11615,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { style: _Main2.default.root },
+	        { className: _Main2.default.root },
 	        _react2.default.createElement(_Docs2.default, null),
 	        _react2.default.createElement(_Footer2.default, null)
 	      );
@@ -11708,26 +11628,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 99 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  root: {
-	    fontFamily: '\'Lato\', sans-serif',
-	    backgroundImage: 'url(\'background.svg\')',
-	    backgroundSize: 'cover',
-	    backgroundRepeat: 'no-repeat'
-
-	  }
-	};
-
-/***/ },
-/* 100 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11736,7 +11637,7 @@
 	  value: true
 	});
 
-	var _locales = __webpack_require__(102);
+	var _locales = __webpack_require__(98);
 
 	var locales = _interopRequireWildcard(_locales);
 
@@ -11756,7 +11657,7 @@
 	};
 
 /***/ },
-/* 101 */
+/* 97 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11812,7 +11713,7 @@
 	};
 
 /***/ },
-/* 102 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11821,7 +11722,7 @@
 	  value: true
 	});
 
-	var _en = __webpack_require__(101);
+	var _en = __webpack_require__(97);
 
 	Object.defineProperty(exports, 'en', {
 	  enumerable: true,
@@ -11833,7 +11734,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 103 */
+/* 99 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11921,6 +11822,34 @@
 	    return u.category == category;
 	  });
 	};
+
+/***/ },
+/* 100 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"root":"Docs__root___39ki4","image":"Docs__image___3waOc","text":"Docs__text___3zZST","table":"Docs__table___3zSNh","highlight":"Docs__highlight___9SsCY"};
+
+/***/ },
+/* 101 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"root":"Footer__root___3OGeJ","link":"Footer__link___KF6nJ"};
+
+/***/ },
+/* 102 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"root":"Link__root___3aB99"};
+
+/***/ },
+/* 103 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"root":"Main__root___3zDhf"};
 
 /***/ },
 /* 104 */

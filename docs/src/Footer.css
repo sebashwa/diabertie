@@ -1,0 +1,13 @@
+.root {
+  background-color: #9BD5FF;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.link {
+  font-weight: bold;
+  text-decoration: none;
+  color: #FFFFFF;
+}

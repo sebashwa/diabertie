@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import styles from './Link.style';
+import styles from './Link.css';
 
 class Link extends Component {
   static propTypes = {
@@ -9,7 +9,7 @@ class Link extends Component {
 
   render() {
     return (
-      <a style={styles.root} href={this.props.href}>{this.props.title}</a>
+      <a className={styles.root} href={this.props.href}>{this.props.title}</a>
     );
   }
 };
