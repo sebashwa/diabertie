@@ -6,9 +6,9 @@
   padding-top: 30px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .root {
-    max-width: 800px;
+    max-width: 1000px;
   }
 }
 .image {

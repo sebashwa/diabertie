@@ -22,9 +22,9 @@
   padding-top: 30px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .Docs__root___39ki4 {
-    max-width: 800px;
+    max-width: 1000px;
   }
 }
 .Docs__image___3waOc {
