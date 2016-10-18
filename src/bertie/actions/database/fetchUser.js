@@ -1,5 +1,5 @@
-import { User } from '../../models';
-import logger from '../../logger';
+import { User } from '../../../models';
+import logger from '../../../logger';
 
 export default async (from) => {
   try {

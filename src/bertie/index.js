@@ -1,4 +1,8 @@
-import { bertieDetect, bertieStart, fetchUser, fetchLogEvents, saveLogEvents, getDiaryNavigation } from './actions';
+import { bertieStart, } from './actions';
+import { detectLogEvents } from './actions/parsing';
+import { fetchLogEvents, saveLogEvents, fetchUser } from './actions/database';
+import { getDiaryNavigation } from './actions/callback';
+
 import polyglot from './polyglot';
 import moment from 'moment-timezone';
 
@@ -29,16 +33,41 @@ export default (bot) => {
       reply_markup: {
         inline_keyboard: [
           [
-            { text: '<<', callback_data: JSON.stringify({ type: 'navigateDiary', data: prevDay }) },
+            { text: '<<', callback_data: JSON.stringify({ type: 'navigateDiary', data: { date: prevDay } }) },
           ]
         ]
       }
     });
   });
 
-  bot.onText(/^(?!\/)\D*$/, async (msg) => {
-    const { from } = msg;
+  bot.onText(/\/deletion/, async ({ from }) => {
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
+    const p = polyglot(user.locale);
 
+    // This is a 'feature toggle', remove it when deletion works
+    return sendMessage(from.id, p.t('onText.notUnderstood'));
+
+    const today = moment.utc().tz(user.timezone);
+    const prevDay = today.clone().subtract(1, 'days').format('YYYY-MM-DD');
+
+    const { message, error } = await fetchLogEvents(user, today);
+    if (error) { return sendMessage(from.id, p.t(...error)); };
+
+    const text = `${p.t('deletion.selectDate')}${message}`;
+
+    sendMessage(from.id, text, {
+      ... defaultOpts,
+      reply_markup: {
+        inline_keyboard: [
+          [ { text: '<<', callback_data: JSON.stringify({ type: 'deletion', data: { date: prevDay } }) } ],
+          [ { text: p.t('deletion.select'), callback_data: JSON.stringify({ type: 'deletion', data: { date: today.format('YYYY-MM-DD'), selected: true } })} ]
+        ]
+      }
+    });
+  });
+
+  bot.onText(/^(?!\/)\D*$/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
 
@@ -52,7 +81,7 @@ export default (bot) => {
 
     const p = polyglot(user.locale);
 
-    const { error: detectionError, message, warnings, data } = await bertieDetect(text, p);
+    const { error: detectionError, message, warnings, data } = await detectLogEvents(text, p);
     if (detectionError) return sendMessage(from.id, p.t(...detectionError));
 
     for(let i = 0; i < warnings.length; i++) {
@@ -99,15 +128,33 @@ export default (bot) => {
       }
 
       case 'navigateDiary': {
-        const queriedDate = moment.utc(callbackProps.data).tz(user.timezone);
+        const queriedDate = moment.utc(callbackProps.data.date).tz(user.timezone);
         if (!queriedDate.isValid()) { return sendMessage(from.id, p.t('generalErrors.superWrong')); };
 
-        const { buttons } = getDiaryNavigation(queriedDate, user, p);
+        const { buttons } = getDiaryNavigation('navigateDiary', queriedDate, user, p);
         const { message, error } = await fetchLogEvents(user, queriedDate);
         if (error) { return sendMessage(from.id, p.t(...error)); }
 
         newMsg = message;
-        newButtons = buttons;
+        newButtons = [ buttons ];
+        break;
+      }
+
+      case 'deletion': {
+        const queriedDate = moment.utc(callbackProps.data.date).tz(user.timezone);
+        if (!queriedDate.isValid()) { return sendMessage(from.id, p.t('generalErrors.superWrong')); };
+
+        if(!callbackProps.data.selected) {
+          const { buttons } = getDiaryNavigation('deletion', queriedDate, user, p);
+          const { message, error } = await fetchLogEvents(user, queriedDate);
+          if (error) { return sendMessage(from.id, p.t(...error)); }
+
+          newMsg = `${p.t('deletion.selectDate')}${message}`;
+          newButtons = [ buttons , [ { text: p.t('deletion.select'), callback_data: JSON.stringify({ type: 'deletion', data: { date: queriedDate.format('YYYY-MM-DD'), selected: true } })} ] ];
+        } else {
+          newMsg = 'Selected';
+        };
+
         break;
       }
     }
@@ -119,7 +166,7 @@ export default (bot) => {
     };
 
     if (newButtons) {
-      messageOptions.reply_markup = { inline_keyboard: [ newButtons ] };
+      messageOptions.reply_markup = { inline_keyboard: newButtons };
     }
 
     bot.editMessageText(newMsg, messageOptions);

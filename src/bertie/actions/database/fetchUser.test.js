@@ -1,5 +1,5 @@
 import expect from 'unexpected';
-import { User } from '../../models';
+import { User } from '../../../models';
 import { fetchUser } from '.';
 
 describe('bertie action #fetchUser', () => {

@@ -1,5 +1,5 @@
-import knwl from '../knwl';
-import unitsBy from '../knwl/units';
+import knwl from '../../knwl';
+import unitsBy from '../../knwl/units';
 
 const previewTexts = (events, p) =>
   events.map(e => `${p.t(`logEvents.${e.subType || e.type}`, e.value)}`).join(', ');
@@ -14,7 +14,7 @@ const buildResponseMessage = (types, {values, time, date}, p) => {
 
   const data = [dateTimeString].concat(valueStrings).join('\n');
 
-  return ['bertieDetect.saveConfirmation', { data }];
+  return ['detectLogEvents.saveConfirmation', { data }];
 };
 
 function validateDetections({ time, date, values }, p) {
@@ -23,9 +23,9 @@ function validateDetections({ time, date, values }, p) {
   const warnings = [];
   let error;
 
-  if (allValues.length == 0) { error = ['bertieDetect.errors.notFound']; };
-  if (sugar.length > 1) { warnings.push(['bertieDetect.warnings.ambiguousSugar', { icon: p.t('icons.sugar'), valueTexts: previewTexts(sugar, p) }]); }
-  if (!time && date) { warnings.push(['bertieDetect.warnings.dateWithoutTime', { date: date.value }]); }
+  if (allValues.length == 0) { error = ['detectLogEvents.errors.notFound']; };
+  if (sugar.length > 1) { warnings.push(['detectLogEvents.warnings.ambiguousSugar', { icon: p.t('icons.sugar'), valueTexts: previewTexts(sugar, p) }]); }
+  if (!time && date) { warnings.push(['detectLogEvents.warnings.dateWithoutTime', { date: date.value }]); }
 
   return { error, warnings };
 }

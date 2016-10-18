@@ -1,5 +1,5 @@
-import { LogEvent } from '../../models';
-import logger from '../../logger';
+import { LogEvent } from '../../../models';
+import logger from '../../../logger';
 import moment from 'moment-timezone';
 
 export default async (detections, user) => {

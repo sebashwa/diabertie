@@ -10,7 +10,7 @@ export default {
     success:   'Hey %{name}, glad to have you on board! To start logging values, just write something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor a comprehensive guide, please visit diabertie.com',
     readyToGo: 'Hey %{name}, we already know each other! Please go ahead and log your values. To do so, write something like:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nFor a comprehensive guide, please visit diabertie.com'
   },
-  bertieDetect: {
+  detectLogEvents: {
     errors: {
       notFound: 'Sorry, I didn\'t get that! To log values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`'
     },
@@ -22,6 +22,10 @@ export default {
   },
   diary: {
     noData: '%{datum}\n\nNo data available for this day ... 😥\n\n'
+  },
+  deletion: {
+    select: 'Select',
+    selectDate: '*Please select a date for deletion:*\n\n'
   },
   saveLogEvents: {
     success: '✅ Saved',

@@ -1,6 +1,6 @@
 import expect from 'unexpected';
 import saveLogEvents from './saveLogEvents';
-import { User, LogEvent } from '../../models';
+import { User, LogEvent } from '../../../models';
 
 describe('bertie action #saveLogEvents', () => {
   let user;

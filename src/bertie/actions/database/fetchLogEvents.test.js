@@ -1,7 +1,7 @@
 import expect from 'unexpected';
 import moment from 'moment-timezone';
 import fetchLogEvents from './fetchLogEvents';
-import { User, LogEvent } from '../../models';
+import { User, LogEvent } from '../../../models';
 
 describe('bertie action #fetchLogEvents', () => {
   let user;
