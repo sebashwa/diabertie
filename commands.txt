@@ -1,0 +1,2 @@
+diary - Review your logged values
+help - Get a quick help on usage
