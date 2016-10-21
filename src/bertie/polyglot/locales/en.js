@@ -2,6 +2,7 @@ export default {
   onText: {
     notUnderstood: 'Oh sorry, I didn\'t get that..'
   },
+  help: 'Write something like this to log your values:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nYou can get an overview of the available commands, if you start typing */*\n\nFor a detailed guide please visit diabertie.com',
   generalErrors: {
     userNotFound: 'Oh! I was not able to find a user. Please enter /start',
     superWrong:   'Oops, sorry! Something went completely wrong.. Please try again later'
