@@ -24,10 +24,13 @@ export default {
     noData: '%{datum}\n\nNo data available for this day ... 😥\n\n'
   },
   deletion: {
-    select: 'Select',
-    selectDate: '*Please select a date for deletion:*\n\n'
+    select:      'Select',
+    selectDate:  '*Please select a date for deletion:*\n\n',
+    selectValue: '*Please select a value for deletion:*\n\n'
   },
   saveLogEvents: {
+    yes:     'Yes',
+    no:      'No',
     success: '✅ Saved',
     abort:   '❌ Not saved',
     oldData: '❌ Not saved, this is an old request'
