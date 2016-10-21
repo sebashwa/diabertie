@@ -8,12 +8,12 @@ export default {
     superWrong:   'Oops, sorry! Something went completely wrong.. Please try again later'
   },
   bertieStart: {
-    success:   'Hey %{name}, glad to have you on board! To start logging values, just write something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor a comprehensive guide, please visit diabertie.com',
-    readyToGo: 'Hey %{name}, we already know each other! Please go ahead and log your values. To do so, write something like:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nFor a comprehensive guide, please visit diabertie.com'
+    success:   'Hey %{name}, glad to have you on board! Start logging values by writing something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor a detailed guide please visit diabertie.com',
+    readyToGo: 'Hey %{name}, we already know each other! Please go ahead and log your values. Just write something like:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nFor a detailed guide please visit diabertie.com'
   },
   detectLogEvents: {
     errors: {
-      notFound: 'Sorry, I didn\'t get that! To log values, please write something like:\n\n`190 mg 2 bolus 27 basal 12:30`'
+      notFound: 'Sorry, I didn\'t get that! Write something like this to log values:\n\n`190 mg 2 bolus 27 basal 12:30`'
     },
     warnings: {
       ambiguousSugar:  'Oh, that\'s strange.. I found more than one sugar value:\n\n%{icon} %{valueTexts}',
