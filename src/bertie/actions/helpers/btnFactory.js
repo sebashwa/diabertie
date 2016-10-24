@@ -1,4 +1,4 @@
-import polyglot from '../polyglot';
+import polyglot from '../../polyglot';
 
 const generateButton = (text, { type, subType, data }) => {
   return { text, callback_data: JSON.stringify({ type, subType, data }) };

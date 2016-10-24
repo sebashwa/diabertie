@@ -1,17 +1,14 @@
-import moment from 'moment-timezone';
-import { btnFactory } from '../..';
+import { btnFactory, timeline } from '../../helpers';
 
 export default (type, date, user) => {
-  const today = moment.utc().tz(user.timezone).format('YYYY-MM-DD');
-  const prevDay = date.clone().subtract(1, 'days').format('YYYY-MM-DD');
+  const tl = timeline(user, date);
 
-  const buttons = [btnFactory[type].back(prevDay)];
+  const buttons = [btnFactory[type].back(tl.str.prevDay)];
 
-  if (today != date.format('YYYY-MM-DD')) {
-    const nextDay = date.clone().add(1, 'days').format('YYYY-MM-DD');
+  if (tl.str.today != date.format('YYYY-MM-DD')) {
     buttons.push(
-      btnFactory[type].forward(nextDay),
-      btnFactory[type].today(today)
+      btnFactory[type].forward(tl.str.nextDay),
+      btnFactory[type].today(tl.str.today)
     );
   }
 

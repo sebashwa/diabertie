@@ -1,4 +1,5 @@
-import { bertieStart, btnFactory } from './actions';
+import { bertieStart } from './actions';
+import { btnFactory, timeline } from './actions/helpers';
 import { detectLogEvents } from './actions/parsing';
 import { fetchLogEvents, fetchUser } from './actions/database';
 import callbackActions from './actions/callback';
@@ -29,17 +30,15 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const today = moment.utc().tz(user.timezone);
+    const tl = timeline(user);
 
-    const { message, error } = await fetchLogEvents(user, today);
+    const { message, error } = await fetchLogEvents(user, tl.moment.today);
     if (error) { return sendMessage(from.id, p.t(...error)); };
-
-    const prevDay = today.clone().subtract(1, 'days').format('YYYY-MM-DD');
 
     sendMessage(from.id, message, {
       ... defaultOpts,
       reply_markup: {
-        inline_keyboard: [[ btnFactory.navigateDiary.back(prevDay) ]]
+        inline_keyboard: [[ btnFactory.navigateDiary.back(tl.str.prevDay) ]]
       }
     });
   });
@@ -48,14 +47,12 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
+    const tl = timeline(user);
 
     // This is a 'feature toggle', remove it when deletion works
     return sendMessage(from.id, p.t('onText.notUnderstood'));
 
-    const today = moment.utc().tz(user.timezone);
-    const prevDay = today.clone().subtract(1, 'days').format('YYYY-MM-DD');
-
-    const { message, error } = await fetchLogEvents(user, today);
+    const { message, error } = await fetchLogEvents(user, tl.moment.today);
     if (error) { return sendMessage(from.id, p.t(...error)); };
 
     const text = `${p.t('deletion.selectDate')}${message}`;
@@ -64,8 +61,8 @@ export default (bot) => {
       ... defaultOpts,
       reply_markup: {
         inline_keyboard: [
-          [ btnFactory.deletion.back(prevDay) ],
-          [ btnFactory.deletion.select(today.format('YYYY-MM-DD')) ]
+          [ btnFactory.deletion.back(tl.str.prevDay) ],
+          [ btnFactory.deletion.select(tl.str.today) ]
         ]
       }
     });
