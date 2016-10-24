@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import { getDiaryNavigation } from './helpers';
 import { fetchLogEvents } from '../database';
-import { btnFactory } from '..';
+import { btnFactory } from '../helpers';
 
 export default async ({ data, subType }, user, p) => {
   const date = moment.utc(data).tz(user.timezone);
