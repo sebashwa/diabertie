@@ -8,7 +8,7 @@ const buildResponseMessage = (types, {values, time, date}, p) => {
   const dateValue = date ? [date.value] : [p.t('dateTime.today')];
   const timeValue = time ? [time.value] : [p.t('dateTime.now')];
 
-  const dateTimeString = `${dateValue.concat(timeValue).join(', ')}:\n`;
+  const dateTimeString = `*${dateValue.concat(timeValue).join(', ')}*:\n`;
   const valueStrings = types.filter(t => !!values[t].length)
                             .map((t) => `${p.t(`icons.${t}`)} ${previewTexts(values[t], p)}`);
 

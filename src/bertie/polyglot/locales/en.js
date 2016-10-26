@@ -16,8 +16,8 @@ export default {
       notFound: 'Sorry, I didn\'t get that! Write something like this to log values:\n\n`190 mg 2 bolus 27 basal 12:30`'
     },
     warnings: {
-      ambiguousSugar:  'Oh, that\'s strange.. I found more than one sugar value:\n\n%{icon} %{valueTexts}',
-      dateWithoutTime: 'Oh, that\'s strange.. I found a date (`%{date}`) without time. That means I would use the current time when saving'
+      ambiguousSugar:  '❗️\n\nOh, that\'s strange.. I found more than one sugar value:\n\n%{icon} %{valueTexts}',
+      dateWithoutTime: '❗️\n\nOh, that\'s strange.. I found a date (%{date}) without a time provided. That means I would use the current time when saving.'
     },
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
   },
