@@ -1,6 +1,6 @@
 import { saveLogEvents } from '../database';
 
-export default async ({data: savedAt}, user, p, originalMsg) => {
+export default async ({d: savedAt}, user, p, originalMsg) => {
   let newMsg;
 
   if (!savedAt) {

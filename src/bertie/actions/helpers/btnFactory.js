@@ -1,11 +1,11 @@
 import polyglot from '../../polyglot';
 
 const generateButton = (text, { type, subType, data }) => {
-  return { text, callback_data: JSON.stringify({ type, subType, data }) };
+  return { text, callback_data: JSON.stringify({ t: type, s: subType, d: data }) };
 };
 
 const navigateDiary = (text, data) => generateButton(text, { type: 'navigateDiary', data });
-const deletion = (text, data, subType) => generateButton(text, { type: 'deletion', subType, data });
+const deletion = (text, data, subType) => generateButton(text, { type: 'del', subType, data });
 const saveLogEvents = (text, data) => generateButton(text, { type: 'saveLogEvents', data });
 
 export default {
@@ -15,10 +15,11 @@ export default {
     today:   (date, p = polyglot()) => navigateDiary(p.t('dateTime.today'), date),
   },
   deletion: {
-    select:  (date, p = polyglot()) => deletion(p.t('deletion.select'), date, 'selectValue'),
-    back:    (date) => deletion('<<', date, 'selectDate'),
-    forward: (date) => deletion('>>', date, 'selectDate'),
-    today:   (date, p = polyglot()) => deletion(p.t('dateTime.today'), date, 'selectDate'),
+    process: (n, at) => deletion(`${n})`, { n, at } , 'delVal'),
+    select:  (date, p = polyglot()) => deletion(p.t('deletion.select'), date, 'selVal'),
+    back:    (date) => deletion('<<', date, 'selDate'),
+    forward: (date) => deletion('>>', date, 'selDate'),
+    today:   (date, p = polyglot()) => deletion(p.t('dateTime.today'), date, 'selDate'),
   },
   saveLogEvents: {
     yes: (savedAt, p = polyglot()) => saveLogEvents(p.t('saveLogEvents.yes'), savedAt),
