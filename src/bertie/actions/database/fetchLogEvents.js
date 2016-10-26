@@ -11,7 +11,7 @@ export default async (user, datum, format='diary') => {
     const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
 
     const valuesString = formatters[format](logEventGroups, p, timezone);
-    const message = `${datum.format('ddd, DD.MM.YYYY')}\n\n${valuesString}`;
+    const message = `🗓 ${datum.format('ddd, DD.MM.YYYY')}\n\n${valuesString}`;
 
     return { message, data: logEventGroups };
   } catch (e) {
