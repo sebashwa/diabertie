@@ -31,7 +31,7 @@ describe('parsing action #detectLogEvents', () => {
     const { message } = await detectLogEvents('120 mg 2 be 4 hum 27 lantus', p);
 
     expect(message, 'to equal', ['detectLogEvents.saveConfirmation', {
-      data: 'today, now:\n\n📈 120 mg/dL\n🍏 2 BE\n💉 4 Humalog, 27 Lantus'
+      data: '*today, now*:\n\n📈 120 mg/dL\n🍏 2 BE\n💉 4 Humalog, 27 Lantus'
     }]);
   });
 
