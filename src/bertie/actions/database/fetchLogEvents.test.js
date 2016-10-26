@@ -26,11 +26,11 @@ describe('bertie action #fetchLogEvents', () => {
   it('fetches the log events of a given date', async () => {
     const { message } = await fetchLogEvents(user, moment('2015-04-11'));
 
-    expect(message, 'to equal', 'Sat, 11.04.2015\n\n*09:30* \n 📈 120 🍏 2 💉 4\n\n*12:40* \n 📈 120 🍏 2 💉 4');
+    expect(message, 'to equal', '🗓 Sat, 11.04.2015\n\n*09:30* \n 📈 120 🍏 2 💉 4\n\n*12:40* \n 📈 120 🍏 2 💉 4');
   });
 
   it('states that not data is available if no data is available', async () => {
     const { message } = await fetchLogEvents(user, moment('2015-04-12'));
-    expect(message, 'to equal', 'Sun, 12.04.2015\n\nNo data available ... 😥\n\n');
+    expect(message, 'to equal', '🗓 Sun, 12.04.2015\n\nNo data available ... 😥\n\n');
   });
 });

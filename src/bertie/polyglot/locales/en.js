@@ -22,15 +22,15 @@ export default {
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
   },
   diary: {
-    noData: '%{datum}\n\nNo data available ... 😥\n\n'
+    noData: '🗓 %{datum}\n\nNo data available ... 😥\n\n'
   },
   deletion: {
     select:      'Select',
     success:     '✅ Deleted *%{selected})* %{value}',
     abort:       '❌ Nothing deleted',
     oldData:     '❌ Nothing deleted, this is an old request',
-    selectDate:  '*Please select a date for deletion:*\n\n',
-    selectValue: '*Please select a value for deletion:*\n\n'
+    selectDate:  'Please select a *date*:\n\n',
+    selectValue: 'Please select a *value*:\n\n'
   },
   saveLogEvents: {
     yes:     'Yes',
