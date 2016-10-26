@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 import { getDiaryNavigation } from './helpers';
 import { fetchLogEvents } from '../database';
 
-export default async ({ data }, user, p) => {
+export default async ({ d: data }, user, p) => {
   const date = moment.utc(data).tz(user.timezone);
   if (!date.isValid()) { return { message: p.t('generalErrors.superWrong') }; };
 

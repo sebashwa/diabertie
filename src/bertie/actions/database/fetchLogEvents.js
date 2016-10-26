@@ -13,7 +13,7 @@ export default async (user, datum, format='diary') => {
     const valuesString = formatters[format](logEventGroups, p, timezone);
     const message = `${datum.format('ddd, DD.MM.YYYY')}\n\n${valuesString}`;
 
-    return { message };
+    return { message, data: logEventGroups };
   } catch (e) {
     logger.error(e);
     return { error: ['generalErrors.superWrong'] };

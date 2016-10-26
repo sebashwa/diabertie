@@ -21,7 +21,7 @@ describe('bertie action #getDiaryNavigation', () => {
     const yesterday = today.clone().subtract(1, 'days').format('YYYY-MM-DD');
 
     return expect(result, 'to equal', {
-      buttons: [ { text: '<<', callback_data: `{"type":"navigateDiary","data":"${yesterday}"}` } ]
+      buttons: [ { text: '<<', callback_data: `{"t":"navigateDiary","d":"${yesterday}"}` } ]
     });
   });
 
@@ -34,9 +34,9 @@ describe('bertie action #getDiaryNavigation', () => {
 
     return expect(result, 'to equal', {
       buttons: [
-        { text: '<<', callback_data: `{"type":"navigateDiary","data":"${twoDaysAgo}"}` },
-        { text: '>>', callback_data: `{"type":"navigateDiary","data":"${today.format('YYYY-MM-DD')}"}` },
-        { text: 'today', callback_data: `{"type":"navigateDiary","data":"${today.format('YYYY-MM-DD')}"}` },
+        { text: '<<', callback_data: `{"t":"navigateDiary","d":"${twoDaysAgo}"}` },
+        { text: '>>', callback_data: `{"t":"navigateDiary","d":"${today.format('YYYY-MM-DD')}"}` },
+        { text: 'today', callback_data: `{"t":"navigateDiary","d":"${today.format('YYYY-MM-DD')}"}` },
       ]
     });
   });

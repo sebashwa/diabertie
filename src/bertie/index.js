@@ -49,9 +49,6 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const tl = timeline(user);
 
-    // This is a 'feature toggle', remove it when deletion works
-    return sendMessage(from.id, p.t('onText.notUnderstood'));
-
     const { message, error } = await fetchLogEvents(user, tl.moment.today);
     if (error) { return sendMessage(from.id, p.t(...error)); };
 
@@ -90,7 +87,7 @@ export default (bot) => {
       await sendMessage(from.id, p.t(...warning));
     }
 
-    const detectedAt = moment().format();
+    const detectedAt = moment().unix();
     await user.update({ latestDetectedData: { detectedAt, data } });
 
     sendMessage(from.id, p.t(...message), {
@@ -109,7 +106,7 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const callbackData = JSON.parse(data);
 
-    const { message, buttons } = await callbackActions[callbackData.type](callbackData, user, p, originalMsg);
+    const { message, buttons } = await callbackActions[callbackData.t](callbackData, user, p, originalMsg);
 
     const messageOpts = {
       ...defaultOpts,
