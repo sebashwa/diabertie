@@ -54,6 +54,13 @@ export default {
     command: '/diary',
     navigate: 'to Diabertie. This way you get your values presented together with a neat interface to browse through them.',
   },
+  deleteValue: {
+    headline: 'Delete a value',
+    intro: 'You can delete a logged value by typing',
+    command: '/deletion',
+    selectDate: 'You have to select a date which you would like to delete a value from. The interface is very similar to the one in the diary, except for the big \'Select\' button.',
+    selectValue: 'After selecting a date, the values are numbered and you can choose, which one you want to delete.'
+  },
   thatsAll: `This is all you can do with Diabertie so far. If you have any suggestions on how to improve or just want to give me
     feedback (bad or good), please feel free to contact me.`
 };
