@@ -16,7 +16,7 @@ export default {
   },
   deletion: {
     process: (n, at) => deletion(`${n})`, { n, at } , 'delVal'),
-    select:  (date, p = polyglot()) => deletion(p.t('deletion.select'), date, 'selVal'),
+    select:  (date, p = polyglot()) => deletion(p.t('deletion.selectDate.select'), date, 'selVal'),
     back:    (date) => deletion('<<', date, 'selDate'),
     forward: (date) => deletion('>>', date, 'selDate'),
     today:   (date, p = polyglot()) => deletion(p.t('dateTime.today'), date, 'selDate'),
