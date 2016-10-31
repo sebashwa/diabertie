@@ -21,23 +21,27 @@ export default {
     },
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
   },
-  diary: {
-    noData: '🗓 %{datum}\n\nNo data available ... 😥\n\n'
-  },
   deletion: {
-    select:      'Select',
-    success:     '✅ Deleted *%{selected})* %{value}',
-    abort:       '❌ Nothing deleted',
-    oldData:     '❌ Nothing deleted, this is an old request',
-    selectDate:  'Please select a *date*:\n\n',
-    selectValue: 'Please select a *value*:\n\n'
+    select:     'Select',
+    success:    '%{original}\n\n✅ Deleted *%{selectedValue})* %{value}',
+    abort:      '%{original}\n\n❌ Nothing deleted',
+    oldData:    '%{original}\n\n❌ Nothing deleted, this is an old request',
+    selectDate: {
+      noData: 'Please select a *date*:\n\n🗓 %{date}\n\nNo data available ... 😥\n\n',
+      data:   'Please select a *date*:\n\n🗓 %{date}\n\n%{values}'
+    },
+    selectValue: 'Please select a *value*: 🗓 %{date}\n\n%{values}'
+  },
+  navigateDiary: {
+    noData: '🗓 %{date}\n\nNo data available ... 😥\n\n',
+    data:   '🗓 %{date}\n\n%{values}'
   },
   saveLogEvents: {
     yes:     'Yes',
     no:      'No',
-    success: '✅ Saved',
-    abort:   '❌ Not saved',
-    oldData: '❌ Not saved, this is an old request'
+    success: '%{original}\n\n✅ Saved',
+    abort:   '%{original}\n\n❌ Not saved',
+    oldData: '%{original}\n\n❌ Not saved, this is an old request'
   },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',

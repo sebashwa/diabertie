@@ -1,15 +1,15 @@
 import { saveLogEvents } from '../database';
 
-export default async ({d: savedAt}, user, p, originalMsg) => {
+export default async ({d: savedAt}, user, p, { text: original }) => {
   let newMsg;
 
   if (!savedAt) {
-    newMsg = `${originalMsg.text}\n\n${p.t('saveLogEvents.abort')}`;
+    newMsg = ['saveLogEvents.abort', { original }];
   } else if (savedAt != user.latestDetectedData.detectedAt){
-    newMsg = `${originalMsg.text}\n\n${p.t('saveLogEvents.oldData')}`;
+    newMsg = ['saveLogEvents.oldData', { original }];
   } else {
-    const { message, error } = await saveLogEvents(user.latestDetectedData.data, user);
-    newMsg = error ? error : `${originalMsg.text}\n\n${p.t(...message)}`;
+    const { error } = await saveLogEvents(user.latestDetectedData.data, user);
+    newMsg = error ? error : ['saveLogEvents.success', { original }];
   }
 
   return { message: newMsg };

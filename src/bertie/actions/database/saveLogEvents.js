@@ -31,9 +31,10 @@ export default async (detections, user) => {
       };
     });
 
-    await LogEvent.insertMany(events);
+    const data = await LogEvent.insertMany(events);
+    const docs = data.map(d => d._doc);
 
-    return { message: ['saveLogEvents.success'] };
+    return { data: docs, error: undefined };
   } catch (e) {
     logger.error(e);
     return { error: ['generalErrors.superWrong'] };
