@@ -22,13 +22,15 @@ export default {
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
   },
   deletion: {
-    select:     'Select',
-    success:    '%{original}\n\n✅ Deleted *%{selectedValue})* %{value}',
-    abort:      '%{original}\n\n❌ Nothing deleted',
-    oldData:    '%{original}\n\n❌ Nothing deleted, this is an old request',
+    deleteValue: {
+      success: '%{original}\n\n✅ Deleted *%{selectedValue})* %{value}',
+      abort:   '%{original}\n\n❌ Nothing deleted',
+      oldData: '%{original}\n\n❌ Nothing deleted, this is an old request',
+    },
     selectDate: {
       noData: 'Please select a *date*:\n\n🗓 %{date}\n\nNo data available ... 😥\n\n',
-      data:   'Please select a *date*:\n\n🗓 %{date}\n\n%{values}'
+      data:   'Please select a *date*:\n\n🗓 %{date}\n\n%{values}',
+      select: 'Select',
     },
     selectValue: 'Please select a *value*: 🗓 %{date}\n\n%{values}'
   },
