@@ -60,6 +60,13 @@ class Docs extends Component {
           <p>{p.t('reviewValues.intro')}</p>
           <code>{p.t('reviewValues.command')}</code>
           <p>{p.t('reviewValues.navigate')}</p>
+
+          <h3 className={styles.highlight}>{p.t('deleteValue.headline')}</h3>
+          <p>{p.t('deleteValue.intro')}</p>
+          <code>{p.t('deleteValue.command')}</code>
+          <p>{p.t('deleteValue.selectDate')}</p>
+          <p>{p.t('deleteValue.selectValue')}</p>
+
           <p>{p.t('thatsAll')}</p>
         </div>
       </div>

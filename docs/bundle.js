@@ -11769,7 +11769,7 @@
 	            p.t('intro.telegramUsage'),
 	            ' ',
 	            _react2.default.createElement(_Link2.default, { href: 'https://telegram.org', title: 'Telegram' }),
-	            ' ',
+	            '\xA0',
 	            _react2.default.createElement(_Link2.default, { href: 'https://core.telegram.org/bots/api', title: 'Bot API' }),
 	            '. ',
 	            p.t('intro.getTelegram')
@@ -11885,6 +11885,31 @@
 	            p.t('reviewValues.navigate')
 	          ),
 	          _react2.default.createElement(
+	            'h3',
+	            { className: _Docs2.default.highlight },
+	            p.t('deleteValue.headline')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('deleteValue.intro')
+	          ),
+	          _react2.default.createElement(
+	            'code',
+	            null,
+	            p.t('deleteValue.command')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('deleteValue.selectDate')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('deleteValue.selectValue')
+	          ),
+	          _react2.default.createElement(
 	            'p',
 	            null,
 	            p.t('thatsAll')
@@ -11942,7 +11967,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: _Footer2.default.root },
-	        'created by ',
+	        'created by\xA0',
 	        _react2.default.createElement(
 	          'a',
 	          { className: _Footer2.default.link, href: 'https://www.github.com/sebashwa' },
@@ -12231,6 +12256,13 @@
 	    intro: 'To get an overview of the values that you have logged so far, just send',
 	    command: '/diary',
 	    navigate: 'to Diabertie. This way you get your values presented together with a neat interface to browse through them.'
+	  },
+	  deleteValue: {
+	    headline: 'Delete a value',
+	    intro: 'You can delete a logged value by typing',
+	    command: '/deletion',
+	    selectDate: 'You have to select a date which you would like to delete a value from. The interface is very similar to the one in the diary, except for the big \'Select\' button.',
+	    selectValue: 'After selecting a date, the values are numbered and you can choose, which one you want to delete.'
 	  },
 	  thatsAll: 'This is all you can do with Diabertie so far. If you have any suggestions on how to improve or just want to give me\n    feedback (bad or good), please feel free to contact me.'
 	};
