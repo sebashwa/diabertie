@@ -14,10 +14,9 @@ describe('bertie callback action #navigateDiary', () => {
 
   describe('with data available', () => {
     it('returns navigation buttons', async () => {
-      const { message, buttons } = await navigateDiary({ d: createdAt }, user);
+      const { buttons } = await navigateDiary({ d: createdAt }, user);
 
       expect(buttons, 'to be ok');
-      expect(message[0], 'to equal', 'navigateDiary.data');
     });
 
     it('returns a message which lists data', async () => {
@@ -36,7 +35,7 @@ describe('bertie callback action #navigateDiary', () => {
       expect(buttons, 'to be ok');
     });
 
-    it('returns a message listing data if data is found', async () => {
+    it('returns a message saying that no data is found', async () => {
       const { message } = await navigateDiary({ d: moment.utc() }, user);
 
       expect(message[0], 'to equal', 'navigateDiary.noData');
