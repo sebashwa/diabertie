@@ -32,7 +32,7 @@ export default {
       data:   'Please select a *date*:\n\n🗓 %{date}\n\n%{values}',
       select: 'Select',
     },
-    selectValue: 'Please select a *value*: 🗓 %{date}\n\n%{values}'
+    selectValue: 'Please select a *value*:\n\n🗓 %{date}\n\n%{values}'
   },
   navigateDiary: {
     noData: '🗓 %{date}\n\nNo data available ... 😥\n\n',
