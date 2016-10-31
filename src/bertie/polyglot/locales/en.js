@@ -1,5 +1,5 @@
 export default {
-  help:   'Write something like this to log your values:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nYou can get an overview of the available commands, if you start typing */*\n\nFor a detailed guide please visit diabertie.com',
+  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- a sugar value of 190 mg/dL\n- 4 units of bolus Insulin\n- 24g carbonhydrates\n\nFor a more detailed guide please visit diabertie.com',
   onText: {
     notUnderstood: 'Oh sorry, I didn\'t get that..'
   },
@@ -28,14 +28,14 @@ export default {
       oldData: '%{original}\n\n❌ Nothing deleted, this is an old request',
     },
     selectDate: {
-      noData: 'Please select a *date*:\n\n🗓 %{date}\n\nNo data available ... 😥\n\n',
+      noData: 'Please select a *date*:\n\n🗓 %{date}\n\nNo values available ... 😥\n\n',
       data:   'Please select a *date*:\n\n🗓 %{date}\n\n%{values}',
       select: 'Select',
     },
     selectValue: 'Please select a *value*:\n\n🗓 %{date}\n\n%{values}'
   },
   navigateDiary: {
-    noData: '🗓 %{date}\n\nNo data available ... 😥\n\n',
+    noData: '🗓 %{date}\n\nNo values available ... 😥\n\n',
     data:   '🗓 %{date}\n\n%{values}'
   },
   saveLogEvents: {
