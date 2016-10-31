@@ -39,7 +39,7 @@
   "devDependencies": {
     "babel-eslint": "^7.0.0",
     "babel-register": "^6.7.2",
-    "eslint": "^3.6.0",
+    "eslint": "^3.9.1",
     "eslint-plugin-react": "^6.1.0",
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2",
