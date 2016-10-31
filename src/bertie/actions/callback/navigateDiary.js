@@ -16,7 +16,7 @@ export default async ({ d }, user) => {
   if (!data[0]) {
     message = ['navigateDiary.noData', { date }];
   } else {
-    const values = formatters.diary(data, user);
+    const values = formatters.diary(data, user.timezone);
     message = ['navigateDiary.data', { date, values }];
   }
 

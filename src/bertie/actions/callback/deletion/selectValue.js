@@ -24,7 +24,7 @@ export default async (date, user) => {
   await user.update({ latestDetectedData: { detectedAt, data: logEventsMap } });
 
   date = date.format('ddd, DD.MM.YYYY');
-  const values = formatters.deletion(data, user);
+  const values = formatters.deletion(data, user.timezone);
   const message = ['deletion.selectValue', { date, values }];
 
   const newBtns = [...Array(rows).keys()].map((i) => buttons.slice(i * 8, (i + 1) * 8));
