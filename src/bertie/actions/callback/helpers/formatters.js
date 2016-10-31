@@ -1,6 +1,10 @@
 import moment from 'moment-timezone';
+import polyglot from '../../../polyglot';
 
-const deletion = (logEventGroups, p, timezone) => {
+const deletion = (logEventGroups, user) => {
+  const p = polyglot();
+  const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
+
   let valueNumber = 0;
 
   return logEventGroups.map((logEventGroup) => {
@@ -17,7 +21,10 @@ const deletion = (logEventGroups, p, timezone) => {
       }).join('\n\n');
 };
 
-const diary = (logEventGroups, p, timezone) => {
+const diary = (logEventGroups, user) => {
+  const p = polyglot();
+  const timezone = logEventGroups[0].logEvents[0].timezone || user.timezone;
+
   return logEventGroups.map((logEventGroup) => {
         const dayOfYear = logEventGroup._id.day;
         delete logEventGroup._id.day;

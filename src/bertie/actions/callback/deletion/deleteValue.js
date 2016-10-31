@@ -1,15 +1,18 @@
 import { deleteLogEvent } from '../../database';
 
-export default async ({n: selectedValue, at: deleteRequestedAt }, user, p, originalMsg) => {
+export default async ({n: selectedValue, at: deleteRequestedAt }, user, p, { text: original }) => {
   let message;
 
   if (!deleteRequestedAt) {
-    message = `${originalMsg.text}\n\n${p.t('deletion.abort')}`;
+    message = ['deletion.abort', { original }];
   } else if (deleteRequestedAt != user.latestDetectedData.detectedAt) {
-    message = `${originalMsg.text}\n\n${p.t('deletion.oldData')}`;
+    message = ['deletion.oldData', { original }];
   } else {
-    const { message: delMsg, error } = await deleteLogEvent(selectedValue, user, p);
-    message = error ? error : `${originalMsg.text}\n\n${p.t(...delMsg)}`;
+    const id = user.latestDetectedData.data[selectedValue];
+    const { data, error } = await deleteLogEvent(id, user);
+    const value = `${p.t(`icons.${data.category}`)} ${data.originalValue}`;
+
+    message = error ? error : ['deletion.success', { original, selectedValue, value } ];
   }
 
   return { message };

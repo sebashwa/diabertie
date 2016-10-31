@@ -1,15 +1,10 @@
 import { LogEvent } from '../../../models';
 import logger from '../../../logger';
 
-export default async (selected, user, p) => {
+export default async (id, user) => {
   try {
-    const logEventId = user.latestDetectedData.data[selected];
-    const le = await LogEvent.findOneAndRemove({ _id: logEventId, user: user._id });
-
-    const value = `${p.t(`icons.${le.category}`)} ${le.originalValue}`;
-    const message = [ 'deletion.success', { selected, value } ];
-
-    return { message };
+    const data = await LogEvent.findOneAndRemove({ _id: id, user: user._id });
+    return { data };
   } catch (e) {
     logger.error(e);
     return { error: ['generalErrors.superWrong'] };

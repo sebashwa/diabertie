@@ -1,19 +1,28 @@
 import moment from 'moment-timezone';
-import { getDiaryNavigation } from '../helpers';
+import { getDiaryNavigation, formatters } from '../helpers';
 import { fetchLogEvents } from '../../database';
 import { btnFactory } from '../../helpers';
 
-export default async (date, user, p) => {
-  date = moment.utc(date).tz(user.timezone);
-  if (!date.isValid()) { return { message: p.t('generalErrors.superWrong')}; };
+export default async (queriedDate, user, p) => {
+  const dateObj = moment.utc(queriedDate).tz(user.timezone);
+  if (!dateObj.isValid()) { return { message: ['generalErrors.superWrong'] }; };
 
-  const { message: eventsMsg, error, data } = await fetchLogEvents(user, date);
-  if (error) { return { message: p.t(...error) }; }
+  const { error, data } = await fetchLogEvents(user, dateObj);
+  if (error) { return { message: error }; }
 
-  const message = `${p.t('deletion.selectDate')}${eventsMsg}`;
+  const date = dateObj.format('ddd, DD.MM.YYYY');
+  let message;
 
-  const { buttons: navBtns } = getDiaryNavigation('deletion', date, user);
-  const buttons = data ? [navBtns, [btnFactory.deletion.select(date.format('YYYY-MM-DD'), p)]] : [navBtns];
+  if (!data[0]) {
+    message = ['deletion.selectDate.noData', { date }];
+  } else {
+    const values = formatters.diary(data, user.timezone);
+    message = ['deletion.selectDate.data', { date, values }];
+  }
+
+
+  const { buttons: navBtns } = getDiaryNavigation('deletion', dateObj, user);
+  const buttons = data[0] ? [navBtns, [btnFactory.deletion.select(dateObj.format('YYYY-MM-DD'), p)]] : [navBtns];
 
   return { message, buttons };
 };

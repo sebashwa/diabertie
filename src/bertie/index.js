@@ -1,7 +1,7 @@
 import { bertieStart } from './actions';
 import { btnFactory, timeline } from './actions/helpers';
 import { detectLogEvents } from './actions/parsing';
-import { fetchLogEvents, fetchUser } from './actions/database';
+import { fetchUser } from './actions/database';
 import callbackActions from './actions/callback';
 
 import polyglot from './polyglot';
@@ -32,15 +32,12 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const tl = timeline(user);
 
-    const { message, error } = await fetchLogEvents(user, tl.moment.today);
-    if (error) { return sendMessage(from.id, p.t(...error)); };
+    const { message, buttons } = await callbackActions.navigateDiary({ d: tl.str.today }, user, p);
 
-    sendMessage(from.id, message, {
-      ... defaultOpts,
-      reply_markup: {
-        inline_keyboard: [[ btnFactory.navigateDiary.back(tl.str.prevDay) ]]
-      }
-    });
+    const opts = { ...defaultOpts };
+    if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
+
+    sendMessage(from.id, p.t(...message), opts);
   });
 
   bot.onText(/\/deletion/, async ({ from }) => {
@@ -49,18 +46,12 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const tl = timeline(user);
 
-    const { message, error } = await fetchLogEvents(user, tl.moment.today);
-    if (error) { return sendMessage(from.id, p.t(...error)); };
+    const { message, buttons } = await callbackActions.del({ d: tl.str.today, s: 'selDate' }, user, p);
 
-    const text = `${p.t('deletion.selectDate')}${message}`;
-
-    sendMessage(from.id, text, {
+    sendMessage(from.id, p.t(...message), {
       ... defaultOpts,
       reply_markup: {
-        inline_keyboard: [
-          [ btnFactory.deletion.back(tl.str.prevDay) ],
-          [ btnFactory.deletion.select(tl.str.today) ]
-        ]
+        inline_keyboard: buttons
       }
     });
   });
@@ -118,6 +109,6 @@ export default (bot) => {
       messageOpts.reply_markup = { inline_keyboard: buttons };
     }
 
-    bot.editMessageText(message, messageOpts);
+    bot.editMessageText(p.t(...message), messageOpts);
   });
 };

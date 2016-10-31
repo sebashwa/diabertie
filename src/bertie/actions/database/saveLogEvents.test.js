@@ -55,8 +55,10 @@ describe('bertie action #saveLogEvents', () => {
     expect(event.user.telegramId, 'to equal', 1234567890);
   });
 
-  it('returns a message after saving the data', async () => {
-    const { message } = await saveLogEvents(detections, user);
-    expect(message, 'to equal', ['saveLogEvents.success']);
+  it('returns the saved data after writing it to db', async () => {
+    const { data } = await saveLogEvents(detections, user);
+    const values = data.map(d => d.originalValue);
+
+    expect(values, 'to equal', [120, 4, 2]);
   });
 });

@@ -5,10 +5,15 @@ import { User, LogEvent } from '../../../models';
 
 describe('bertie action #fetchLogEvents', () => {
   let user;
+  let breakfastIds;
+  let lunchIds;
+
   const createLogEventBatch = async (date) => {
-    await LogEvent.create({ user: user.id, createdAt: date, category: 'sugar', unit: 'sugarMmol', value: 6.66, originalUnit: 'sugarMg', originalValue: 120 });
-    await LogEvent.create({ user: user.id, createdAt: date, category: 'food', unit: 'carbs', value: 24, originalUnit: 'be', originalValue: 2 });
-    await LogEvent.create({ user: user.id, createdAt: date, category: 'therapy', unit: 'bolusInsulin', value: 4, originalUnit: 'humalog', originalValue: 4 });
+   const { _doc: doc1 } = await LogEvent.create({ user: user.id, createdAt: date, category: 'sugar', unit: 'sugarMmol', value: 6.66, originalUnit: 'sugarMg', originalValue: 120 });
+   const { _doc: doc2 } = await LogEvent.create({ user: user.id, createdAt: date, category: 'food', unit: 'carbs', value: 24, originalUnit: 'be', originalValue: 2 });
+   const { _doc: doc3 } = await LogEvent.create({ user: user.id, createdAt: date, category: 'therapy', unit: 'bolusInsulin', value: 4, originalUnit: 'humalog', originalValue: 4 });
+
+   return [doc1._id, doc2._id, doc3._id];
   };
 
   beforeEach(async () => {
@@ -18,19 +23,22 @@ describe('bertie action #fetchLogEvents', () => {
     });
 
     const breakfastTime = moment.utc('2015-04-11 07:32');
-    await createLogEventBatch(breakfastTime);
+    breakfastIds = await createLogEventBatch(breakfastTime);
+
     const lunchTime = moment.utc('2015-04-11 10:43');
-    await createLogEventBatch(lunchTime);
+    lunchIds = await createLogEventBatch(lunchTime);
   });
 
   it('fetches the log events of a given date', async () => {
-    const { message } = await fetchLogEvents(user, moment('2015-04-11'));
+    const { data } = await fetchLogEvents(user, moment('2015-04-11'));
+    const logEventIds = data.reduce((p, c) => (p.concat(c.logEvents)), []).map(d => d._id);
 
-    expect(message, 'to equal', '🗓 Sat, 11.04.2015\n\n*09:30* \n 📈 120 🍏 2 💉 4\n\n*12:40* \n 📈 120 🍏 2 💉 4');
+    expect(logEventIds, 'to equal', breakfastIds.concat(lunchIds));
   });
 
-  it('states that not data is available if no data is available', async () => {
-    const { message } = await fetchLogEvents(user, moment('2015-04-12'));
-    expect(message, 'to equal', '🗓 Sun, 12.04.2015\n\nNo data available ... 😥\n\n');
+  it('returns empty array if no data is available' , async () => {
+    const { data } = await fetchLogEvents(user, moment('2015-04-12'));
+
+    expect(data, 'to equal', []);
   });
 });
