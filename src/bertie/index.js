@@ -32,7 +32,7 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const tl = timeline(user);
 
-    const { message, buttons } = await callbackActions.navigateDiary({ d: tl.str.today }, user, p);
+    const { message, buttons } = await callbackActions.navigateDiary({ d: tl.str.today }, user);
 
     const opts = { ...defaultOpts };
     if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
@@ -46,7 +46,7 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const tl = timeline(user);
 
-    const { message, buttons } = await callbackActions.del({ d: tl.str.today, s: 'selDate' }, user, p);
+    const { message, buttons } = await callbackActions.del({ d: tl.str.today, s: 'selDate' }, user);
 
     sendMessage(from.id, p.t(...message), {
       ... defaultOpts,
@@ -97,7 +97,7 @@ export default (bot) => {
     const p = polyglot(user.locale);
     const callbackData = JSON.parse(data);
 
-    const { message, buttons } = await callbackActions[callbackData.t](callbackData, user, p, originalMsg);
+    const { message, buttons } = await callbackActions[callbackData.t](callbackData, user, originalMsg);
 
     const messageOpts = {
       ...defaultOpts,

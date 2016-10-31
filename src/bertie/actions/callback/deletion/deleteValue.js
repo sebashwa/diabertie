@@ -1,7 +1,9 @@
 import { deleteLogEvent } from '../../database';
+import polyglot from '../../../polyglot';
 
-export default async ({n: selectedValue, at: deleteRequestedAt }, user, p, { text: original }) => {
+export default async ({n: selectedValue, at: deleteRequestedAt }, user, { text: original }) => {
   let message;
+  const p = polyglot();
 
   if (!deleteRequestedAt) {
     message = ['deletion.abort', { original }];
