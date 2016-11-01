@@ -1,14 +1,14 @@
 export default {
   help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar value of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar values, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nFor a more detailed guide please visit diabertie.com',
   onText: {
-    notUnderstood: 'Oh sorry, I didn\'t get that..'
+    notUnderstood: 'Oh sorry, I didn\'t get that.. 😳'
   },
   generalErrors: {
     userNotFound: 'Oh! I was not able to find a user for this conversation 😳\n\nPlease enter /start to get started',
-    superWrong:   'Oops, sorry! Something went completely wrong.. 😳 Please try again'
+    superWrong:   'Oops, sorry! Something went completely wrong.. 😳\n\nPlease try again'
   },
   bertieStart: {
-    success:   'Hey %{name}, glad to have you on board! Start logging values by writing something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor a detailed guide please visit diabertie.com',
+    success:   'Hey %{name}, glad to have you on board! Start logging values by writing something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor more information type /help and for a detailed guide please visit diabertie.com\n\n*But wait!* ☝️\n\nThe first thing you want to do before logging values is to set your timezone. This way, the values you log have a correct time and date.\n\nJust write me the city where you\'re currently at (or any city in your timezone. I won\'t save it. All I save is your timezone)\nYou can always change your timezone by typig /timezone',
     readyToGo: 'Hey %{name}, we already know each other! Please go ahead and log your values. Just write something like:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nFor a detailed guide please visit diabertie.com'
   },
   detectLogEvents: {
@@ -30,17 +30,22 @@ export default {
     selectDate: {
       noData: 'Please select a *date*:\n\n🗓 %{date}\n\nNo values available ... 😥\n\n',
       data:   'Please select a *date*:\n\n🗓 %{date}\n\n%{values}',
-      select: 'Select',
     },
     selectValue: 'Please select a *value*:\n\n🗓 %{date}\n\n%{values}'
+  },
+  setTimezone: {
+    askForChange:    '🌍🕕 Your set timezone is:\n\n`%{timezone}`\n\nDo you want to change it?',
+    requestLocation: '🌍🕕 Your set timezone is:\n\n`%{timezone}`\n\nOk, send me where you\'re at .. Any city in your timezone should work!',
+    notSet:          '🌍🕕 Your set timezone is:\n\n`%{timezone}`\n\n❌ Did not set a new timezone',
+    noLocation:      'I wasn\'t able to find that location 😥 .. Please try again (maybe with a large city nearby)',
+    noTimezone:      'I could not find a timezone for that city 😥 .. Please try again (maybe with a large city nearby)',
+    success:         '✅ I changed your timezone to: `%{timeZoneId}`',
   },
   navigateDiary: {
     noData: '🗓 %{date}\n\nNo values available ... 😥\n\n',
     data:   '🗓 %{date}\n\n%{values}'
   },
   saveLogEvents: {
-    yes:     'Yes',
-    no:      'No',
     success: '%{original}\n\n✅ Saved',
     abort:   '%{original}\n\n❌ Not saved',
     oldData: '%{original}\n\n❌ Not saved, this is an old request'
@@ -67,5 +72,10 @@ export default {
   dateTime: {
     now:   'now',
     today: 'today'
-  }
+  },
+  generalWords: {
+    yes:    'Yes',
+    no:     'No',
+    select: 'Select',
+  },
 };

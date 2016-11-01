@@ -3,6 +3,7 @@ import { btnFactory, timeline } from './actions/helpers';
 import { detectLogEvents } from './actions/parsing';
 import { fetchUser } from './actions/database';
 import callbackActions from './actions/callback';
+import conversationalActions from './actions/conversational';
 
 import polyglot from './polyglot';
 import moment from 'moment-timezone';
@@ -26,13 +27,29 @@ export default (bot) => {
     sendMessage(from.id, p.t('help'));
   });
 
+  bot.onText(/^\/timezone/, async ({ from }) => {
+    const { user } = await fetchUser(from);
+    const p = polyglot(user.locale);
+
+    const detectedAt = moment().unix();
+
+    sendMessage(from.id, p.t('setTimezone.askForChange', { timezone: user.timezone }), {
+      ... defaultOpts,
+      reply_markup: {
+        inline_keyboard: [
+          [ btnFactory.setTimezone.yes(detectedAt, p), btnFactory.setTimezone.no(p) ]
+        ]
+      }
+    });
+  });
+
   bot.onText(/^\/diary/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline(user);
+    const tl = timeline();
 
-    const { message, buttons } = await callbackActions.navigateDiary({ d: tl.str.today }, user);
+    const { message, buttons } = await callbackActions.navigateDiary({ d: tl.moment.today.unix() }, user);
 
     const opts = { ...defaultOpts };
     if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
@@ -44,9 +61,9 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline(user);
+    const tl = timeline();
 
-    const { message, buttons } = await callbackActions.del({ d: tl.str.today, s: 'selDate' }, user);
+    const { message, buttons } = await callbackActions.del({ d: tl.unix.today, s: 'selDate' }, user);
 
     sendMessage(from.id, p.t(...message), {
       ... defaultOpts,
@@ -56,12 +73,20 @@ export default (bot) => {
     });
   });
 
-  bot.onText(/^(?!\/)\D*$/, async ({ from }) => {
+  bot.onText(/^(?!\/)\D*$/, async ({ from, text }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
-
     const p = polyglot(user.locale);
-    sendMessage(from.id, p.t('onText.notUnderstood'));
+    var newMsg = ['onText.notUnderstood'];
+
+    const data = user.latestDetectedData.data;
+
+    if (data && conversationalActions[data.type]) {
+      const { message } = await conversationalActions[data.type](text, user);
+      newMsg = message;
+    }
+
+    sendMessage(from.id, p.t(...newMsg));
   });
 
   bot.onText(/^(?!\/).*\d.*\s.*[A-Za-z].*$/, async ({ from, text }) => {
@@ -85,7 +110,7 @@ export default (bot) => {
       ... defaultOpts,
       reply_markup: {
         inline_keyboard: [
-          [ btnFactory.saveLogEvents.yes(detectedAt), btnFactory.saveLogEvents.no() ]
+          [ btnFactory.saveLogEvents.yes(detectedAt, p), btnFactory.saveLogEvents.no(p) ]
         ]
       }
     });

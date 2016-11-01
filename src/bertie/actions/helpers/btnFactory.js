@@ -7,6 +7,7 @@ const generateButton = (text, { type, subType, data }) => {
 const navigateDiary = (text, data) => generateButton(text, { type: 'navigateDiary', data });
 const deletion = (text, data, subType) => generateButton(text, { type: 'del', subType, data });
 const saveLogEvents = (text, data) => generateButton(text, { type: 'saveLogEvents', data });
+const setTimezone = (text, data) => generateButton(text, { type: 'setTimezone', data });
 
 export default {
   navigateDiary: {
@@ -16,13 +17,17 @@ export default {
   },
   deletion: {
     process: (n, at) => deletion(`${n})`, { n, at } , 'delVal'),
-    select:  (date, p = polyglot()) => deletion(p.t('deletion.selectDate.select'), date, 'selVal'),
+    select:  (date, p = polyglot()) => deletion(p.t('generalWords.select'), date, 'selVal'),
     back:    (date) => deletion('<<', date, 'selDate'),
     forward: (date) => deletion('>>', date, 'selDate'),
     today:   (date, p = polyglot()) => deletion(p.t('dateTime.today'), date, 'selDate'),
   },
   saveLogEvents: {
-    yes: (savedAt, p = polyglot()) => saveLogEvents(p.t('saveLogEvents.yes'), savedAt),
-    no:  (p = polyglot()) => saveLogEvents(p.t('saveLogEvents.no')),
+    yes: (savedAt, p = polyglot()) => saveLogEvents(p.t('generalWords.yes'), savedAt),
+    no:  (p = polyglot()) => saveLogEvents(p.t('generalWords.no')),
+  },
+  setTimezone: {
+    yes: (savedAt, p = polyglot()) => setTimezone(p.t('generalWords.yes'), savedAt),
+    no:  (p = polyglot()) => setTimezone(p.t('generalWords.no')),
   }
 };

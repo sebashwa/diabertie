@@ -4,7 +4,7 @@ import { btnFactory } from '../../helpers';
 import { formatters } from '../helpers';
 
 export default async (date, user) => {
-  date = moment.utc(date).tz(user.timezone);
+  date = moment.unix(date);
   if (!date.isValid()) { return { message: ['generalErrors.superWrong'] }; };
 
   const { error, data } = await fetchLogEvents(user, date);

@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 
-export default (user, start) => {
-  const today = moment.utc().tz(user.timezone);
+export default (start) => {
+  const today = moment().utc();
   if (!start) { start = today.clone(); }
   const prevDay = start.clone().subtract(1, 'days');
   const nextDay = start.clone().add(1, 'days');
@@ -12,6 +12,12 @@ export default (user, start) => {
       start,
       prevDay,
       nextDay,
+    },
+    unix: {
+      today:   today.unix(),
+      start:   start.unix(),
+      prevDay: prevDay.unix(),
+      nextDay: nextDay.unix(),
     },
     str: {
       today:   today.format('YYYY-MM-DD'),
