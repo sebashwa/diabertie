@@ -3,14 +3,14 @@ import { getDiaryNavigation, formatters } from './helpers';
 import { fetchLogEvents } from '../database';
 
 export default async ({ d }, user) => {
-  const datum = moment.utc(d).tz(user.timezone);
+  const datum = moment.unix(d);
   if (!datum.isValid()) { return { message: ['generalErrors.superWrong'] }; };
 
-  const { buttons } = getDiaryNavigation('navigateDiary', datum, user);
+  const { buttons } = getDiaryNavigation('navigateDiary', datum);
   const { data, error } = await fetchLogEvents(user, datum);
   if (error) { return { message: error }; }
 
-  const date = datum.format('ddd, DD.MM.YYYY');
+  const date = datum.tz(user.timezone).format('ddd, DD.MM.YYYY');
   let message;
 
   if (!data[0]) {

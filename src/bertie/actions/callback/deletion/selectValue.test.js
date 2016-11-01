@@ -21,7 +21,7 @@ describe('bertie callback action deletion#selectValue', () => {
     beforeEach(async () => logEventIds = await createLogEvents(5));
 
     it('generates buttons for each available logEvent', async () => {
-      const { buttons } = await selectValue(createdAt, user);
+      const { buttons } = await selectValue(createdAt.unix(), user);
       const buttonSubtypes = buttons[0].map(b => JSON.parse(b.callback_data).s);
 
       expect(buttons[0], 'to be ok');
@@ -30,7 +30,7 @@ describe('bertie callback action deletion#selectValue', () => {
     });
 
     it('saves a map with (button)numbers as keys and logEvent ids as values on the user latestDetectedData field', async () => {
-      await selectValue(createdAt, user);
+      await selectValue(createdAt.unix(), user);
       const expected = logEventIds.reduce((p, c, i) => { p[i + 1] = c; return p; }, {});
 
       const refreshedUser = await User.findById(user._id);
@@ -43,7 +43,7 @@ describe('bertie callback action deletion#selectValue', () => {
     beforeEach(async () => logEventIds = await createLogEvents(17));
 
     it('splits the buttons to several rows (because telegram only allows 8 buttons per row)', async () => {
-      const { buttons } = await selectValue(createdAt, user);
+      const { buttons } = await selectValue(createdAt.unix(), user);
 
       expect(buttons[0], 'to be ok');
       expect(buttons[1], 'to be ok');

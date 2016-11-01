@@ -3,7 +3,6 @@ import polyglot from '../../../polyglot';
 
 const deletion = (logEventGroups, userTimezone) => {
   const p = polyglot();
-  const timezone = logEventGroups[0].logEvents[0].timezone || userTimezone;
 
   let valueNumber = 0;
 
@@ -11,7 +10,9 @@ const deletion = (logEventGroups, userTimezone) => {
         const dayOfYear = logEventGroup._id.day;
         delete logEventGroup._id.day;
 
+        const timezone = logEventGroup.logEvents[0].timezone || userTimezone;
         const time = moment.utc(logEventGroup._id).dayOfYear(dayOfYear).tz(timezone).format('HH:mm');
+
         const values = logEventGroup.logEvents.map((logEvent) => {
           valueNumber = valueNumber + 1;
           return `${valueNumber}) ${p.t(`icons.${logEvent.category}`)} ${logEvent.originalValue}`;
@@ -23,13 +24,14 @@ const deletion = (logEventGroups, userTimezone) => {
 
 const diary = (logEventGroups, userTimezone) => {
   const p = polyglot();
-  const timezone = logEventGroups[0].logEvents[0].timezone || userTimezone;
 
   return logEventGroups.map((logEventGroup) => {
         const dayOfYear = logEventGroup._id.day;
         delete logEventGroup._id.day;
 
+        const timezone = logEventGroup.logEvents[0].timezone || userTimezone;
         const time = moment.utc(logEventGroup._id).dayOfYear(dayOfYear).tz(timezone).format('HH:mm');
+
         const values = logEventGroup.logEvents.map((logEvent) => {
           return `${p.t(`icons.${logEvent.category}`)} ${logEvent.originalValue}`;
         }).join(' ');

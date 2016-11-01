@@ -14,14 +14,14 @@ describe('bertie callback action deletion#selectDate', () => {
 
   describe('with data available', () => {
     it('returns navigation buttons with a select button included', async () => {
-      const { buttons } = await selectDate(createdAt, user);
+      const { buttons } = await selectDate(createdAt.unix(), user);
 
       expect(buttons, 'to be ok');
       expect(JSON.parse(buttons[1][0].callback_data).s, 'to equal', 'selVal');
     });
 
     it('returns a message which lists data', async () => {
-      const { message } = await selectDate(createdAt, user);
+      const { message } = await selectDate(createdAt.unix(), user);
 
       expect(message[0], 'to equal', 'deletion.selectDate.data');
       expect(message[1].values, 'to be ok');

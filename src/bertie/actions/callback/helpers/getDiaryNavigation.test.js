@@ -17,27 +17,19 @@ describe('bertie action #getDiaryNavigation', () => {
 
   it('returns a back button if requested date is current day', () => {
     const today = moment.utc().tz(user.timezone);
-    const result = getDiaryNavigation('navigateDiary', today, user);
-    const yesterday = today.clone().subtract(1, 'days').format('YYYY-MM-DD');
+    const { buttons } = getDiaryNavigation('navigateDiary', today);
 
-    return expect(result, 'to equal', {
-      buttons: [ { text: '<<', callback_data: `{"t":"navigateDiary","d":"${yesterday}"}` } ]
-    });
+    expect(buttons.length, 'to equal', 1);
+    expect(buttons[0].text, 'to equal', '<<');
   });
 
   it('returns a back, forward and today button if requested date is not current day', () => {
     const today = moment.utc().tz(user.timezone);
     const yesterday = today.clone().subtract(1, 'days');
-    const twoDaysAgo = yesterday.clone().subtract(1, 'days').format('YYYY-MM-DD');
 
-    const result = getDiaryNavigation('navigateDiary', yesterday, user);
+    const { buttons } = getDiaryNavigation('navigateDiary', yesterday);
 
-    return expect(result, 'to equal', {
-      buttons: [
-        { text: '<<', callback_data: `{"t":"navigateDiary","d":"${twoDaysAgo}"}` },
-        { text: '>>', callback_data: `{"t":"navigateDiary","d":"${today.format('YYYY-MM-DD')}"}` },
-        { text: 'today', callback_data: `{"t":"navigateDiary","d":"${today.format('YYYY-MM-DD')}"}` },
-      ]
-    });
+    expect(buttons.length, 'to equal', 3);
+    expect(buttons.map((b) => b.text), 'to equal', ['<<', '>>', 'today']);
   });
 });

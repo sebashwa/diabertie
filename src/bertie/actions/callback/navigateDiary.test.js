@@ -14,13 +14,13 @@ describe('bertie callback action #navigateDiary', () => {
 
   describe('with data available', () => {
     it('returns navigation buttons', async () => {
-      const { buttons } = await navigateDiary({ d: createdAt }, user);
+      const { buttons } = await navigateDiary({ d: createdAt.unix() }, user);
 
       expect(buttons, 'to be ok');
     });
 
     it('returns a message which lists data', async () => {
-      const { message } = await navigateDiary({ d: createdAt }, user);
+      const { message } = await navigateDiary({ d: createdAt.unix() }, user);
 
       expect(message[0], 'to equal', 'navigateDiary.data');
       expect(message[1].values, 'to be ok');
