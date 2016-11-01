@@ -11,14 +11,14 @@ export default (bot) => {
   const defaultOpts = { parse_mode: 'Markdown'};
   const sendMessage = (fromId, msg, opts = defaultOpts) => bot.sendMessage(fromId, msg, opts);
 
-  bot.onText(/\/start.*$/, async ({ from }) => {
+  bot.onText(/^\/start.*$/, async ({ from }) => {
     const p = polyglot();
     const text = await bertieStart(from);
 
     sendMessage(from.id, p.t(...text));
   });
 
-  bot.onText(/\/help/, async ({ from }) => {
+  bot.onText(/^\/help/, async ({ from }) => {
     const { user } = await fetchUser(from);
     const locale = user ? user.locale : 'en';
     const p = polyglot(locale);
@@ -26,7 +26,7 @@ export default (bot) => {
     sendMessage(from.id, p.t('help'));
   });
 
-  bot.onText(/\/diary/, async ({ from }) => {
+  bot.onText(/^\/diary/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
@@ -40,7 +40,7 @@ export default (bot) => {
     sendMessage(from.id, p.t(...message), opts);
   });
 
-  bot.onText(/\/deletion/, async ({ from }) => {
+  bot.onText(/^\/deletion/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
