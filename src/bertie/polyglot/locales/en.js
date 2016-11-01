@@ -1,11 +1,11 @@
 export default {
-  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- a sugar value of 190 mg/dL\n- 4 units of bolus Insulin\n- 24g carbonhydrates\n\nFor a more detailed guide please visit diabertie.com',
+  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar value of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar values, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nFor a more detailed guide please visit diabertie.com',
   onText: {
     notUnderstood: 'Oh sorry, I didn\'t get that..'
   },
   generalErrors: {
-    userNotFound: 'Oh! I was not able to find a user. Please enter /start',
-    superWrong:   'Oops, sorry! Something went completely wrong.. Please try again later'
+    userNotFound: 'Oh! I was not able to find a user for this conversation 😳\n\nPlease enter /start to get started',
+    superWrong:   'Oops, sorry! Something went completely wrong.. 😳 Please try again'
   },
   bertieStart: {
     success:   'Hey %{name}, glad to have you on board! Start logging values by writing something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor a detailed guide please visit diabertie.com',
