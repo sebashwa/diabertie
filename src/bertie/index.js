@@ -73,6 +73,22 @@ export default (bot) => {
     });
   });
 
+  bot.onText(/^\/notes/, async ({ from }) => {
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
+    const p = polyglot(user.locale);
+    const tl = timeline();
+
+    const { message, buttons } = await callbackActions.notes({ d: tl.unix.today, s: 'selDate' }, user);
+
+    sendMessage(from.id, p.t(...message), {
+      ... defaultOpts,
+      reply_markup: {
+        inline_keyboard: buttons
+      }
+    });
+  });
+
   bot.onText(/^(?!\/)\D*$/, async ({ from, text }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }

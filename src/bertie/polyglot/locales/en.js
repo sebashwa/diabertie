@@ -42,13 +42,29 @@ export default {
     success:         '✅ I changed your timezone to: `%{timeZoneId}`',
   },
   navigateDiary: {
-    noData: '🗓 %{date}\n\nNo values available ... 😥\n\n',
-    data:   '🗓 %{date}\n\n%{values}'
+    noData: '🗓 %{date}\n\nNo data available ... 😥',
+    data:   '🗓 %{date}\n\n`%{notes}`%{logEvents}'
   },
   saveLogEvents: {
     success: '%{original}\n\n✅ Saved',
     abort:   '%{original}\n\n❌ Not saved',
     oldData: '%{original}\n\n❌ Not saved, this is an old request'
+  },
+  notes: {
+    addNote:     'Add Note',
+    delNote:     'Delete Note',
+    added:       '✅ Added the note',
+    requestNote: '🗓 %{date}\n\nOk, go ahead an write a new note',
+    selectDate:  {
+      data:   '🗓 %{date}\n\n`%{notes}`\n\n',
+      noData: '🗓 %{date}\n\nNo notes available ... 😥\n\n'
+    },
+    selectNote: 'Please select a note for deletion:\n\n🗓 %{date}\n\n`%{notes}`\n\n',
+    deleteNote: {
+      success: '%{original}\n\n✅ Deleted note *%{number})*',
+      abort:   '%{original}\n\n❌ Nothing deleted',
+      oldData: '%{original}\n\n❌ Nothing deleted, this is an old request'
+    }
   },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',
