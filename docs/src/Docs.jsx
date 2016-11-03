@@ -26,7 +26,7 @@ class Docs extends Component {
         <div className={styles.text}>
           <p>
             {p.t('intro.telegramUsage')} <Link href="https://telegram.org" title="Telegram" />&nbsp;
-            <Link href="https://core.telegram.org/bots/api" title="Bot API" />. {p.t('intro.getTelegram')}
+            <Link href="https://core.telegram.org/bots/api" title="Bot API" />. {p.t('intro.getTelegram')} <code>{p.t('intro.botName')}</code> {p.t('intro.rest')}
           </p>
 
           <h2 className={styles.highlight}>{p.t('usage.headline')}</h2>
@@ -67,7 +67,12 @@ class Docs extends Component {
           <p>{p.t('deleteValue.selectDate')}</p>
           <p>{p.t('deleteValue.selectValue')}</p>
 
-          <p>{p.t('thatsAll')}</p>
+          <h3 className={styles.highlight}>{p.t('notes.headline')}</h3>
+          <p>{p.t('notes.intro')}</p>
+          <code>{p.t('notes.command')}</code>
+          <p>{p.t('notes.selectDate')}</p>
+
+          <p className={styles.feedback}>{p.t('thatsAll')}</p>
         </div>
       </div>
     );

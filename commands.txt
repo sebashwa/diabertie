@@ -1,4 +1,5 @@
 deletion - Delete a logged value
 diary - Review your logged values
 help - Get a quick help on usage
+notes - Manage your notes
 timezone - Edit your timezone

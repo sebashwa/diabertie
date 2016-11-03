@@ -11769,10 +11769,18 @@
 	            p.t('intro.telegramUsage'),
 	            ' ',
 	            _react2.default.createElement(_Link2.default, { href: 'https://telegram.org', title: 'Telegram' }),
-	            '\xA0',
+	            ' ',
 	            _react2.default.createElement(_Link2.default, { href: 'https://core.telegram.org/bots/api', title: 'Bot API' }),
 	            '. ',
-	            p.t('intro.getTelegram')
+	            p.t('intro.getTelegram'),
+	            ' ',
+	            _react2.default.createElement(
+	              'code',
+	              null,
+	              p.t('intro.botName')
+	            ),
+	            ' ',
+	            p.t('intro.rest')
 	          ),
 	          _react2.default.createElement(
 	            'h2',
@@ -11910,8 +11918,28 @@
 	            p.t('deleteValue.selectValue')
 	          ),
 	          _react2.default.createElement(
+	            'h3',
+	            { className: _Docs2.default.highlight },
+	            p.t('notes.headline')
+	          ),
+	          _react2.default.createElement(
 	            'p',
 	            null,
+	            p.t('notes.intro')
+	          ),
+	          _react2.default.createElement(
+	            'code',
+	            null,
+	            p.t('notes.command')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            p.t('notes.selectDate')
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: _Docs2.default.feedback },
 	            p.t('thatsAll')
 	          )
 	        )
@@ -11967,7 +11995,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: _Footer2.default.root },
-	        'created by\xA0',
+	        'created by ',
 	        _react2.default.createElement(
 	          'a',
 	          { className: _Footer2.default.link, href: 'https://www.github.com/sebashwa' },
@@ -12218,7 +12246,9 @@
 	exports.default = {
 	  intro: {
 	    telegramUsage: 'This is the Diabertie chatbot documentation page.\n      Diabertie uses the awesome',
-	    getTelegram: 'So to use Diabertie you have to get Telegram, which is available for all\n      platforms commonly used nowadays.\n      After installing Telegram, just search for a contact named @diabertiebot and\n      start writing him your diabetes values.'
+	    getTelegram: 'So to use Diabertie you have to get Telegram, which is available for all\n      platforms commonly used nowadays.\n      After installing Telegram, just search for a contact named',
+	    botName: '@diabertiebot',
+	    rest: 'and start writing him your diabetes values.'
 	  },
 	  usage: {
 	    headline: 'Usage',
@@ -12263,6 +12293,12 @@
 	    command: '/deletion',
 	    selectDate: 'You have to select a date which you would like to delete a value from. The interface is very similar to the one in the diary, except for the big \'Select\' button.',
 	    selectValue: 'After selecting a date, the values are numbered and you can choose, which one you want to delete.'
+	  },
+	  notes: {
+	    headline: 'Manage notes',
+	    intro: 'Notes can be helpful to log your daily mood or sports activities and the likes. You can add and delete notes by writing',
+	    command: '/notes',
+	    selectDate: 'Select a date which you want to add a note for or delete a note from. Then click on the action you want to perform. All your added notes show up in the diary!'
 	  },
 	  thatsAll: 'This is all you can do with Diabertie so far. If you have any suggestions on how to improve or just want to give me\n    feedback (bad or good), please feel free to contact me.'
 	};
@@ -12383,7 +12419,7 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"root":"Docs__root___39ki4","image":"Docs__image___3waOc","imageContainer":"Docs__imageContainer___6iocL","imageAppear":"Docs__imageAppear___8xeiQ","imageAppearActive":"Docs__imageAppearActive___BfKbn","text":"Docs__text___3zZST","table":"Docs__table___3zSNh","highlight":"Docs__highlight___9SsCY"};
+	module.exports = {"root":"Docs__root___39ki4","image":"Docs__image___3waOc","imageContainer":"Docs__imageContainer___6iocL","imageAppear":"Docs__imageAppear___8xeiQ","imageAppearActive":"Docs__imageAppearActive___BfKbn","text":"Docs__text___3zZST","table":"Docs__table___3zSNh","feedback":"Docs__feedback___b8Vm8","highlight":"Docs__highlight___9SsCY"};
 
 /***/ },
 /* 107 */

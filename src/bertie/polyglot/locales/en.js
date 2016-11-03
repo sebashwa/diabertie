@@ -1,5 +1,5 @@
 export default {
-  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar value of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar values, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nFor a more detailed guide please visit diabertie.com',
+  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar value of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar values, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nIt is also possible to add /notes, which is very useful to log for example sports activity or your daily mood\n\nFor a more detailed guide please visit diabertie.com',
   onText: {
     notUnderstood: 'Oh sorry, I didn\'t get that.. 😳'
   },
@@ -9,7 +9,7 @@ export default {
   },
   bertieStart: {
     success:   'Hey %{name}, glad to have you on board! Start logging values by writing something like:\n\n`7 mmol 2 bolus 27 basal 12:30`\n\nFor more information type /help and for a detailed guide please visit diabertie.com\n\n*But wait!* ☝️\n\nThe first thing you want to do before logging values is to set your timezone. This way, the values you log have a correct time and date.\n\nJust write me the city where you\'re currently at (or any city in your timezone. I won\'t save it. All I save is your timezone)\nYou can always change your timezone by typig /timezone',
-    readyToGo: 'Hey %{name}, we already know each other! Please go ahead and log your values. Just write something like:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nFor a detailed guide please visit diabertie.com'
+    readyToGo: 'Hey %{name}, we already know each other! Please go ahead and log your values. Just write something like:\n\n`190 mg 2 bolus 27 basal 12:30`\n\nFor more information type /help and for a detailed guide please visit diabertie.com'
   },
   detectLogEvents: {
     errors: {
