@@ -55,6 +55,10 @@
   text-align: justify;
 }
 
+.feedback {
+  margin-top: 4em;
+}
+
 .highlight {
   color: #ACA7D2;
 }
