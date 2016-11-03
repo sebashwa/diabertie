@@ -79,7 +79,7 @@ export default (bot) => {
     const p = polyglot(user.locale);
     var newMsg = ['onText.notUnderstood'];
 
-    const data = user.latestDetectedData.data;
+    const { data } = user.latestDetectedData;
 
     if (data && conversationalActions[data.type]) {
       const { message } = await conversationalActions[data.type](text, user);
