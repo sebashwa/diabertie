@@ -1,3 +1,4 @@
 import setTimezone from './setTimezone';
+import addNote from './addNote';
 
-export default { setTimezone };
+export default { addNote, setTimezone };

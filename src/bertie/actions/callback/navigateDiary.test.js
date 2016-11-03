@@ -23,7 +23,7 @@ describe('bertie callback action #navigateDiary', () => {
       const { message } = await navigateDiary({ d: createdAt.unix() }, user);
 
       expect(message[0], 'to equal', 'navigateDiary.data');
-      expect(message[1].values, 'to be ok');
+      expect(message[1].logEvents, 'to be ok');
       expect(message[1].date, 'to be ok');
     });
   });
