@@ -16,14 +16,10 @@ export default async (date, user) => {
   const buttons = logEventsFlat.map((_, i) => btnFactory.deletion.process(i + 1, detectedAt));
   const rows = Math.floor(buttons.length / 8) + 1;
 
-  const logEventsMap = logEventsFlat.reduce((prev, curr, i) => {
-    prev[i + 1] = curr._id;
-    return prev;
-  }, {});
-
+  const logEventsMap = logEventsFlat.reduce((p, c, i) => { p[i+1] = c._id; return p; }, {});
   await user.update({ latestDetectedData: { detectedAt, data: logEventsMap } });
 
-  date = date.format('ddd, DD.MM.YYYY');
+  date = date.tz(user.timezone).format('ddd, DD.MM.YYYY');
   const values = formatters.deletion(data, user.timezone);
   const message = ['deletion.selectValue', { date, values }];
 
