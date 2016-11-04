@@ -108,8 +108,13 @@ export default (bot) => {
   bot.onText(/^(?!\/).*\d.*\s.*[A-Za-z].*$/, async ({ from, text }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
-
     const p = polyglot(user.locale);
+
+    const { data: latestDetected } = user.latestDetectedData;
+    if (latestDetected && conversationalActions[latestDetected.type]) {
+      const { message: conversationalMessage } = await conversationalActions[latestDetected.type](text, user);
+      return sendMessage(from.id, p.t(...conversationalMessage));
+    }
 
     const { error: detectionError, message, warnings, data } = await detectLogEvents(text, p);
     if (detectionError) return sendMessage(from.id, p.t(...detectionError));
