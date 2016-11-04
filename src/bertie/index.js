@@ -1,4 +1,4 @@
-import { bertieStart } from './actions';
+import { bertieStart, listShorthands } from './actions';
 import { btnFactory, timeline } from './actions/helpers';
 import { detectLogEvents } from './actions/parsing';
 import { fetchUser } from './actions/database';
@@ -41,6 +41,14 @@ export default (bot) => {
         ]
       }
     });
+  });
+
+  bot.onText(/^\/shorthands/, async ({ from }) => {
+    const { user } = await fetchUser(from);
+    const p = polyglot(user.locale);
+
+    const { message } = listShorthands(p);
+    sendMessage(from.id, p.t(...message));
   });
 
   bot.onText(/^\/diary/, async ({ from }) => {

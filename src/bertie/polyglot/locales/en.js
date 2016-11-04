@@ -1,5 +1,5 @@
 export default {
-  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar level of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar levels, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nIt is also possible to add /notes, which is very useful to log for example sports activity or your daily mood\n\nFor a more detailed guide please visit diabertie.com',
+  help:   '*Log values*\nWrite something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 🍏 24g carbonhydrates\n- 📈 a sugar level of 190 mg/dL\n- 💉 4 units of bolus Insulin\n\nThose are also the three available types of values (sugar levels, medication, food), which are often shortened by the above symbols (for example in the /diary).\nYou can get a list of all available units and their shorthands by writing /shorthands\n\n*Notes*\nIt is also possible to add /notes, which is very useful to log for example sports activity or your daily mood\n\nFor a more detailed guide please visit diabertie.com',
   onText: {
     notUnderstood: 'Oh sorry, I didn\'t get that.. 😳'
   },
@@ -13,7 +13,7 @@ export default {
   },
   detectLogEvents: {
     errors: {
-      notFound: 'Sorry, I didn\'t get that! Write something like this to log values:\n\n`190 mg 2 bolus 27 basal 12:30`'
+      notFound: 'Sorry, I didn\'t get that! Write something like this to log values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 🍏 24g carbonhydrates\n- 📈 a sugar level of 190 mg/dL\n- 💉 4 units of bolus Insulin\n\nThere are many /shorthands that I can understand.'
     },
     warnings: {
       ambiguousSugar:  '❗️\n\nOh, that\'s strange.. I found more than one sugar level:\n\n%{icon} %{valueTexts}',
@@ -80,7 +80,27 @@ export default {
     sugarMg:      '%{smart_count} mg/dL |||| %{smart_count} mg/dL',
     sugarMmol:    '%{smart_count} mmol/L |||| %{smart_count} mmol/L'
   },
-  icons: {
+  categories: {
+    sugar:   'Sugar Level',
+    food:    'Food',
+    therapy: 'Medication'
+  },
+  subTypes: {
+    be:           'Broteinheit',
+    carbUnit:     'Carbohydrate Unit',
+    carbs:        'Gram Carbohydrates',
+    basisInsulin: 'Base Insulin',
+    lantus:       'Lantus',
+    pumpRate:     'Pump Rate',
+    bolusInsulin: 'Bolus Insulin',
+    humalog:      'Humalog',
+    tablets:      'Tablets',
+    pills:        'Pills',
+    sugarMg:      'Sugar Level (mg/dL)',
+    sugarMmol:    'Sugar Level (mmol/l)'
+  },
+  shorthandList: 'Here is a list of all the units and their shorthands that I can understand.\nUse them when you log your values, by writing me for example\n\n`24 carbs 190 mg 4 bolus`\n\n%{shorthandList}',
+  icons:         {
     sugar:   '📈',
     therapy: '💉',
     food:    '🍏'
