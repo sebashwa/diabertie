@@ -12271,9 +12271,9 @@
 	  logValues: {
 	    headline: 'Log values',
 	    intro: 'To log values, usually all you have to do is write Diabertie a one line\n       text message. Let\'s get started with an example:',
-	    example: 'You just measured your sugar value, ate something and injected the appropriate\n      insulin dose. This is all you have to write to Diabertie to save your actions:',
+	    example: 'You just measured your sugar level, ate something and injected the appropriate\n      insulin dose. This is all you have to write to Diabertie to save your actions:',
 	    command1: '5.5 mmol 24 carbs 4 hum',
-	    explanation: 'Diabertie detects that you measure your sugar value in mmol/l,\n      your food in grams carbonhydrate and that you use Humalog as your insulin.\n      Besides those units, Diabertie understands much more. Here is a list with\n      all the abbreviations that you can use, if you want to log values\n      in the various units:',
+	    explanation: 'Diabertie detects that you measure your sugar level in mmol/l,\n      your food in grams carbonhydrate and that you use Humalog as your insulin.\n      Besides those units, Diabertie understands much more. Here is a list with\n      all the abbreviations that you can use, if you want to log values\n      in the various units:',
 	    contact: 'If you miss any units in this table, please contact me and I will add them as soon as possible.',
 	    changeTime: 'Of course it is also possible to change the time and date of your logging.\n      In the example above, you could have logged those values some hours later and add a timestamp:',
 	    command2: '10:00 5.5 mmol 24 carbs 4 hum',

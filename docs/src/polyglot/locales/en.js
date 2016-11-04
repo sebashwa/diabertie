@@ -33,10 +33,10 @@ export default {
     headline: 'Log values',
     intro: `To log values, usually all you have to do is write Diabertie a one line
        text message. Let's get started with an example:`,
-    example: `You just measured your sugar value, ate something and injected the appropriate
+    example: `You just measured your sugar level, ate something and injected the appropriate
       insulin dose. This is all you have to write to Diabertie to save your actions:`,
     command1: '5.5 mmol 24 carbs 4 hum',
-    explanation: `Diabertie detects that you measure your sugar value in mmol/l,
+    explanation: `Diabertie detects that you measure your sugar level in mmol/l,
       your food in grams carbonhydrate and that you use Humalog as your insulin.
       Besides those units, Diabertie understands much more. Here is a list with
       all the abbreviations that you can use, if you want to log values
