@@ -8,6 +8,7 @@ export default async (text, user) => {
     const forDate = moment.unix(data.forDate).tz(timezone).toDate();
 
     await Note.create({ text, user, forDate, timezone });
+    await user.update({ latestDetectedData: { data: null, detectedAt: null } });
 
     return { message: ['notes.added'] };
   } catch (e) {
