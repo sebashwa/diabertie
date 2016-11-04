@@ -25,14 +25,14 @@ const units = [
     type:     'basisInsulin',
     subType:  null,
     factor:   null,
-    tokens:   ['basal', 'basis', 'base', 'long']
+    tokens:   ['base', 'basal', 'basis', 'long']
   },
   {
     category: 'therapy',
     type:     'basisInsulin',
     subType:  'lantus',
     factor:   null,
-    tokens:   ['lantus', 'lant']
+    tokens:   ['lan', 'lant', 'lantus']
   },
   {
     category: 'therapy',
@@ -53,14 +53,14 @@ const units = [
     type:     'bolusInsulin',
     subType:  'humalog',
     factor:   null,
-    tokens:   ['humalog', 'hum']
+    tokens:   ['hum', 'humalog']
   },
   {
     category: 'therapy',
     type:     'tablets',
     subType:  null,
     factor:   null,
-    tokens:   ['tablet', 'tablets', 'tab']
+    tokens:   ['tab', 'tablet', 'tablets']
   },
   {
     category: 'therapy',
@@ -74,14 +74,14 @@ const units = [
     type:     'sugarMmol',
     subType:  'sugarMg',
     factor:   0.0555,
-    tokens:   ['mg/dl', 'mg']
+    tokens:   ['mg', 'mg/dl']
   },
   {
     category: 'sugar',
     type:     'sugarMmol',
     subType:  null,
     factor:   null,
-    tokens:   ['mmol/l', 'mmol']
+    tokens:   ['mmol', 'mmol/l']
   }
 ];
 

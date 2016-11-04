@@ -2,4 +2,5 @@ deletion - Delete a logged value
 diary - Review your logged values
 help - Get a quick help on usage
 notes - Manage your notes
+shorthands - List available shorthands
 timezone - Edit your timezone
