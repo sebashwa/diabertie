@@ -1,5 +1,5 @@
 export default {
-  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar value of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar values, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nIt is also possible to add /notes, which is very useful to log for example sports activity or your daily mood\n\nFor a more detailed guide please visit diabertie.com',
+  help:   'Write something like this to log your values:\n\n`24 carbs 190 mg 4 bolus`\n\nThis means you want to save:\n\n- 📈 a sugar level of 190 mg/dL\n- 💉 4 units of bolus Insulin\n- 🍏 24g carbonhydrates\n\nThose are also the three available types of values (sugar levels, therapy values, food values), which are often shortened by the above symbols (for example in the /diary).\n\nIt is also possible to add /notes, which is very useful to log for example sports activity or your daily mood\n\nFor a more detailed guide please visit diabertie.com',
   onText: {
     notUnderstood: 'Oh sorry, I didn\'t get that.. 😳'
   },
@@ -16,7 +16,7 @@ export default {
       notFound: 'Sorry, I didn\'t get that! Write something like this to log values:\n\n`190 mg 2 bolus 27 basal 12:30`'
     },
     warnings: {
-      ambiguousSugar:  '❗️\n\nOh, that\'s strange.. I found more than one sugar value:\n\n%{icon} %{valueTexts}',
+      ambiguousSugar:  '❗️\n\nOh, that\'s strange.. I found more than one sugar level:\n\n%{icon} %{valueTexts}',
       dateWithoutTime: '❗️\n\nOh, that\'s strange.. I found a date (%{date}) without a time provided. That means I would use the current time when saving.'
     },
     saveConfirmation: '%{data}\n\nDo you want me to save that?'
