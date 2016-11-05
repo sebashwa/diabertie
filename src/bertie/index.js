@@ -97,23 +97,7 @@ export default (bot) => {
     });
   });
 
-  bot.onText(/^(?!\/)\D*$/, async ({ from, text }) => {
-    const { user, error: userError } = await fetchUser(from);
-    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
-    const p = polyglot(user.locale);
-    var newMsg = ['onText.notUnderstood'];
-
-    const { data } = user.latestDetectedData;
-
-    if (data && conversationalActions[data.type]) {
-      const { message } = await conversationalActions[data.type](text, user);
-      newMsg = message;
-    }
-
-    sendMessage(from.id, p.t(...newMsg));
-  });
-
-  bot.onText(/^(?!\/).*\d.*\s.*[A-Za-z].*$/, async ({ from, text }) => {
+  bot.onText(/^(?!\/).*$/, async ({ from, text }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
