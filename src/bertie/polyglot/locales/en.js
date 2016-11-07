@@ -78,10 +78,10 @@ export default {
       button: 'Manage Log Reminders',
       list:   'Your log reminders are:\n\n%{remindersList}'
     },
-    noReminders:          'No reminders set',
+    noReminders:          'No reminders',
     overview:             '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
-    deleteLogReminder:    '➖ Delete %{text}',
-    addLogReminder:       '➕ Add %{text}',
+    deleteLogReminder:    '%{icon} Delete %{text}',
+    addLogReminder:       '%{icon} Add %{text}',
     manageDailyReminders: 'Manage Daily Reminders',
     backToOverview:       '◀ Back',
   },
