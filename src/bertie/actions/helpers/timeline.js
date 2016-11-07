@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 
-export default (start) => {
-  const today = moment().utc();
+export default (user, start) => {
+  const today = moment.utc().tz(user.timezone);
   if (!start) { start = today.clone(); }
   const prevDay = start.clone().subtract(1, 'days');
   const nextDay = start.clone().add(1, 'days');

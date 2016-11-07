@@ -11,7 +11,7 @@ export default async (d, user) => {
   const { error, data } = await fetchLogEvents(user, dateObj);
   if (error) { return { message: error }; }
 
-  const { buttons: navBtns } = getDiaryNavigation('deletion', dateObj);
+  const { buttons: navBtns } = getDiaryNavigation('deletion', dateObj, user);
 
   let message;
   let buttons;

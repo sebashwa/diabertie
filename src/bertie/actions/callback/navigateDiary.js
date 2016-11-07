@@ -6,7 +6,7 @@ export default async ({ d }, user) => {
   const datum = moment.unix(d);
   if (!datum.isValid()) { return { message: ['generalErrors.superWrong'] }; };
 
-  const { buttons } = getDiaryNavigation('navigateDiary', datum);
+  const { buttons } = getDiaryNavigation('navigateDiary', datum, user);
 
   const { data: logEventsData, error: logEventsError } = await fetchLogEvents(user, datum);
   if (logEventsError) { return { message: logEventsError }; }

@@ -1,7 +1,9 @@
 import { btnFactory, timeline } from '../../helpers';
+import moment from 'moment-timezone';
 
-export default (type, date) => {
-  const tl = timeline(date);
+export default (type, date, user) => {
+  const localDate = moment.tz(date, user.timezone);
+  const tl = timeline(user, localDate);
 
   const buttons = [btnFactory[type].back(tl.unix.prevDay)];
 

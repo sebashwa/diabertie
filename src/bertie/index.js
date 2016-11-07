@@ -55,7 +55,7 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline();
+    const tl = timeline(user);
 
     const { message, buttons } = await callbackActions.navigateDiary({ d: tl.moment.today.unix() }, user);
 
@@ -69,7 +69,7 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline();
+    const tl = timeline(user);
 
     const { message, buttons } = await callbackActions.del({ d: tl.unix.today, s: 'selDate' }, user);
 
@@ -85,7 +85,7 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline();
+    const tl = timeline(user);
 
     const { message, buttons } = await callbackActions.notes({ d: tl.unix.today, s: 'selDate' }, user);
 

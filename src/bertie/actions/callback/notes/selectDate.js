@@ -11,7 +11,7 @@ export default async (d, user) => {
   const { data, error } = await fetchNotes(user, dateObj);
   if (error) { return { message: error }; }
 
-  const { buttons: navBtns } = getDiaryNavigation('notes', dateObj);
+  const { buttons: navBtns } = getDiaryNavigation('notes', dateObj, user);
 
   let message;
   let buttons;
