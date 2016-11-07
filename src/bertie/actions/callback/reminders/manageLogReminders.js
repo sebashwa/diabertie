@@ -8,9 +8,9 @@ import logReminderTypes from './logReminderTypes';
 const { MORNING, AFTERNOON, EVENING } = logReminderTypes;
 
 const reminderTimes = {
-  morning: { hour: 11, minute: 0 },
+  morning:   { hour: 11, minute: 0 },
   afternoon: { hour: 15, minute: 0 },
-  evening: { hour: 21, minute: 0 },
+  evening:   { hour: 21, minute: 0 },
 };
 
 async function addReminder (text, user) {
