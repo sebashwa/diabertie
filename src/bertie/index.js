@@ -89,12 +89,17 @@ export default (bot) => {
 
     const { message, buttons } = await callbackActions.notes({ d: tl.unix.today, s: 'selDate' }, user);
 
-    sendMessage(from.id, p.t(...message), {
-      ... defaultOpts,
-      reply_markup: {
-        inline_keyboard: buttons
-      }
-    });
+    sendMessage(from.id, p.t(...message), { ... defaultOpts, reply_markup: { inline_keyboard: buttons } });
+  });
+
+  bot.onText(/^\/reminderz/, async ({ from }) => {
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
+    const p = polyglot(user.locale);
+
+    const { message, buttons } = await callbackActions.reminders({ s: 'overview' }, user);
+
+    sendMessage(from.id, p.t(...message), { ... defaultOpts, reply_markup: { inline_keyboard: buttons } });
   });
 
   bot.onText(/^(?!\/).*$/, async ({ from, text }) => {

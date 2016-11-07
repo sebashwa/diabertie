@@ -63,6 +63,28 @@ export default {
       oldData: '%{original}\n\n❌ Nothing deleted, this is an old request'
     }
   },
+  reminders: {
+    icons: {
+      morning:   '🏙',
+      afternoon: '🌇',
+      evening:   '🌆',
+    },
+    logReminders: {
+      morning:   'morning reminder',
+      afternoon: 'afternoon reminder',
+      evening:   'evening reminder',
+    },
+    manageLogReminders: {
+      button: 'Manage Log Reminders',
+      list:   'Your log reminders are:\n\n%{remindersList}'
+    },
+    noReminders:          'No reminders set',
+    overview:             '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
+    deleteLogReminder:    '➖ Delete %{text}',
+    addLogReminder:       '➕ Add %{text}',
+    manageDailyReminders: 'Manage Daily Reminders',
+    backToOverview:       '◀ Back',
+  },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',
     carbUnit:     '%{smart_count} KHE |||| %{smart_count} KHE',
