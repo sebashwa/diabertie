@@ -74,16 +74,15 @@ export default {
       afternoon: 'afternoon reminder',
       evening:   'evening reminder',
     },
-    manageLogReminders: {
-      button: 'Manage Log Reminders',
-      list:   'Your log reminders are:\n\n%{remindersList}'
+    manageLog: {
+      button:    'Manage Log Reminders',
+      list:      'Your log reminders are:\n\n%{remindersList}',
+      addButton: '%{icon} Add %{text}',
+      delButton: '%{icon} Delete %{text}',
     },
-    noReminders:          'No reminders',
-    overview:             '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
-    deleteLogReminder:    '%{icon} Delete %{text}',
-    addLogReminder:       '%{icon} Add %{text}',
-    manageDailyReminders: 'Manage Daily Reminders',
-    backToOverview:       '◀ Back',
+    noReminders:    'No reminders',
+    overview:       '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
+    backToOverview: '◀ Back',
   },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',

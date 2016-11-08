@@ -1,7 +1,7 @@
-import manageLogReminders from './manageLogReminders';
+import manageLog from './manageLog';
 import overview from './overview';
 
 export default {
-  mngLogReminders: manageLogReminders,
+  mngLog: manageLog,
   overview
 };

@@ -22,17 +22,17 @@ export default async ({ add, del }, user) => {
   const remindersPerDaytime = reminders.reduce((p, c) => { p[c.text] = c; return p; }, {});
 
   const buttons = [MORNING, AFTERNOON, EVENING].map((type) => {
-    const { addLogReminder, deleteLogReminder } = btnFactory.reminders;
+    const reminderBtns = btnFactory.reminders;
     const r = remindersPerDaytime[type];
 
-    if (r) { return [deleteLogReminder(p, r.text)]; }
-    return [addLogReminder(p, type)];
+    if (r) { return [reminderBtns.delLog(p, r.text)]; }
+    return [reminderBtns.addLog(p, type)];
   });
 
   buttons.unshift([btnFactory.reminders.backToOverview(p)]);
 
-  const remindersList = reminders.length ? formatLogReminders(reminders, p) : p.t('reminders.noReminders');
-  const message = ['reminders.manageLogReminders.list', { remindersList }];
+  const remindersList = reminders.length ? formatLogReminders(reminders, p, user.timezone) : p.t('reminders.noReminders');
+  const message = ['reminders.manageLog.list', { remindersList }];
 
   return { message, buttons };
 };

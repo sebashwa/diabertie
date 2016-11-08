@@ -11,13 +11,13 @@ export default async (_, user) => {
   const logReminders = reminders.filter((r) => (r.type == 'log'));
   const dailyReminders = reminders.filter((r) => (r.type == 'daily'));
 
-  const logRemindersString = !logReminders.length ? p.t('reminders.noReminders') : formatLogReminders(logReminders, p);
-  const dailyRemindersString = !dailyReminders.length ? p.t('reminders.noReminders') : formatDailyReminders(dailyReminders);
+  const logRemindersString = !logReminders.length ? p.t('reminders.noReminders') : formatLogReminders(logReminders, p, user.timezone);
+  const dailyRemindersString = !dailyReminders.length ? p.t('reminders.noReminders') : formatDailyReminders(dailyReminders, user.timezone);
 
   const message = ['reminders.overview', { dailyRemindersString, logRemindersString }];
 
-  const { manageLogReminders, manageDailyReminders } = btnFactory.reminders;
-  const buttons = [[manageLogReminders(p)], [manageDailyReminders(p)]];
+  const { manageLog, manageDaily } = btnFactory.reminders;
+  const buttons = [[manageLog(p)], [manageDaily(p)]];
 
   return { message, buttons };
 };
