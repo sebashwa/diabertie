@@ -29,7 +29,7 @@ export default async ({ add, del }, user) => {
     return [reminderBtns.addLog(p, type)];
   });
 
-  buttons.unshift([btnFactory.reminders.backToOverview(p)]);
+  buttons.unshift([btnFactory.reminders.back(p, 'overview')]);
 
   const remindersList = reminders.length ? formatLogReminders(reminders, p, user.timezone) : p.t('reminders.noReminders');
   const message = ['reminders.manageLog.list', { remindersList }];

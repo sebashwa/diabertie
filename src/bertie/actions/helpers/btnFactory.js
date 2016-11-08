@@ -28,10 +28,13 @@ export default {
     today:   (date, p = dP) => genBtn(p.t('dateTime.today'), 'notes', 'selDate', date),
   },
   reminders: {
-    manageLog:      (p = dP) => genBtn(p.t('reminders.manageLog.button'), 'reminders', 'mngLog', {}),
-    backToOverview: (p = dP) => genBtn(p.t('reminders.backToOverview'), 'reminders', 'overview'),
-    addLog:         (p = dP, add) => genBtn(p.t('reminders.manageLog.addButton', { icon: p.t(`reminders.icons.${add}`), text: p.t(`reminders.logReminders.${add}`)  }), 'reminders', 'mngLog', { add }),
-    delLog:         (p = dP, del) => genBtn(p.t('reminders.manageLog.delButton', { icon: p.t(`reminders.icons.${del}`), text: p.t(`reminders.logReminders.${del}`) }), 'reminders', 'mngLog', { del }),
+    manageLog:   (p = dP) => genBtn(p.t('reminders.manageLog.button'), 'reminders', 'mngLog', {}),
+    manageDaily: (p = dP) => genBtn(p.t('reminders.manageDaily.button'), 'reminders', 'mngDaily', {}),
+    back:        (p = dP, to) => genBtn(p.t('generalWords.back'), 'reminders', to),
+    addLog:      (p = dP, add) => genBtn(p.t('reminders.manageLog.addButton', { icon: p.t(`reminders.icons.${add}`), text: p.t(`reminders.logReminders.${add}`)  }), 'reminders', 'mngLog', { add }),
+    delLog:      (p = dP, del) => genBtn(p.t('reminders.manageLog.delButton', { icon: p.t(`reminders.icons.${del}`), text: p.t(`reminders.logReminders.${del}`) }), 'reminders', 'mngLog', { del }),
+    addDaily:    (p = dP) => genBtn(p.t('reminders.addDaily.button'), 'reminders', 'addDaily'),
+    delDaily:    (p = dP) => genBtn(p.t('reminders.manageDaily.delButton'), 'reminders', 'delDaily'),
   },
   saveLogEvents: {
     yes: (savedAt, p = dP) => genBtn(p.t('generalWords.yes'), 'saveLogEvents', undefined, savedAt),
