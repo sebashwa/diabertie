@@ -1,4 +1,3 @@
-import moment from 'moment-timezone';
 import { Reminder } from '../../../../models';
 import { btnFactory } from '../../helpers';
 import { formatLogReminders } from './helpers/remindersFormatter';
@@ -13,17 +12,10 @@ const reminderTimes = {
   evening:   { hour: 21, minute: 0 },
 };
 
-async function addReminder (text, user) {
-  const at = moment.tz(reminderTimes[text], user.timezone).tz('etc_utc');
-  const atMinute = at.hours() * 60 + at.minutes();
-  const query = { type: 'log', user: user.id, text };
-  await Reminder.findOneAndUpdate(query, {...query, atMinute }, { upsert: true });
-}
-
 export default async ({ add, del }, user) => {
   const p = polyglot(user.locale);
 
-  if (add) { await addReminder(add, user); };
+  if (add) { await Reminder.addReminder(reminderTimes[add], 'log', add, user); };
   if (del) { await Reminder.remove({ type: 'log', user: user.id, text: del }); };
 
   const reminders = await Reminder.find({ type: 'log', user: user.id });
