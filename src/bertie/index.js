@@ -109,8 +109,10 @@ export default (bot) => {
 
     const { data: latestDetected } = user.latestDetectedData;
     if (latestDetected && conversationalActions[latestDetected.type]) {
-      const { message: conversationalMessage } = await conversationalActions[latestDetected.type](text, user);
-      return sendMessage(from.id, p.t(...conversationalMessage));
+      const { message: conversationalMessage, buttons } = await conversationalActions[latestDetected.type](text, user);
+      const opts = defaultOpts;
+      if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
+      return sendMessage(from.id, p.t(...conversationalMessage), opts);
     }
 
     const { error: detectionError, message, warnings, data } = await detectLogEvents(text, p);

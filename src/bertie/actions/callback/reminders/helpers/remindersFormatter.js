@@ -30,7 +30,7 @@ const formatDailyReminders = (r, tz) => {
     const hours = `${Math.floor(localMinutes / 60)}`;
     let minutes = `${localMinutes - hours * 60}`;
     minutes = (minutes.length == 1) ? `0${minutes}` : minutes;
-    return `*${hours}:${minutes}* - \"${text}\"`;
+    return `*${hours}:${minutes}* - ${text}`;
   }).join('\n');
 };
 

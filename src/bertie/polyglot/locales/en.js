@@ -76,13 +76,22 @@ export default {
     },
     manageLog: {
       button:    'Manage Log Reminders',
-      list:      'Your log reminders are:\n\n%{remindersList}',
+      list:      '⏰ Your log reminders are:\n\n%{remindersList}',
       addButton: '%{icon} Add %{text}',
       delButton: '%{icon} Delete %{text}',
     },
-    noReminders:    'No reminders',
-    overview:       '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
-    backToOverview: '◀ Back',
+    manageDaily: {
+      button:    'Manage Daily Reminders',
+      list:      '⏰ Your daily reminders are:\n\n%{remindersList}',
+      delButton: 'Delete Daily Reminder',
+    },
+    addDaily: {
+      button:      'Add Daily Reminder',
+      success:     '✅ Sucessfully added daily reminder\n\n%{hours}:%{minutes} - %{text}',
+      explanation: '⏰ Add daily reminder\n\nPlease write the reminder time in the format `HH:MM`\nYou can add an explanation completing the sentence _"I\'d like to remind you to ..."_\n\n*Example*\nYou want to be reminded to take your medicine at 21:00. Just write\n\n`21:00 take your medicine`',
+    },
+    noReminders: '😶 No reminders',
+    overview:    '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
   },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',
@@ -128,6 +137,7 @@ export default {
     today: 'today'
   },
   generalWords: {
+    back:   '◀ Back',
     yes:    'Yes',
     no:     'No',
     select: 'Select',
