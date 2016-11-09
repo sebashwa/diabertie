@@ -12,8 +12,8 @@ export default async (_, user) => {
 
   const buttons = [[btnFactory.reminders.back(p, 'overview')]];
 
-  if (reminders.length <= 8) { buttons.push([btnFactory.reminders.addDaily(p)]); };
-  if (reminders.length > 0) { buttons.push([btnFactory.reminders.delDaily(p)]); };
+  if (reminders.length < 8) { buttons.push([btnFactory.reminders.addDaily(p)]); };
+  if (reminders.length > 0) { buttons.push([btnFactory.reminders.listForDeletion(p)]); };
 
   const remindersList = reminders.length ? formatDailyReminders(reminders, user.timezone) : p.t('reminders.noReminders');
   const message = ['reminders.manageDaily.list', { remindersList }];

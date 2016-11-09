@@ -81,14 +81,20 @@ export default {
       delButton: '%{icon} Delete %{text}',
     },
     manageDaily: {
-      button:    'Manage Daily Reminders',
-      list:      '⏰ Your daily reminders are:\n\n%{remindersList}',
-      delButton: 'Delete Daily Reminder',
+      button: 'Manage Daily Reminders',
+      list:   '⏰ Your daily reminders are:\n\n%{remindersList}',
     },
     addDaily: {
       button:      'Add Daily Reminder',
       success:     '✅ Sucessfully added daily reminder\n\n%{hours}:%{minutes} - %{text}',
       explanation: '⏰ Add daily reminder\n\nPlease write the reminder time in the format `HH:MM`\nYou can add an explanation completing the sentence _"I\'d like to remind you to ..."_\n\n*Example*\nYou want to be reminded to take your medicine at 21:00. Just write\n\n`21:00 take your medicine`',
+    },
+    delDaily: {
+      button:  'Delete Daily Reminder',
+      success: '%{original}\n\n✅ Deleted *%{selectedValue})* %{value}',
+      abort:   '%{original}\n\n❌ Nothing deleted',
+      oldData: '%{original}\n\n❌ Nothing deleted, this is an old request',
+      list:    '⏰ Delete a daily reminder by choosing a number\n\n%{remindersList}',
     },
     noReminders: '😶 No reminders',
     overview:    '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',

@@ -1,18 +1,23 @@
 import moment from 'moment-timezone';
 
-function getLocalMinutes(utcMinutes, tz) {
+const localMinutes = (utcMinutes, tz) => {
   const hours = Math.floor(utcMinutes / 60);
   const minutes = utcMinutes - hours * 60;
   const localTime = moment.utc({ hours, minutes }).tz(tz);
   return localTime.hours() * 60 + localTime.minutes();
-}
+};
+
+const timeStringFromMinutes = (min) => {
+  const hours = Math.floor(min / 60);
+  let minutes = `${min - hours * 60}`;
+  minutes = (minutes.length == 1) ? `0${minutes}` : minutes;
+  return `${hours}:${minutes}`;
+};
 
 function sortReminders(r, tz) {
-  const glm = getLocalMinutes;
-
   return r.sort((first, second) =>  {
-    const a = glm(first.atMinute, tz);
-    const b = glm(second.atMinute, tz);
+    const a = localMinutes(first.atMinute, tz);
+    const b = localMinutes(second.atMinute, tz);
 
     if (a > b) { return 1; }
     if (a < b) { return -1; }
@@ -26,12 +31,8 @@ const formatLogReminders = (r, p, tz) => {
 
 const formatDailyReminders = (r, tz) => {
   return sortReminders(r, tz).map(({ text, atMinute }) => {
-    const localMinutes = getLocalMinutes(atMinute, tz);
-    const hours = `${Math.floor(localMinutes / 60)}`;
-    let minutes = `${localMinutes - hours * 60}`;
-    minutes = (minutes.length == 1) ? `0${minutes}` : minutes;
-    return `*${hours}:${minutes}* - ${text}`;
+    return `*${timeStringFromMinutes(localMinutes(atMinute, tz))}* - ${text}`;
   }).join('\n');
 };
 
-export { formatLogReminders, formatDailyReminders };
+export { formatLogReminders, formatDailyReminders, localMinutes, timeStringFromMinutes };
