@@ -97,7 +97,7 @@ export default {
       list:    '⏰ Delete a daily reminder by choosing a number\n\n%{remindersList}',
     },
     noReminders: '😶 No reminders',
-    overview:    '⏰ Your reminders are\n\n*Log Reminders* _- only sent if you forgot to log values_\n\n%{logRemindersString}\n\n*Daily Reminders* _- helpful to remember medications, measuring sugar levels etc._\n\n%{dailyRemindersString}',
+    overview:    '⏰ There are two types of reminders\n\n*Log Reminders:* only sent if you forgot to log values\n*Daily Reminders:* helpful to remember medications, measuring sugar levels etc.',
   },
   logEvents: {
     be:           '%{smart_count} BE |||| %{smart_count} BE',
