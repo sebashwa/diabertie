@@ -26,7 +26,7 @@ describe('bertie callback action #saveLogEvents', () => {
     });
   });
 
-  describe('with another date given then the latest detected data', () => {
+  describe('with another date given than the latest detected data', () => {
     it('states that the action is old and aborts', async () => {
       const someOtherDate = moment.utc('2013-05-12').unix();
       const { message } = await saveLogEvents({ d: someOtherDate }, user, originalMsg);

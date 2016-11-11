@@ -3,7 +3,7 @@ import { deleteNote } from '../../database';
 export default async ({n: selectedValue, at: deleteRequestedAt }, user, { text: original }) => {
   let message;
 
-  if (!deleteRequestedAt) {
+ if (!deleteRequestedAt) {
     message = ['notes.deleteNote.abort', { original }];
   } else if (deleteRequestedAt != user.latestDetectedData.detectedAt) {
     message = ['notes.deleteNote.oldData', { original }];
