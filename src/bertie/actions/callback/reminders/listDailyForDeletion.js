@@ -18,7 +18,8 @@ export default async (_, user) => {
 
   const remindersList = reminders.map((r, i) => {
     const time = timeStringFromMinutes(localMinutes(r.atMinute, user.timezone));
-    return `${i + 1}) ${time} - ${r.text}`;
+    const description = r.text ? ` - ${r.text}` : '';
+    return `${i + 1}) ${time}${description}`;
   }).join('\n');
   const message = ['reminders.delDaily.list', { remindersList }];
 
