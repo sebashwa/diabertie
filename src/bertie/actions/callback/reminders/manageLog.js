@@ -3,19 +3,13 @@ import { btnFactory } from '../../helpers';
 import { formatLogReminders } from './helpers/remindersFormatter';
 import polyglot from '../../../polyglot';
 
-import logReminderTypes from './logReminderTypes';
+import { logReminderTypes, logReminderTimes } from '../../../../constants/reminders';
 const { MORNING, AFTERNOON, EVENING } = logReminderTypes;
-
-const reminderTimes = {
-  morning:   { hour: 11, minute: 0 },
-  afternoon: { hour: 15, minute: 0 },
-  evening:   { hour: 21, minute: 0 },
-};
 
 export default async ({ add, del }, user) => {
   const p = polyglot(user.locale);
 
-  if (add) { await Reminder.addReminder(reminderTimes[add], 'log', add, user); };
+  if (add) { await Reminder.addReminder(logReminderTimes[add], 'log', add, user); };
   if (del) { await Reminder.remove({ type: 'log', user: user.id, text: del }); };
 
   const reminders = await Reminder.find({ type: 'log', user: user.id });

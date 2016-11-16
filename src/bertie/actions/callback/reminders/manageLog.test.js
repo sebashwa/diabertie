@@ -2,7 +2,7 @@ import expect from 'unexpected';
 import manageLog from './manageLog';
 import { User, Reminder } from '../../../../models';
 
-import logReminderTypes from './logReminderTypes';
+import { logReminderTypes } from '../../../../constants/reminders';
 const { MORNING, AFTERNOON, EVENING } = logReminderTypes;
 
 describe('bertie callback action reminders#manageLog', () => {
