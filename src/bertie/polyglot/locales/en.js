@@ -64,6 +64,33 @@ export default {
     }
   },
   reminders: {
+    messages: {
+      daily: {
+        withText: {
+          1: 'Hey, this is your daily reminder to `%{text}`! 🕐',
+          2: 'It\'s time to `%{text}`! 💪',
+          3: 'Hey, I want to remind you to `%{text}` 😊',
+          4: 'Do you still have to `%{text}`❔',
+          5: 'Don\'t forget to `%{text}` today! 🙀',
+          6: 'Did you remember to `%{text}`? 🙃',
+        },
+        withoutText: {
+          1: 'Hey this is your daily reminder for %{time}',
+          2: 'Hey it\'s %{time}! Time to do your thing'
+        }
+      },
+      log: {
+        noValues: {
+          1: 'Hey, you didn\'t log any values at all today. Do you want to take some minutes to do so? 👍',
+          2: 'Hey! No values in your diary today! 🙀 It won\'t take much time to log some values!',
+          3: 'Hey, how about logging some values today? 😊',
+        },
+        1: 'You didn\'t log any values this %{daytime} 😔',
+        2: 'Hey, would you mind logging some values this %{daytime} 💪',
+        3: 'This is your reminder to log values this %{daytime} 🕐',
+        4: 'It\'s time to log some values for this %{daytime}! ',
+      },
+    },
     icons: {
       morning:   '🏙',
       afternoon: '🌇',
