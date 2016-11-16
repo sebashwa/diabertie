@@ -112,9 +112,10 @@ export default {
       list:   '⏰ Your daily reminders are:\n\n%{remindersList}',
     },
     addDaily: {
-      button:      'Add Daily Reminder',
-      success:     '✅ Sucessfully added daily reminder\n\n%{hours}:%{minutes} - %{text}',
-      explanation: '⏰ Add daily reminder\n\nPlease write the reminder time in the format `HH:MM`\nYou can add an explanation completing the sentence _"I\'d like to remind you to ..."_\n\n*Example*\nYou want to be reminded to take your medicine at 21:00. Just write\n\n`21:00 take your medicine`',
+      button:       'Add Daily Reminder',
+      success:      '✅ Sucessfully added daily reminder\n\n%{hours}:%{minutes} - %{text}',
+      explanation:  '⏰ Add daily reminder\n\nPlease write the reminder time in the format `HH:MM`\nYou can add an explanation completing the sentence _"I\'d like to remind you to ..."_\n\n*Example*\nYou want to be reminded to take your medicine at 21:00. Just write\n\n`21:00 take your medicine`',
+      regExFailure: 'Ooops, I did not understand that..\nPlease write something like\n\n`12:30 measure your sugar level`',
     },
     delDaily: {
       button:  'Delete Daily Reminder',
