@@ -9,7 +9,7 @@ export default async (_, done) => {
 
   const reminders = await Reminder.find({
     type:           'daily',
-    atMinute:       { $gt: nowMin - 10, $lt: nowMin + 10 },
+    atMinute:       { $gt: nowMin - 5, $lt: nowMin + 5 },
     lastExecutedAt: { $lt: now.startOf('day').toDate() },
   });
 
