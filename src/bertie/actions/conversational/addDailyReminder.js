@@ -14,19 +14,15 @@ export default async (msg, user) => {
 
     if (!match) { return { message: ['reminders.addDaily.regExFailure'] }; };
 
-    const hours = parseInt(match[1]);
-    const minutes = parseInt(match[2]);
+    const hour = parseInt(match[1]);
+    const minute = parseInt(match[2]);
     const text = match[3];
 
-    const etcTime = moment.tz({ hours, minutes }, user.timezone).tz('etc_utc');
-    const atMinute = etcTime.hours() * 60 + etcTime.minutes();
-
     const lastExecutedAt = moment.utc().subtract(1, 'days').toDate();
-
-    await Reminder.create({ type: 'daily', text, user: user.id, atMinute, lastExecutedAt });
+    await Reminder.addReminder({ hour, minute }, 'daily', text, user, lastExecutedAt);
     await user.update({ latestDetectedData: { data: null, detectedAt: null } });
 
-    const message = ['reminders.addDaily.success', { hours: zeroPadded(hours), minutes: zeroPadded(minutes), text }];
+    const message = ['reminders.addDaily.success', { hours: zeroPadded(hour), minutes: zeroPadded(minute), text }];
     const buttons = [[btnFactory.reminders.manageDaily(polyglot(user.locale))]];
 
     return { message, buttons };

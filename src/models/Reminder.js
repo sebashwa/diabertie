@@ -10,10 +10,10 @@ const ReminderSchema = new Schema({
   user:           { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
-ReminderSchema.static('addReminder', async function({ hour, minute }, type, text, user) {
+ReminderSchema.static('addReminder', async function({ hour, minute }, type, text, user, lastExecutedAt) {
   const at = moment.tz({ hour, minute }, user.timezone).tz('etc_utc');
   const atMinute = at.hours() * 60 + at.minutes();
-  const query = { type, user: user.id, text };
+  const query = { type, user: user.id, text, lastExecutedAt };
 
   return await this.findOneAndUpdate(query, {...query, atMinute }, { upsert: true });
 });
