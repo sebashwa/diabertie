@@ -110,7 +110,7 @@ export default (bot) => {
     const { data: latestDetected } = user.latestDetectedData;
     if (latestDetected && conversationalActions[latestDetected.type]) {
       const { message: conversationalMessage, buttons } = await conversationalActions[latestDetected.type](text, user);
-      const opts = defaultOpts;
+      const opts = { ... defaultOpts };
       if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
       return sendMessage(from.id, p.t(...conversationalMessage), opts);
     }
@@ -144,16 +144,13 @@ export default (bot) => {
 
     const { message, buttons } = await callbackActions[callbackData.t](callbackData, user, originalMsg);
 
-    const messageOpts = {
+    const opts = {
       ...defaultOpts,
       chat_id:    originalMsg.chat.id,
       message_id: originalMsg.message_id,
     };
 
-    if (buttons) {
-      messageOpts.reply_markup = { inline_keyboard: buttons };
-    }
-
-    bot.editMessageText(p.t(...message), messageOpts);
+    if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
+    bot.editMessageText(p.t(...message), opts);
   });
 };

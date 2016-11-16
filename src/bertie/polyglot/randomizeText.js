@@ -14,5 +14,5 @@ export default (locale, polyglotString, polyglotOpts) => {
   const max = Object.keys(texts).length + 1;
 
   return p.t(`${polyglotString}.${getRandomInt(1, max)}`, polyglotOpts);
-}
+};
 
