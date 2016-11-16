@@ -34,7 +34,7 @@ export default {
     addLog:          (p = dP, add) => genBtn(p.t('reminders.manageLog.addButton', { icon: p.t(`reminders.icons.${add}`), text: p.t(`reminders.logReminders.${add}`)  }), 'reminders', 'mngLog', { add }),
     delLog:          (p = dP, del) => genBtn(p.t('reminders.manageLog.delButton', { icon: p.t(`reminders.icons.${del}`), text: p.t(`reminders.logReminders.${del}`) }), 'reminders', 'mngLog', { del }),
     addDaily:        (p = dP) => genBtn(p.t('reminders.addDaily.button'), 'reminders', 'addDaily'),
-    delDaily:        (n, at) => genBtn(`${n}`, 'reminders', 'delDaily', { n, at }),
+    delDaily:        (n, at) => genBtn(`${n})`, 'reminders', 'delDaily', { n, at }),
     listForDeletion: (p = dP) => genBtn(p.t('reminders.delDaily.button'), 'reminders', 'listForDel'),
   },
   saveLogEvents: {
