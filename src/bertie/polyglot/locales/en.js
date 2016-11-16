@@ -82,13 +82,13 @@ export default {
         }
       },
       log: {
-        noValues: {
+        noLogsToday: {
           1: 'Hey, you didn\'t log any values at all today. Do you want to take some minutes to do so? 👍',
-          2: 'Hey! No values in your diary today! 🙀 It won\'t take much time to log some values!',
+          2: 'Hey, no values in your diary today! 🙀  It won\'t take much time to log some values, go ahead!',
           3: 'Hey, how about logging some values today? 😊',
         },
         1: 'You didn\'t log any values so far this %{daytime} 😔',
-        2: 'Hey, would you mind logging some values for this %{daytime} 💪',
+        2: 'Hey, would you mind logging some values for this %{daytime}? 💪',
         3: 'This is your reminder to log values for this %{daytime} 🕐',
         4: 'It\'s time to log some values for this %{daytime}! ',
       },

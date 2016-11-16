@@ -10,12 +10,14 @@ const ReminderSchema = new Schema({
   user:           { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
-ReminderSchema.static('addReminder', async function({ hour, minute }, type, text, user, lastExecutedAt) {
+ReminderSchema.static('addReminder', async function({ hour, minute }, type, text, user, lastExecuted) {
   const at = moment.tz({ hour, minute }, user.timezone).tz('etc_utc');
   const atMinute = at.hours() * 60 + at.minutes();
-  const query = { type, user: user.id, text, lastExecutedAt };
+  const query = { type, user: user.id, text };
 
-  return await this.findOneAndUpdate(query, {...query, atMinute }, { upsert: true });
+  const lastExecutedAt = lastExecuted ? lastExecuted : moment().tz(user.timezone).subtract(1, 'days');
+
+  return await this.findOneAndUpdate(query, {...query, atMinute, lastExecutedAt }, { upsert: true });
 });
 
 export default mongoose.model('Reminder', ReminderSchema);
