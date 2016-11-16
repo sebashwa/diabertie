@@ -1,7 +1,7 @@
 import Agenda from 'agenda';
 import sendDailyReminders from './sendDailyReminders';
 
-const agenda = new Agenda({ db: { address: process.env.MONGO_AGENDA_URL } });
+const agenda = new Agenda({ db: { address: process.env.MONGO_DB_URL } });
 
 export default () => {
   agenda.define('send daily reminders', sendDailyReminders);
