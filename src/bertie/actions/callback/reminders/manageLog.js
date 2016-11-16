@@ -1,6 +1,6 @@
 import { Reminder } from '../../../../models';
 import { btnFactory } from '../../helpers';
-import { formatLogReminders } from './helpers/remindersFormatter';
+import { listLog } from './helpers/remindersFormatter';
 import polyglot from '../../../polyglot';
 
 import { logReminderTypes, logReminderTimes } from '../../../../constants/reminders';
@@ -25,7 +25,7 @@ export default async ({ add, del }, user) => {
 
   buttons.unshift([btnFactory.reminders.back(p, 'overview')]);
 
-  const remindersList = reminders.length ? formatLogReminders(reminders, p, user.timezone) : p.t('reminders.noReminders');
+  const remindersList = reminders.length ? listLog(reminders, p, user.timezone) : p.t('reminders.noReminders');
   const message = ['reminders.manageLog.list', { remindersList }];
 
   return { message, buttons };

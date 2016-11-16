@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import { Reminder } from '../../../../models';
 import { btnFactory } from '../../helpers';
-import { localMinutes, timeStringFromMinutes } from './helpers/remindersFormatter';
+import { listDailyForDeletion } from './helpers/remindersFormatter';
 import polyglot from '../../../polyglot';
 
 export default async (_, user) => {
@@ -16,11 +16,7 @@ export default async (_, user) => {
   const delButtons = reminders.map((_, i) => btnFactory.reminders.delDaily(i + 1, detectedAt));
   const buttons = [[btnFactory.reminders.back(p, 'mngDaily')], delButtons];
 
-  const remindersList = reminders.map((r, i) => {
-    const time = timeStringFromMinutes(localMinutes(r.atMinute, user.timezone));
-    const description = r.text ? ` - ${r.text}` : '';
-    return `${i + 1}) ${time}${description}`;
-  }).join('\n');
+  const remindersList = listDailyForDeletion(reminders, user.timezone);
   const message = ['reminders.delDaily.list', { remindersList }];
 
   return { message, buttons };

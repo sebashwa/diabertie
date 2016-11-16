@@ -1,6 +1,6 @@
 import { Reminder } from '../../../../models';
 import { btnFactory } from '../../helpers';
-import { formatDailyReminders } from './helpers/remindersFormatter';
+import { listDaily } from './helpers/remindersFormatter';
 import polyglot from '../../../polyglot';
 
 export default async (_, user) => {
@@ -15,7 +15,7 @@ export default async (_, user) => {
   if (reminders.length < 8) { buttons.push([btnFactory.reminders.addDaily(p)]); };
   if (reminders.length > 0) { buttons.push([btnFactory.reminders.listForDeletion(p)]); };
 
-  const remindersList = reminders.length ? formatDailyReminders(reminders, user.timezone) : p.t('reminders.noReminders');
+  const remindersList = reminders.length ? listDaily(reminders, user.timezone) : p.t('reminders.noReminders');
   const message = ['reminders.manageDaily.list', { remindersList }];
 
   return { message, buttons };

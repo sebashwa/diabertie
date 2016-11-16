@@ -22,7 +22,8 @@ export default async (msg, user) => {
     await Reminder.addReminder({ hour, minute }, 'daily', text, user, lastExecutedAt);
     await user.update({ latestDetectedData: { data: null, detectedAt: null } });
 
-    const message = ['reminders.addDaily.success', { hours: zeroPadded(hour), minutes: zeroPadded(minute), text }];
+    const description = text.length > 0 ? `- ${text}` : '';
+    const message = ['reminders.addDaily.success', { hours: zeroPadded(hour), minutes: zeroPadded(minute), description }];
     const buttons = [[btnFactory.reminders.manageDaily(polyglot(user.locale))]];
 
     return { message, buttons };

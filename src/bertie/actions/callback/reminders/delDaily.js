@@ -16,7 +16,8 @@ export default async ({ n: selectedValue, at: deleteRequestedAt }, user, { text:
     const id = user.latestDetectedData.data[selectedValue];
     const { data, error } = await deleteDailyReminder(id, user);
     const time = timeStringFromMinutes(localMinutes(data.atMinute, user.timezone));
-    const value = `${time} - ${data.text}`;
+    const desc = data.text.length > 0 ? `- ${data.text}` : '';
+    const value = `${time} ${desc}`;
 
     message = error ? error : ['reminders.delDaily.success', { original, selectedValue, value } ];
   }

@@ -26,14 +26,18 @@ function sortReminders(r, tz) {
   });
 };
 
-const formatLogReminders = (r, p, tz) => {
+const listLog = (r, p, tz) => {
   return sortReminders(r, tz).map(({ text }) => `${p.t(`reminders.icons.${text}`)} - ${p.t(`reminders.logReminders.${text}`)}`).join('\n');
 };
 
-const formatDailyReminders = (r, tz) => {
+const dailyRemindersArray = (r, tz) => {
   return sortReminders(r, tz).map(({ text, atMinute }) => {
-    return `*${timeStringFromMinutes(localMinutes(atMinute, tz))}* - ${text}`;
-  }).join('\n');
+    const desc = text.length > 0 ? `- ${text}` : '';
+    return `*${timeStringFromMinutes(localMinutes(atMinute, tz))}* ${desc}`;
+  });
 };
 
-export { formatLogReminders, formatDailyReminders, localMinutes, timeStringFromMinutes };
+const listDaily = (r, tz) => dailyRemindersArray(r, tz).join('\n');
+const listDailyForDeletion = (r, tz) => dailyRemindersArray(r, tz).map((r, i) => `${i + 1}) ${r}`).join('\n');
+
+export { listLog, listDaily, listDailyForDeletion, localMinutes, timeStringFromMinutes };

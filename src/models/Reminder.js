@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 const ReminderSchema = new Schema({
   atMinute:       { type: Number },
   type:           { type: String }, // daily or log
-  text:           { type: String },
+  text:           { type: String, default: '' },
   lastExecutedAt: { type: Date },
   createdAt:      { type: Date, default: Date.now },
   user:           { type: Schema.Types.ObjectId, ref: 'User' },
