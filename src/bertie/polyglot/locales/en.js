@@ -75,8 +75,10 @@ export default {
           6: 'Did you remember to `%{text}`? 🙃',
         },
         withoutText: {
-          1: 'Hey this is your daily reminder for %{time}',
-          2: 'Hey it\'s %{time}! Time to do your thing'
+          1: 'Hey this is your daily reminder 🕐',
+          2: 'You told me to remind you now! Time to do your thing 🙃',
+          3: 'It\'s time for your daily diabetes routine! 😊',
+          4: 'Hey it\'s me with your daily reminder! 🕐',
         }
       },
       log: {
