@@ -13,8 +13,8 @@ async function sendIfNeeded(type, startTime, user)  {
   const logEvents = await LogEvent.find({ user: user.id, createdAt: { $lt: end, $gt: start } });
 
   if (logEvents.length == 0) {
-    var polyglotPath = 'reminders.messages.log';
-    polyglotPath += (type == EVENING && startTime == START_OF_DAY) ? '.noLogsToday' : '';
+    var polyglotPath = 'reminders.messages.log.';
+    polyglotPath += (type == EVENING && startTime == START_OF_DAY) ? 'withoutLogEvents' : 'withLogEvents';
 
     const text = randomizeText(user.locale, polyglotPath, { daytime: type });
     bot.sendMessage(user.telegramId, text, { parse_mode: 'Markdown' });
