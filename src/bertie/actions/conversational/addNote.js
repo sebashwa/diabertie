@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import logger from '../../../logger';
 import { Note } from '../../../models';
 
 export default async (text, user) => {
@@ -12,7 +13,7 @@ export default async (text, user) => {
 
     return { message: ['notes.added'] };
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return { message: ['generalErrors.superWrong'] };
   }
 };
