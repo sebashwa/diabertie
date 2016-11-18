@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import polyglot from '../../polyglot';
+import logger from '../../../logger';
 import { Reminder } from '../../../models';
 import { btnFactory } from '../helpers';
 
@@ -28,7 +29,7 @@ export default async (msg, user) => {
 
     return { message, buttons };
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return { message: ['generalErrors.superWrong'] };
   }
 };
