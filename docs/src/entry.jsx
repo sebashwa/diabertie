@@ -6,7 +6,7 @@ import HowTo from './modules/HowTo';
 import Landing from './modules/Landing';
 
 render((
-  <Router history={hashHistory}>
+  <Router history={hashHistory} onUpdate={() => window.scrollTo(0, 0)}>
     <Route path="/" component={Layout}>
       <IndexRoute component={Landing}/>
       <Route path="/howto" component={HowTo}/>
