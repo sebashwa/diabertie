@@ -9,7 +9,11 @@ class Link extends Component {
 
   render() {
     return (
-      <a className={styles.root} href={this.props.href}>{this.props.title}</a>
+      <a className={styles.root}
+         href={this.props.href}
+         onClick={this.props.onClick}>
+        {this.props.title || this.props.children}
+      </a>
     );
   }
 };

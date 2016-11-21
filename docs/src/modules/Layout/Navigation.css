@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  top: 3.5em;
+  right: 0;
+  border-bottom: 1px solid #ACA7D2;
+}
+
+.link {
+  padding: 0.5em;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+@media (min-width: 1000px) {
+  .root {
+    position: inherit;
+    flex-direction: row;
+    border: none;
+  }
+}

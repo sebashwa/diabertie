@@ -1,0 +1,48 @@
+.root {
+  font-family: 'Lato', sans-serif;
+  font-size: 2.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  .root {
+    font-size: 1.2em;
+  }
+}
+
+.content {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 30px;
+  margin-top: 3.5em;
+  color: #6F6F6F;
+  background-color: #FFFFFF;
+}
+
+@media (min-width: 1000px) {
+  .content {
+    margin-top: 5em;
+    max-width: 1000px;
+  }
+}
+
+.image {
+  width: 70%;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  .image {
+    width: 300px;
+  }
+}
