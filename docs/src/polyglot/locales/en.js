@@ -9,7 +9,7 @@ export default {
       addNote: 'Manage notes',
     },
     intro: {
-      telegramUsage: `This is the Diabertie how to page.
+      telegramUsage: `This is the Diabertie how to.
         Diabertie uses the awesome`,
       getTelegram: `functionality. So to use Diabertie you have to get Telegram, which is available for all
         platforms commonly used nowadays.

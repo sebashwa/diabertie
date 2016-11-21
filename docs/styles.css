@@ -85,11 +85,17 @@
   cursor: pointer;
 }
 
+.Navigation__toggleImage___1UwyA {
+  width: 1em;
+  margin-right: 1em;
+}
+
 @media (min-width: 1000px) {
   .Navigation__root___3JzBT {
     position: inherit;
     flex-direction: row;
     border: none;
+    margin-right: 2em;
   }
 }
 .Header__root___KEFlX {

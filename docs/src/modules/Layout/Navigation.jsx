@@ -30,11 +30,14 @@ class Navigation extends Component {
 
   render() {
     const { subNavActive } = this.state;
+    const toggleImage = subNavActive ? 'toggleMenuUp' : 'toggleMenuDown';
 
     return (
       <div>
         <MediaQuery maxWidth={1000}>
-          <a className={styles.toggle} onClick={this.toggleSubNav}>...</a>
+          <a className={styles.toggle} onClick={this.toggleSubNav}>
+            <img className={styles.toggleImage} src={`img/${toggleImage}.svg`} />
+          </a>
           {subNavActive && this.renderLinks()}
         </MediaQuery>
 
