@@ -14473,7 +14473,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: _Landing2.default.line },
-	          _react2.default.createElement('img', { className: _Landing2.default.bertie, src: 'img/bertie.svg' }),
+	          _react2.default.createElement('img', { className: _Landing2.default.bertie, src: 'img/bertie_bubble.svg' }),
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -14635,7 +14635,7 @@
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/' },
-	          scrolledDown && _react2.default.createElement('img', { className: _Header2.default.image, src: 'img/bertie.svg' })
+	          scrolledDown && _react2.default.createElement('img', { className: _Header2.default.image, src: 'img/bertie_bubble.svg' })
 	        ),
 	        _react2.default.createElement(_Navigation2.default, null)
 	      );

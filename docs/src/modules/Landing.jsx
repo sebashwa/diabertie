@@ -26,7 +26,7 @@ class Landing extends Component {
     return (
       <div className={styles.root}>
         <div className={styles.line}>
-          <img className={styles.bertie} src="img/bertie.svg" />
+          <img className={styles.bertie} src="img/bertie_bubble.svg" />
           <div>
             <h1>{p.t('landing.teaser.heading')}</h1>
             <h2>{p.t('landing.teaser.sub')}</h2>

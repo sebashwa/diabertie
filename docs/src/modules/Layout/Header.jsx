@@ -13,7 +13,7 @@ class Header extends Component {
     return (
       <div className={rootClass} onScroll={this.onScroll}>
         <Link to="/">
-          { scrolledDown && <img className={styles.image} src="img/bertie.svg" /> }
+          { scrolledDown && <img className={styles.image} src="img/bertie_bubble.svg" /> }
         </Link>
 
         <Navigation />
