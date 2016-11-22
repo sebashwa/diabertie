@@ -1,23 +1,28 @@
 import moment from 'moment-timezone';
 import { getDiaryNavigation, formatters } from './helpers';
-import { fetchLogEvents } from '../database';
+import { fetchNotes, fetchLogEvents } from '../database';
 
 export default async ({ d }, user) => {
   const datum = moment.unix(d);
   if (!datum.isValid()) { return { message: ['generalErrors.superWrong'] }; };
 
-  const { buttons } = getDiaryNavigation('navigateDiary', datum);
-  const { data, error } = await fetchLogEvents(user, datum);
-  if (error) { return { message: error }; }
+  const { buttons } = getDiaryNavigation('navigateDiary', datum, user);
+
+  const { data: logEventsData, error: logEventsError } = await fetchLogEvents(user, datum);
+  if (logEventsError) { return { message: logEventsError }; }
+  const { data: notesData, error: notesError } = await fetchNotes(user, datum);
+  if (notesError) { return { message: notesError }; }
 
   const date = datum.tz(user.timezone).format('ddd, DD.MM.YYYY');
   let message;
 
-  if (!data[0]) {
+  if (!logEventsData[0] && !notesData[0]) {
     message = ['navigateDiary.noData', { date }];
   } else {
-    const values = formatters.diary(data, user.timezone);
-    message = ['navigateDiary.data', { date, values }];
+    const logEvents = formatters.diary(logEventsData, user.timezone);
+    const notes = notesData[0] ? `${notesData.map((n) => n.text).join('\n')}\n\n` : '';
+
+    message = ['navigateDiary.data', { date, logEvents, notes }];
   }
 
   return {

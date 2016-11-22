@@ -5,7 +5,6 @@ import { User, LogEvent } from '../../../../models';
 
 describe('bertie callback action deletion#selectValue', () => {
   let user;
-  let logEventIds;
   const createdAt = moment.utc('2015-12-24 10:24');
 
   const createLogEvents = async (number) => {
@@ -18,7 +17,7 @@ describe('bertie callback action deletion#selectValue', () => {
   beforeEach(async () => user = await User.create({ telegramId: 1234567890 }));
 
   describe('with less than 8 log events', () => {
-    beforeEach(async () => logEventIds = await createLogEvents(5));
+    beforeEach(async () => await createLogEvents(5));
 
     it('generates buttons for each available logEvent', async () => {
       const { buttons } = await selectValue(createdAt.unix(), user);
@@ -28,19 +27,10 @@ describe('bertie callback action deletion#selectValue', () => {
       expect(buttons[0].length, 'to be', 5);
       expect(buttonSubtypes, 'to equal', ['delVal','delVal','delVal','delVal','delVal']);
     });
-
-    it('saves a map with (button)numbers as keys and logEvent ids as values on the user latestDetectedData field', async () => {
-      await selectValue(createdAt.unix(), user);
-      const expected = logEventIds.reduce((p, c, i) => { p[i + 1] = c; return p; }, {});
-
-      const refreshedUser = await User.findById(user._id);
-
-      expect(refreshedUser.latestDetectedData.data, 'to satisfy', expected);
-    });
   });
 
   describe('with more than 8 log events', () => {
-    beforeEach(async () => logEventIds = await createLogEvents(17));
+    beforeEach(async () => await createLogEvents(17));
 
     it('splits the buttons to several rows (because telegram only allows 8 buttons per row)', async () => {
       const { buttons } = await selectValue(createdAt.unix(), user);

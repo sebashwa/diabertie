@@ -1,4 +1,4 @@
-import { bertieStart } from './actions';
+import { bertieStart, listShorthands } from './actions';
 import { btnFactory, timeline } from './actions/helpers';
 import { detectLogEvents } from './actions/parsing';
 import { fetchUser } from './actions/database';
@@ -43,11 +43,19 @@ export default (bot) => {
     });
   });
 
+  bot.onText(/^\/shorthands/, async ({ from }) => {
+    const { user } = await fetchUser(from);
+    const p = polyglot(user.locale);
+
+    const { message } = listShorthands(p);
+    sendMessage(from.id, p.t(...message));
+  });
+
   bot.onText(/^\/diary/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline();
+    const tl = timeline(user);
 
     const { message, buttons } = await callbackActions.navigateDiary({ d: tl.moment.today.unix() }, user);
 
@@ -61,7 +69,7 @@ export default (bot) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    const tl = timeline();
+    const tl = timeline(user);
 
     const { message, buttons } = await callbackActions.del({ d: tl.unix.today, s: 'selDate' }, user);
 
@@ -73,27 +81,39 @@ export default (bot) => {
     });
   });
 
-  bot.onText(/^(?!\/)\D*$/, async ({ from, text }) => {
+  bot.onText(/^\/notes/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);
-    var newMsg = ['onText.notUnderstood'];
+    const tl = timeline(user);
 
-    const data = user.latestDetectedData.data;
+    const { message, buttons } = await callbackActions.notes({ d: tl.unix.today, s: 'selDate' }, user);
 
-    if (data && conversationalActions[data.type]) {
-      const { message } = await conversationalActions[data.type](text, user);
-      newMsg = message;
-    }
-
-    sendMessage(from.id, p.t(...newMsg));
+    sendMessage(from.id, p.t(...message), { ... defaultOpts, reply_markup: { inline_keyboard: buttons } });
   });
 
-  bot.onText(/^(?!\/).*\d.*\s.*[A-Za-z].*$/, async ({ from, text }) => {
+  bot.onText(/^\/reminderz/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
-
     const p = polyglot(user.locale);
+
+    const { message, buttons } = await callbackActions.reminders({ s: 'overview' }, user);
+
+    sendMessage(from.id, p.t(...message), { ... defaultOpts, reply_markup: { inline_keyboard: buttons } });
+  });
+
+  bot.onText(/^(?!\/).*$/, async ({ from, text }) => {
+    const { user, error: userError } = await fetchUser(from);
+    if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
+    const p = polyglot(user.locale);
+
+    const { data: latestDetected } = user.latestDetectedData;
+    if (latestDetected && conversationalActions[latestDetected.type]) {
+      const { message: conversationalMessage, buttons } = await conversationalActions[latestDetected.type](text, user);
+      const opts = { ... defaultOpts };
+      if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
+      return sendMessage(from.id, p.t(...conversationalMessage), opts);
+    }
 
     const { error: detectionError, message, warnings, data } = await detectLogEvents(text, p);
     if (detectionError) return sendMessage(from.id, p.t(...detectionError));
@@ -124,16 +144,13 @@ export default (bot) => {
 
     const { message, buttons } = await callbackActions[callbackData.t](callbackData, user, originalMsg);
 
-    const messageOpts = {
+    const opts = {
       ...defaultOpts,
       chat_id:    originalMsg.chat.id,
       message_id: originalMsg.message_id,
     };
 
-    if (buttons) {
-      messageOpts.reply_markup = { inline_keyboard: buttons };
-    }
-
-    bot.editMessageText(p.t(...message), messageOpts);
+    if (buttons) { opts.reply_markup = { inline_keyboard: buttons }; };
+    bot.editMessageText(p.t(...message), opts);
   });
 };

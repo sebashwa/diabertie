@@ -6,8 +6,9 @@ export default {
       Diabertie uses the awesome`,
     getTelegram: `So to use Diabertie you have to get Telegram, which is available for all
       platforms commonly used nowadays.
-      After installing Telegram, just search for a contact named @diabertiebot and
-      start writing him your diabetes values.`
+      After installing Telegram, just search for a contact named`,
+    botName: '@diabertiebot',
+    rest: 'and start writing him your diabetes values.'
   },
   usage: {
     headline: 'Usage',
@@ -32,10 +33,10 @@ export default {
     headline: 'Log values',
     intro: `To log values, usually all you have to do is write Diabertie a one line
        text message. Let's get started with an example:`,
-    example: `You just measured your sugar value, ate something and injected the appropriate
+    example: `You just measured your sugar level, ate something and injected the appropriate
       insulin dose. This is all you have to write to Diabertie to save your actions:`,
     command1: '5.5 mmol 24 carbs 4 hum',
-    explanation: `Diabertie detects that you measure your sugar value in mmol/l,
+    explanation: `Diabertie detects that you measure your sugar level in mmol/l,
       your food in grams carbonhydrate and that you use Humalog as your insulin.
       Besides those units, Diabertie understands much more. Here is a list with
       all the abbreviations that you can use, if you want to log values
@@ -60,6 +61,12 @@ export default {
     command: '/deletion',
     selectDate: 'You have to select a date which you would like to delete a value from. The interface is very similar to the one in the diary, except for the big \'Select\' button.',
     selectValue: 'After selecting a date, the values are numbered and you can choose, which one you want to delete.'
+  },
+  notes: {
+    headline: 'Manage notes',
+    intro: 'Notes can be helpful to log your daily mood or sports activities and the likes. You can add and delete notes by writing',
+    command: '/notes',
+    selectDate: 'Select a date which you want to add a note for or delete a note from. Then click on the action you want to perform. All your added notes show up in the diary!',
   },
   thatsAll: `This is all you can do with Diabertie so far. If you have any suggestions on how to improve or just want to give me
     feedback (bad or good), please feel free to contact me.`

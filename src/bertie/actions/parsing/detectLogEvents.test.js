@@ -41,7 +41,7 @@ describe('parsing action #detectLogEvents', () => {
     expect(error, 'to equal', ['detectLogEvents.errors.notFound']);
   });
 
-  it('returns a warning when two sugar values given', async () => {
+  it('returns a warning when two sugar levels given', async () => {
     const { warnings } = await detectLogEvents('120 mg 7 mmol', p);
 
     expect(warnings[0], 'to equal', ['detectLogEvents.warnings.ambiguousSugar', {

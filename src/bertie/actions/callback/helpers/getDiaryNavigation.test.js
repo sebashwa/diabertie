@@ -17,7 +17,7 @@ describe('bertie action #getDiaryNavigation', () => {
 
   it('returns a back button if requested date is current day', () => {
     const today = moment.utc().tz(user.timezone);
-    const { buttons } = getDiaryNavigation('navigateDiary', today);
+    const { buttons } = getDiaryNavigation('navigateDiary', today, user);
 
     expect(buttons.length, 'to equal', 1);
     expect(buttons[0].text, 'to equal', '<<');
@@ -27,7 +27,7 @@ describe('bertie action #getDiaryNavigation', () => {
     const today = moment.utc().tz(user.timezone);
     const yesterday = today.clone().subtract(1, 'days');
 
-    const { buttons } = getDiaryNavigation('navigateDiary', yesterday);
+    const { buttons } = getDiaryNavigation('navigateDiary', yesterday, user);
 
     expect(buttons.length, 'to equal', 3);
     expect(buttons.map((b) => b.text), 'to equal', ['<<', '>>', 'today']);

@@ -2,7 +2,7 @@ import expect from 'unexpected';
 import knwl from '..';
 
 describe('knwl plugin BertieValue', () => {
-  const sugarUnits = [{ category: 'sugar', type: 'sugarValue', tokens: ['mg'] }];
+  const sugarUnits = [{ category: 'sugar', type: 'sugarLevel', tokens: ['mg'] }];
 
   it('accepts a units object and finds corresponding values', () => {
     const parser = knwl('250 mg 1 khe 6.5 humalog');
@@ -11,7 +11,7 @@ describe('knwl plugin BertieValue', () => {
     expect(value, 'to equal', {
       value:    250,
       category: 'sugar',
-      type:     'sugarValue'
+      type:     'sugarLevel'
     });
   });
 
