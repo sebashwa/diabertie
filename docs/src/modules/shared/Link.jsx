@@ -4,7 +4,7 @@ import styles from './Link.css';
 class Link extends Component {
   static propTypes = {
     href:  PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
   };
 
   render() {

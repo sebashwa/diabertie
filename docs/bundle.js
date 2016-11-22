@@ -14198,19 +14198,21 @@
 	          'p',
 	          null,
 	          p.t('howTo.intro.telegramUsage'),
-	          ' ',
 	          _react2.default.createElement(_Link2.default, { href: 'https://telegram.org', title: 'Telegram' }),
 	          '\xA0',
-	          _react2.default.createElement(_Link2.default, { href: 'https://core.telegram.org/bots', title: 'Bot' }),
-	          ' ',
+	          _react2.default.createElement(_Link2.default, { href: 'https://core.telegram.org/bots', title: 'Bot ' }),
 	          p.t('howTo.intro.getTelegram'),
-	          ' ',
 	          _react2.default.createElement(
 	            'code',
 	            null,
 	            p.t('howTo.intro.botName')
 	          ),
-	          ' ',
+	          p.t('howTo.intro.orClick'),
+	          _react2.default.createElement(
+	            _Link2.default,
+	            { href: 'https://www.telegram.me/diabertiebot' },
+	            p.t('howTo.intro.here')
+	          ),
 	          p.t('howTo.intro.rest')
 	        ),
 	        _react2.default.createElement(
@@ -14441,6 +14443,16 @@
 
 	var _Landing2 = _interopRequireDefault(_Landing);
 
+	var _Link = __webpack_require__(133);
+
+	var _Link2 = _interopRequireDefault(_Link);
+
+	var _Link3 = __webpack_require__(46);
+
+	var _Link4 = _interopRequireDefault(_Link3);
+
+	var _reactRouter = __webpack_require__(57);
+
 	var _polyglot = __webpack_require__(80);
 
 	var _polyglot2 = _interopRequireDefault(_polyglot);
@@ -14521,7 +14533,35 @@
 	        ),
 	        ['logValues', 'getReminders', 'addNotes'].map(function (type, i) {
 	          return _this2.renderLine(type, i);
-	        })
+	        }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: _Landing2.default.callToAction },
+	          _react2.default.createElement(
+	            _Link2.default,
+	            { href: 'https://www.telegram.me/diabertiebot' },
+	            _react2.default.createElement('img', { className: _Landing2.default.telegramLogo, src: 'img/telegram_logo.svg' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: _Landing2.default.callToAction },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { href: 'https://www.telegram.me/diabertiebot' },
+	              p.t('landing.callToAction.getStarted')
+	            ),
+	            p.t('landing.callToAction.orRead'),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: _Link4.default.root, to: '/howto' },
+	              p.t('landing.callToAction.here')
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -14587,12 +14627,7 @@
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'span',
-	          null,
-	          '|'
-	        ),
-	        _react2.default.createElement(
-	          'span',
+	          'small',
 	          null,
 	          _react2.default.createElement(
 	            _reactRouter.Link,
@@ -14959,7 +14994,7 @@
 
 	Link.propTypes = {
 	  href: _react.PropTypes.string.isRequired,
-	  title: _react.PropTypes.string.isRequired
+	  title: _react.PropTypes.string
 	};
 	;
 
@@ -15251,7 +15286,7 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"root":"Landing__root___1uYua","bertie":"Landing__bertie___2mDCZ","image":"Landing__image___2ti_A","line":"Landing__line___2NNnq","reverse":"Landing__reverse___2VrTm"};
+	module.exports = {"root":"Landing__root___1uYua","bertie":"Landing__bertie___2mDCZ","image":"Landing__image___2ti_A","telegramLogo":"Landing__telegramLogo___3bG7o","callToAction":"Landing__callToAction___wa7Wq","line":"Landing__line___2NNnq","reverse":"Landing__reverse___2VrTm"};
 
 /***/ },
 /* 139 */
@@ -28856,10 +28891,12 @@
 	      manageReminders: 'Manage reminders'
 	    },
 	    intro: {
-	      telegramUsage: 'This is the Diabertie how to.\n        Diabertie uses the awesome',
+	      telegramUsage: 'This is the Diabertie how to.\n        Diabertie uses the awesome ',
 	      getTelegram: 'functionality. So to use Diabertie you have to get Telegram, which is available for all\n        platforms commonly used nowadays.\n        After installing Telegram, just search for a contact named',
-	      botName: '@diabertiebot',
-	      rest: 'and start writing him your diabetes values.'
+	      botName: ' @diabertiebot',
+	      orClick: ' (or click ',
+	      here: 'here',
+	      rest: ') and start writing him your diabetes values.'
 	    },
 	    usage: {
 	      headline: 'Usage',
@@ -28937,6 +28974,11 @@
 	    addNotes: {
 	      heading: 'Add notes',
 	      text: 'Keep track of your sports activity or unusual events'
+	    },
+	    callToAction: {
+	      getStarted: 'Get started',
+	      orRead: ' or read more ',
+	      here: 'here'
 	    }
 	  },
 	  privacyPolicy: {

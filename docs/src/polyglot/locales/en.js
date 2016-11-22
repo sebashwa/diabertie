@@ -11,12 +11,14 @@ export default {
     },
     intro: {
       telegramUsage: `This is the Diabertie how to.
-        Diabertie uses the awesome`,
+        Diabertie uses the awesome `,
       getTelegram: `functionality. So to use Diabertie you have to get Telegram, which is available for all
         platforms commonly used nowadays.
         After installing Telegram, just search for a contact named`,
-      botName: '@diabertiebot',
-      rest: 'and start writing him your diabetes values.'
+      botName: ' @diabertiebot',
+      orClick: ' (or click ',
+      here: 'here',
+      rest: ') and start writing him your diabetes values.'
     },
     usage: {
       headline: 'Usage',
@@ -102,6 +104,11 @@ export default {
     addNotes: {
       heading: 'Add notes',
       text: 'Keep track of your sports activity or unusual events'
+    },
+    callToAction: {
+      getStarted: 'Get started',
+      orRead: ' or read more ',
+      here: 'here'
     }
   },
   privacyPolicy: {

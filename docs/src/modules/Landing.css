@@ -11,6 +11,17 @@
   width: 400px;
 }
 
+.telegramLogo {
+  width: 250px;
+}
+
+.callToAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .line {
   display: flex;
   flex-direction: column;
@@ -23,6 +34,10 @@
 @media (min-width: 1000px) {
   .image {
     width: 320px;
+  }
+
+  .telegramLogo {
+    width: 100px;
   }
 
   .line {

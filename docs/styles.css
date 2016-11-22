@@ -50,7 +50,9 @@
   background-color: #9BD5FF;
   color: #FFFFFF;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 30px 0;
   width: 100%;
 }
@@ -169,6 +171,17 @@ h1, h2 {
   width: 400px;
 }
 
+.Landing__telegramLogo___3bG7o {
+  width: 250px;
+}
+
+.Landing__callToAction___wa7Wq {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .Landing__line___2NNnq {
   display: flex;
   flex-direction: column;
@@ -181,6 +194,10 @@ h1, h2 {
 @media (min-width: 1000px) {
   .Landing__image___2ti_A {
     width: 320px;
+  }
+
+  .Landing__telegramLogo___3bG7o {
+    width: 100px;
   }
 
   .Landing__line___2NNnq {

@@ -32,8 +32,14 @@ class HowTo extends Component {
         <img className={styles.paper} src="img/howto.svg" />
 
         <p>
-          {p.t('howTo.intro.telegramUsage')} <Link href="https://telegram.org" title="Telegram" />&nbsp;
-          <Link href="https://core.telegram.org/bots" title="Bot" /> {p.t('howTo.intro.getTelegram')} <code>{p.t('howTo.intro.botName')}</code> {p.t('howTo.intro.rest')}
+          {p.t('howTo.intro.telegramUsage')}
+          <Link href="https://telegram.org" title="Telegram" />&nbsp;
+          <Link href="https://core.telegram.org/bots" title="Bot " />
+          {p.t('howTo.intro.getTelegram')}
+          <code>{p.t('howTo.intro.botName')}</code>
+          {p.t('howTo.intro.orClick')}
+          <Link href="https://www.telegram.me/diabertiebot">{p.t('howTo.intro.here')}</Link>
+          {p.t('howTo.intro.rest')}
         </p>
 
         <h1>{p.t('howTo.usage.headline')}</h1>
