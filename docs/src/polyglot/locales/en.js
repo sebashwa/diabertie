@@ -150,5 +150,43 @@ export default {
         Privacy Policy. Your continued use of Diabertie’s service after any change in this Privacy Policy will constitute
         your acceptance of such change.`
     },
+  },
+  FAQ: {
+    heading: 'FAQ',
+    intro: 'Below are listed questions that I am often asked about this project. If your question is not answered below, please do not hesitate to contact me.',
+    behind: {
+      question: 'Who is behind Diabertie?',
+      text: `I am a software developer from Hamburg, Germany and this is one of my side projects. I am a diabetic myself for over 20 years and I am very bad at keeping track of my values (which is not very helpful for a decent therapy).
+        I tried using apps, writing stuff down on paper etc...
+        This all did not work out for me, so I came up with the idea of having a chatbot to help me manage my diabetes diary. So far I am very happy with the result.`
+    },
+    whyChatbot: {
+      question: 'Why a chatbot when I can use an app?',
+      text: `There are dozens of apps to help you manage your diary. None of them worked for me.
+        The fact alone to open up a seperate app is too annoying for a task you have to perform several times a day.
+        A chatbot conversation-like experience works much better for the daily routine of many people (using
+        a chat app is not such an unusual thing).`
+    },
+    replaceDoctor: {
+      question: 'Can Diabertie replace my doctor visits?',
+      text: `No. It can not and never will. Its only purpose is to help you manage your diabetes diary and support you
+        in your daily diabetes life (i.e. through reminders). Always talk and listen to your doctor.`
+    },
+    dataPrivate: {
+      question: 'Is my data kept private at Diabertie?',
+      text: `I do my very best to keep your data private. The first and foremost thing I do to make that sure is to collect as little data as possible in the first place.
+        The integration with Telegram makes it possible to use Diabertie without a sign up process. This way you do not have to offer an email address or any other personal data.
+        Telegram does not pass me your phone number. The only thing I save from Telegram is an (unpersonalized) identifier. This fact makes Diabertie quite private.`
+    },
+    addFeature: {
+      question: 'Can you add feature XY?',
+      text: `If you have ideas on how to improve Diabertie, I would be pleased if you contact me and tell me about it (email works best).
+        I do not have a massive ton of time though and this is a side project, but I promise to do my very best to get back to you.`
+    },
+    helpOut: {
+      question: 'Can I help you out?',
+      beforeLink: 'Diabertie is open source and can be found on ',
+      afterLink: '. Feel free to contribute, file an issue, or contact me about something. If you think you can help out other ways than with code, feel free to contact me.'
+    }
   }
 };

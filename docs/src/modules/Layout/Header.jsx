@@ -5,7 +5,7 @@ import styles from './Header.css';
 
 class Header extends Component {
   render() {
-    const scrolledDown = this.props.scrollPos > 300;
+    const scrolledDown = this.props.scrollPos > 200;
     const startedScrolling = this.props.scrollPos > 0;
     const rootClass = startedScrolling ? `${styles.root} ${styles.navBorder}` : styles.root;
 

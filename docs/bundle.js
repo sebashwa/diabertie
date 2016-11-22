@@ -68,6 +68,10 @@
 
 	var _PrivacyPolicy2 = _interopRequireDefault(_PrivacyPolicy);
 
+	var _FAQ = __webpack_require__(269);
+
+	var _FAQ2 = _interopRequireDefault(_FAQ);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -80,7 +84,8 @@
 	    { path: '/', component: _Layout.Layout },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Landing2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/howto', component: _HowTo2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/privacy', component: _PrivacyPolicy2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/privacy', component: _PrivacyPolicy2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/faq', component: _FAQ2.default })
 	  )
 	), document.getElementById('main'));
 
@@ -14620,7 +14625,7 @@
 	  _createClass(Header, [{
 	    key: 'render',
 	    value: function render() {
-	      var scrolledDown = this.props.scrollPos > 300;
+	      var scrolledDown = this.props.scrollPos > 200;
 	      var startedScrolling = this.props.scrollPos > 0;
 	      var rootClass = startedScrolling ? _Header2.default.root + ' ' + _Header2.default.navBorder : _Header2.default.root;
 
@@ -14806,6 +14811,11 @@
 	          _reactRouter.Link,
 	          { className: allLinkStyles, onClick: this.toggleSubNav, to: '/howto' },
 	          'How to'
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { className: allLinkStyles, onClick: this.toggleSubNav, to: '/faq' },
+	          'FAQ'
 	        )
 	      );
 	    }
@@ -28917,6 +28927,35 @@
 	      heading: 'Privacy Policy Changes',
 	      text: 'Although most changes are likely to be minor, Diabertie may change its Privacy Policy from time to time, and in\n        Diabertie\u2019s sole discretion. Diabertie encourages visitors to frequently check this page for any changes to its\n        Privacy Policy. Your continued use of Diabertie\u2019s service after any change in this Privacy Policy will constitute\n        your acceptance of such change.'
 	    }
+	  },
+	  FAQ: {
+	    heading: 'FAQ',
+	    intro: 'Below are listed questions that I am often asked about this project. If your question is not answered below, please do not hesitate to contact me.',
+	    behind: {
+	      question: 'Who is behind Diabertie?',
+	      text: 'I am a software developer from Hamburg, Germany and this is one of my side projects. I am a diabetic myself for over 20 years and I am very bad at keeping track of my values (which is not very helpful for a decent therapy).\n        I tried using apps, writing stuff down on paper etc...\n        This all did not work out for me, so I came up with the idea of having a chatbot to help me manage my diabetes diary. So far I am very happy with the result.'
+	    },
+	    whyChatbot: {
+	      question: 'Why a chatbot when I can use an app?',
+	      text: 'There are dozens of apps to help you manage your diary. None of them worked for me.\n        The fact alone to open up a seperate app is too annoying for a task you have to perform several times a day.\n        A chatbot conversation-like experience works much better for the daily routine of many people (using\n        a chat app is not such an unusual thing).'
+	    },
+	    replaceDoctor: {
+	      question: 'Can Diabertie replace my doctor visits?',
+	      text: 'No. It can not and never will. Its only purpose is to help you manage your diabetes diary and support you\n        in your daily diabetes life (i.e. through reminders). Always talk and listen to your doctor.'
+	    },
+	    dataPrivate: {
+	      question: 'Is my data kept private at Diabertie?',
+	      text: 'I do my very best to keep your data private. The first and foremost thing I do to make that sure is to collect as little data as possible in the first place.\n        The integration with Telegram makes it possible to use Diabertie without a sign up process. This way you do not have to offer an email address or any other personal data.\n        Telegram does not pass me your phone number. The only thing I save from Telegram is an (unpersonalized) identifier. This fact makes Diabertie quite private.'
+	    },
+	    addFeature: {
+	      question: 'Can you add feature XY?',
+	      text: 'If you have ideas on how to improve Diabertie, I would be pleased if you contact me and tell me about it (email works best).\n        I do not have a massive ton of time though and this is a side project, but I promise to do my very best to get back to you.'
+	    },
+	    helpOut: {
+	      question: 'Can I help you out?',
+	      beforeLink: 'Diabertie is open source and can be found on ',
+	      afterLink: '. Feel free to contribute, file an issue, or contact me about something. If you think you can help out other ways than with code, feel free to contact me.'
+	    }
 	  }
 	};
 
@@ -29068,6 +29107,136 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(6);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Link = __webpack_require__(133);
+
+	var _Link2 = _interopRequireDefault(_Link);
+
+	var _polyglot = __webpack_require__(80);
+
+	var _polyglot2 = _interopRequireDefault(_polyglot);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FAQ = function (_Component) {
+	  _inherits(FAQ, _Component);
+
+	  function FAQ() {
+	    _classCallCheck(this, FAQ);
+
+	    return _possibleConstructorReturn(this, (FAQ.__proto__ || Object.getPrototypeOf(FAQ)).apply(this, arguments));
+	  }
+
+	  _createClass(FAQ, [{
+	    key: 'render',
+	    value: function render() {
+	      var p = (0, _polyglot2.default)();
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          p.t('FAQ.heading')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.intro')
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          p.t('FAQ.behind.question')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.behind.text')
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          p.t('FAQ.whyChatbot.question')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.whyChatbot.text')
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          p.t('FAQ.replaceDoctor.question')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.replaceDoctor.text')
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          p.t('FAQ.dataPrivate.question')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.dataPrivate.text')
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          p.t('FAQ.addFeature.question')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.addFeature.text')
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          p.t('FAQ.helpOut.question')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('FAQ.helpOut.beforeLink'),
+	          _react2.default.createElement(_Link2.default, { href: 'https://www.github.com/sebashwa/diabertie', title: 'Github' }),
+	          p.t('FAQ.helpOut.afterLink')
+	        )
+	      );
+	    }
+	  }]);
+
+	  return FAQ;
+	}(_react.Component);
+
+	exports.default = FAQ;
 
 /***/ }
 /******/ ]);

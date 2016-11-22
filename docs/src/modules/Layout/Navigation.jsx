@@ -24,6 +24,7 @@ class Navigation extends Component {
       <div className={styles.root}>
         <Link className={allLinkStyles} onClick={this.toggleSubNav} to="/">About</Link>
         <Link className={allLinkStyles} onClick={this.toggleSubNav} to="/howto">How to</Link>
+        <Link className={allLinkStyles} onClick={this.toggleSubNav} to="/faq">FAQ</Link>
       </div>
     );
   }
