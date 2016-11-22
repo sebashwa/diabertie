@@ -92,7 +92,7 @@ export default (bot) => {
     sendMessage(from.id, p.t(...message), { ... defaultOpts, reply_markup: { inline_keyboard: buttons } });
   });
 
-  bot.onText(/^\/reminderz/, async ({ from }) => {
+  bot.onText(/^\/reminders/, async ({ from }) => {
     const { user, error: userError } = await fetchUser(from);
     if (userError) { return sendMessage(from.id, polyglot().t(...userError)); }
     const p = polyglot(user.locale);

@@ -1,4 +1,6 @@
-import { User } from '../../models';
+import { User, Reminder } from '../../models';
+import { logReminderTypes, logReminderTimes } from '../../constants/reminders';
+const { EVENING } = logReminderTypes;
 import logger from '../../logger';
 import moment from 'moment-timezone';
 
@@ -11,6 +13,8 @@ export default async (from) => {
 
     if (!users.length) {
       const user = await User.create({ telegramId });
+      await Reminder.addReminder(logReminderTimes[EVENING], 'log', EVENING, user);
+
       const data = { type: 'setTimezone' };
       await user.update({ latestDetectedData: { data, detectedAt: moment().unix() } });
 
