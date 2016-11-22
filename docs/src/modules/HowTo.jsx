@@ -40,7 +40,7 @@ class HowTo extends Component {
         <p>{p.t('howTo.usage.text')}</p>
 
         {
-          ['logValues', 'reviewValues', 'deleteValue', 'addNote'].map((t, i) => {
+          ['logValues', 'reviewValues', 'deleteValue', 'manageNotes', 'manageReminders'].map((t, i) => {
             return <span className={linkStyles.root} onClick={() => this.scrollToAnchor(t)}>{p.t(`howTo.quickjump.${t}`)}</span>
           })
         }
@@ -80,12 +80,18 @@ class HowTo extends Component {
         <p>{p.t('howTo.deleteValue.selectDate')}</p>
         <p>{p.t('howTo.deleteValue.selectValue')}</p>
 
-        <h2 ref="addNote">{p.t('howTo.notes.headline')}</h2>
+        <h2 ref="manageNotes">{p.t('howTo.notes.headline')}</h2>
         <p>{p.t('howTo.notes.intro')}</p>
         <code>{p.t('howTo.notes.command')}</code>
         <p>{p.t('howTo.notes.selectDate')}</p>
 
-        <p className={styles.feedback}>{p.t('howTo.thatsAll')}</p>
+        <h2 ref="manageReminders">{p.t('howTo.reminders.headline')}</h2>
+        <p>{p.t('howTo.reminders.intro')}</p>
+        <code>{p.t('howTo.reminders.command')}</code>
+        <p>{p.t('howTo.reminders.explanation')}</p>
+        <code>{p.t('howTo.reminders.dailyFormat')}</code>
+        <p>{p.t('howTo.reminders.dailyExplanation')}</p>
+        <code>{p.t('howTo.reminders.dailyExample')}</code>
       </div>
     );
   }

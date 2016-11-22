@@ -14223,7 +14223,7 @@
 	          null,
 	          p.t('howTo.usage.text')
 	        ),
-	        ['logValues', 'reviewValues', 'deleteValue', 'addNote'].map(function (t, i) {
+	        ['logValues', 'reviewValues', 'deleteValue', 'manageNotes', 'manageReminders'].map(function (t, i) {
 	          return _react2.default.createElement(
 	            'span',
 	            { className: _Link4.default.root, onClick: function onClick() {
@@ -14359,7 +14359,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'h2',
-	          { ref: 'addNote' },
+	          { ref: 'manageNotes' },
 	          p.t('howTo.notes.headline')
 	        ),
 	        _react2.default.createElement(
@@ -14378,9 +14378,39 @@
 	          p.t('howTo.notes.selectDate')
 	        ),
 	        _react2.default.createElement(
+	          'h2',
+	          { ref: 'manageReminders' },
+	          p.t('howTo.reminders.headline')
+	        ),
+	        _react2.default.createElement(
 	          'p',
-	          { className: _HowTo2.default.feedback },
-	          p.t('howTo.thatsAll')
+	          null,
+	          p.t('howTo.reminders.intro')
+	        ),
+	        _react2.default.createElement(
+	          'code',
+	          null,
+	          p.t('howTo.reminders.command')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('howTo.reminders.explanation')
+	        ),
+	        _react2.default.createElement(
+	          'code',
+	          null,
+	          p.t('howTo.reminders.dailyFormat')
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          p.t('howTo.reminders.dailyExplanation')
+	        ),
+	        _react2.default.createElement(
+	          'code',
+	          null,
+	          p.t('howTo.reminders.dailyExample')
 	        )
 	      );
 	    }
@@ -28822,7 +28852,8 @@
 	      logValues: 'Log values',
 	      reviewValues: 'Review values',
 	      deleteValue: 'Delete a value',
-	      addNote: 'Manage notes'
+	      manageNotes: 'Manage notes',
+	      manageReminders: 'Manage reminders'
 	    },
 	    intro: {
 	      telegramUsage: 'This is the Diabertie how to.\n        Diabertie uses the awesome',
@@ -28880,7 +28911,15 @@
 	      command: '/notes',
 	      selectDate: 'Select a date which you want to add a note for or delete a note from. Then click on the action you want to perform. All your added notes show up in the diary!'
 	    },
-	    thatsAll: 'This is all you can do with Diabertie so far. If you have any suggestions on how to improve or just want to give me\n      feedback (bad or good), please feel free to contact me.'
+	    reminders: {
+	      headline: 'Manage reminders',
+	      intro: 'Reminders are short and discrete text messages, which help you remind stuff that is important for your daily diabetes routine. To manage your reminders, send',
+	      command: '/reminders',
+	      explanation: 'There are two types of reminders. Log reminders are only sent if you forget to log values on that day. You can receive them up to three times a day. Daily reminders are sent at a specific time every day. They are very useful to remember stuff like measuring your sugar level or injecting your insulin. Push the respective button to manage those types of reminders. To add a daily reminder you have to provide it in a specific format, like so',
+	      dailyFormat: '15:00 measure your sugar level',
+	      dailyExplanation: 'This would cause a reminder to be sent every day at 3pm in the fashion of',
+	      dailyExample: 'Hey, this is your daily reminder to measure your sugar level! 🕐'
+	    }
 	  },
 	  landing: {
 	    teaser: {
