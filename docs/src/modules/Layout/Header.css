@@ -1,0 +1,31 @@
+.root {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 3.5em;
+}
+
+.navBorder {
+  border-bottom: 1px solid #ACA7D2;
+}
+
+.image {
+  width: 2.5em;
+  height: 2.5em;
+  margin: 0.2em;
+}
+
+@media (min-width: 1000px) {
+  .root {
+    min-height: 5.0em;
+  }
+  .image {
+    width: 3.5em;
+    height: 3.5em;
+    margin: 0.5em;
+  }
+}

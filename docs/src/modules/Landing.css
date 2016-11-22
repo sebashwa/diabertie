@@ -1,0 +1,51 @@
+.root {
+  width: 100%;
+}
+
+.bertie {
+  width: 300px;
+  height: 300px;
+}
+
+.image {
+  width: 400px;
+}
+
+.telegramLogo {
+  width: 250px;
+}
+
+.callToAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 5em;
+}
+
+@media (min-width: 1000px) {
+  .image {
+    width: 320px;
+  }
+
+  .telegramLogo {
+    width: 100px;
+  }
+
+  .line {
+    text-align: inherit;
+    flex-direction: row;
+  }
+
+  .reverse {
+    flex-direction: row-reverse;
+  }
+}
