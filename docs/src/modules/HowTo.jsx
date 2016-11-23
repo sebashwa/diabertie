@@ -47,7 +47,7 @@ class HowTo extends Component {
 
         {
           ['logValues', 'reviewValues', 'deleteValue', 'manageNotes', 'manageReminders'].map((t, i) => {
-            return <span className={linkStyles.root} onClick={() => this.scrollToAnchor(t)}>{p.t(`howTo.quickjump.${t}`)}</span>
+            return <span key={i} className={linkStyles.root} onClick={() => this.scrollToAnchor(t)}>{p.t(`howTo.quickjump.${t}`)}</span>
           })
         }
 

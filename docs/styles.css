@@ -168,7 +168,8 @@ h1, h2 {
 }
 
 .Landing__image___2ti_A {
-  width: 400px;
+  width: 85%;
+  max-width: 620px;
 }
 
 .Landing__telegramLogo___3bG7o {

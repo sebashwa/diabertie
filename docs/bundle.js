@@ -14419,7 +14419,7 @@
 	        ['logValues', 'reviewValues', 'deleteValue', 'manageNotes', 'manageReminders'].map(function (t, i) {
 	          return _react2.default.createElement(
 	            'span',
-	            { className: _Link4.default.root, onClick: function onClick() {
+	            { key: i, className: _Link4.default.root, onClick: function onClick() {
 	                return _this2.scrollToAnchor(t);
 	              } },
 	            p.t('howTo.quickjump.' + t)
