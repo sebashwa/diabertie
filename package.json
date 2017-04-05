@@ -28,7 +28,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "knwl.js": "^1.0.2",
-    "moment-timezone": "^0.5.9",
+    "moment-timezone": "^0.5.13",
     "mongoose": "^4.6.6",
     "node-fetch": "^1.6.3",
     "node-polyglot": "^2.0.0",
