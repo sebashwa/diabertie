@@ -43,6 +43,6 @@ describe('conversational action #setTimezone', () => {
     await setTimezone('berlin', user);
 
     const { atMinute } = await Reminder.findById(reminder.id);
-    expect(atMinute, 'to equal', 1140);
+    expect(atMinute, 'to equal', 1080);
   });
 });

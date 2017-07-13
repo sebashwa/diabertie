@@ -16,7 +16,7 @@ describe('conversational action #addDailyReminder', () => {
     await addDailyReminder('12:00 measure your sugar level', user);
     const reminders = await Reminder.find({ user });
 
-    const utcTwelveOclock = 11 * 60;
+    const utcTwelveOclock = 10 * 60;
     expect(reminders[0].text, 'to equal', 'measure your sugar level');
     expect(reminders[0].atMinute, 'to equal', utcTwelveOclock);
   });

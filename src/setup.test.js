@@ -1,7 +1,6 @@
 import * as models from './models';
 import mongoose from 'mongoose';
 
-
 before(async () => {
   mongoose.Promise = global.Promise;
   await mongoose.connect('mongodb://localhost:27017/diabertie_test', (err) => { if (err) throw err; } );
