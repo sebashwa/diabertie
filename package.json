@@ -34,7 +34,7 @@
     "node-polyglot": "^2.0.0",
     "node-telegram-bot-api": "^0.24.0",
     "react": "^15.3.2",
-    "react-addons-css-transition-group": "^15.3.2",
+    "react-addons-css-transition-group": "^15.5.1",
     "react-dom": "^15.3.2",
     "react-responsive": "^1.2.1",
     "react-router": "^3.0.0",
